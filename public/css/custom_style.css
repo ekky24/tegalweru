@@ -1,0 +1,20 @@
+h1 {
+	margin-bottom: 40px;
+}
+
+form textarea {
+	width: 100% !important;
+}
+
+#div_keluarga {
+	display: none;
+}
+
+#tambah_row {
+	margin-bottom: 10px;
+	margin-top: 20px;
+}
+
+.form_button {
+	margin-top: 50px;
+}
