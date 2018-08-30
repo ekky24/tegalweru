@@ -30,6 +30,7 @@ class CreatePenduduksTable extends Migration
             $table->string('ayah');
             $table->string('ibu');
             $table->string('kk_id')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

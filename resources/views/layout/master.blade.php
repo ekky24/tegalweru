@@ -26,7 +26,7 @@
     <link href="/vendor/morrisjs/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/font-awesome/css/fontawesome-all.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -65,6 +65,9 @@
     <script src="/vendor/raphael/raphael.min.js"></script>
     <script src="/vendor/morrisjs/morris.min.js"></script>
     <script src="/data/morris-data.js"></script>
+
+    <!-- Chart.js -->
+    <script src="/vendor/chart/Chart.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="/dist/js/sb-admin-2.js"></script>

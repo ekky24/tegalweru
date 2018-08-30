@@ -4,35 +4,25 @@ namespace App;
 
 class KartuKeluarga extends Model
 {
+    public $incrementing = false;
+
+    public function get_kepala_keluarga() {
+        return $this->belongsTo(Penduduk::class, 'kepala_keluarga');
+    }
+
     public function get_penduduk() {
-        return $this->hasMany(Penduduk::class);
-    }
-
-    public function get_rt() {
-        return $this->belongsTo(RT::class);
-    }
-
-    public function get_rw() {
-        return $this->belongsTo(RW::class);
+        return $this->hasMany(Penduduk::class, 'kk_id')->whereNull('status');
     }
 
     public function get_kelurahan() {
-        return $this->belongsTo(Kelurahan::class);
+        return $this->belongsTo(Kelurahan::class, 'kelurahan');
     }
 
-    public function get_kecamatan() {
-        return $this->belongsTo(Kecamatan::class);
+    public function get_rt() {
+        return $this->belongsTo(RukunTetangga::class, 'rukun_tetangga');
     }
 
-    public function get_kota() {
-        return $this->belongsTo(Kota::class);
-    }
-
-    public function get_provinsi() {
-        return $this->belongsTo(Provinsi::class);
-    }
-
-    public function get_penerbit() {
-        return $this->belongsTo(Penerbit::class);
+    public function get_rw() {
+        return $this->belongsTo(RukunWarga::class, 'rukun_warga');
     }
 }

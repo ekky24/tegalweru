@@ -1,0 +1,17 @@
+table {
+                border-collapse: collapse;
+            }
+
+            table, th, td {
+                border: 1px solid gray;
+                font-size: 12px;
+            }
+
+            th {
+                background-color: #a5a5a5;
+            }
+
+            th, td {
+                padding: 10px;
+                text-align: left;
+            }

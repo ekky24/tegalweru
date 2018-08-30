@@ -1,0 +1,59 @@
+body {
+                font-family: "Times New Roman";
+                text-align: justify;
+                margin: 0;
+                padding: 0;
+                line-height: 1.5;
+            }
+
+            div.isi {
+                padding-left: 1.5cm;
+                padding-right: 1.5cm;
+            }
+
+            p.header {
+                font-size: 14pt;
+                font-weight: bold;
+                text-decoration: underline;
+                margin-bottom: 0;
+                margin-top: 50px;
+            }
+            p.nomor {
+                font-size: 12pt;
+                font-weight: bold;
+                margin-top: 0;
+                margin-bottom: 50px;
+            }
+
+            p.body {
+                font-size: 12pt;
+            }
+
+            table {
+                margin-left: 50px;
+            }
+
+            table td {
+                padding-right: 10px;
+                vertical-align: top;
+                text-align: justify;
+            }
+
+            td.header {
+                white-space: nowrap;
+            }
+
+            table.bawah {
+                float: right;
+                margin-right: 30px;
+            }
+
+            table.bawah td {
+                text-align: center;
+            }
+
+            .nama_pejabat {
+                margin-top: 100px;
+                font-weight: bold;
+                text-decoration: underline;
+            }

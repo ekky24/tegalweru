@@ -8,9 +8,23 @@ use App\RukunWarga;
 
 class RukunTetanggaController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+    
     public function insert() {
         $rw = RukunWarga::all();
     	return view('rt.insert', compact('rw'));
+    }
+
+    public function show_all() {
+        $rt = RukunTetangga::all();
+        return view('rt.show_all', compact('rt'));
+    }
+
+    public function edit(RukunTetangga $rt) {
+        $rw = RukunWarga::all();
+        return view('rt.edit', compact('rt', 'rw'));
     }
 
     public function store() {
@@ -22,10 +36,25 @@ class RukunTetanggaController extends Controller
 
     	RukunTetangga::create([
     		'rukun_warga_id' => request('rukun_warga_id'),
-    		'nama' => "RUKUN TETANGGA " . request('nama'),
+    		'nama' => "00" . request('nama'),
     		'ketua' => strtoupper(request('ketua')),
     	]);
 
-    	return redirect('/');
+    	return redirect('/rt');
+    }
+
+    public function store_edit(RukunTetangga $rt) {
+        $this->validate(request(), [
+            'rukun_warga_id' => 'required|numeric',
+            'nama' => 'required|numeric',
+            'ketua' => 'required'
+        ]);
+
+        $rt->rukun_warga_id = request('rukun_warga_id');
+        $rt->nama = "00" . request('nama');
+        $rt->ketua = strtoupper(request('ketua'));
+        $rt->save();
+
+        return redirect('/rt');
     }
 }

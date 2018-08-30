@@ -7,6 +7,10 @@ use App\Kecamatan;
 
 class KecamatanController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+    
     public function kecamatan_ajax() {
         $kecamatan = Kecamatan::select('nama', 'id')->get();
     	return $kecamatan;

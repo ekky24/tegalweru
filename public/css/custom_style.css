@@ -1,5 +1,144 @@
+@font-face {
+    font-family: 'Montserrat-Regular'; 
+    src: url('font/Montserrat-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Montserrat-Bold'; 
+    src: url('font/Montserrat-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Montserrat-SemiBold'; 
+    src: url('font/Montserrat-SemiBold.ttf');
+}
+
+html {
+	margin: 0;
+	padding: 0;
+	background-color: #ffffff !important;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #0B65B1;
+}
+
+h1 {
+	font-family: 'Montserrat-Bold';
+}
+
+h3 {
+	font-family: 'Montserrat-SemiBold';
+}
+
+body.body-login {
+	background-color: #E9FAFF;
+	min-height: 100%;  
+  	min-height: 100vh; 
+  	display: flex;
+  	align-items: center;
+}
+
+h1.login-text1 {
+	font-family: 'Montserrat-Bold';
+	margin-bottom: 0;
+	color: #286090;
+}
+
+h3.login-text2 {
+	margin-top: 10px;
+	margin-bottom: 50px;
+	font-family: 'Montserrat-Regular'
+}
+
+#side-menu a.active, #side-menu a.active:hover {
+	background-color: #ffffff !important;
+	color: #003d66 !important;
+}
+
+.fa {
+	font-size: 14px;
+	margin-right: 8px;
+}
+
+.navbar-text {
+	color: #ffffff !important;
+}
+
+.sidebar .nav-third-level li a {
+	color: #ffffff !important;
+	background-color: #003d66;
+}
+
+.sidebar .nav-second-level .nav-third-level li a:hover {
+	background-color: #052b44 !important;
+}
+
+.nav-second-level {
+	background-color: #145a89;
+}
+
+.nav-second-level:active {
+	background-color: #003d66;
+}
+
+.sidebar .nav-second-level li a:hover {
+	background-color: #003d66 !important;
+	color: #ffffff !important;
+}
+
+#background-login {
+	background-color: #ffffff;
+	padding: 50px;
+}
+
+.form-login {
+	height: 60px;
+	width: 100%;
+	border-radius: 0;
+}
+
+.button-login {
+	height: 50px;
+	width: 100%;
+	border-radius: 0;
+	margin-top: 40px;
+}
+
+#page-wrapper {
+	background-color: #ffffff;
+	min-height: 100vh;
+}
+
+.navbar-inverse {
+	background-color: #0B65B1 !important;
+	border-color: #004e89 !important;
+}
+
+.navbar-brand {
+	color: #ffffff !important;
+}
+
+ul#side-menu.nav > li > a, a.dropdown-toggle, ul#side-menu.nav > li > ul > li > a {
+	color: #ffffff;
+}
+
+ul#side-menu.nav > li > a:hover, ul#side-menu.nav > li > a:focus, ul#side-menu.nav > li > ul > li > a:hover, ul#side-menu.nav > li > ul > li > a:focus {
+	background-color: #20628e;
+}
+
+a.dropdown-toggle:hover, a.dropdown-toggle:focus {
+	background-color: #20628e !important;
+}
+
 h1 {
 	margin-bottom: 40px;
+}
+
+h1.filter {
+	margin-bottom: 20px;
 }
 
 form textarea {
@@ -10,11 +149,31 @@ form textarea {
 	display: none;
 }
 
-#tambah_row {
+.eac-description {
+	width: 100% !important;
+}
+
+#tambah_row, #tambah_row_edit {
 	margin-bottom: 10px;
 	margin-top: 20px;
 }
 
 .form_button {
 	margin-top: 50px;
+}
+
+.tabel_detail_penduduk>tbody>tr>th {
+	background-color: #e0e0e0 !important;
+	width: 30%;
+	text-align: right;
+	padding-right: 10px;
+}
+
+.tabel_detail_penduduk>tbody>tr>td {
+	width: 70%;
+	padding-left: 10px;
+}
+
+.filter {
+	margin-bottom: 30px;
 }

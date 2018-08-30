@@ -18,7 +18,7 @@ class Penduduk extends Model
     }
 
     public function get_agama() {
-    	return $this->belongsTo(Agama::class);
+    	return $this->belongsTo(Agama::class, 'agama_id');
     }
 
     public function get_tempat_lahir() {
@@ -26,19 +26,27 @@ class Penduduk extends Model
     }
 
     public function get_pendidikan() {
-    	return $this->belongsTo(Pendidikan::class);
+    	return $this->belongsTo(Pendidikan::class, 'pendidikan_id');
     }
 
     public function get_jenis_pekerjaan() {
-    	return $this->belongsTo(JenisPekerjaan::class);
+    	return $this->belongsTo(JenisPekerjaan::class, 'jenis_pekerjaan_id');
     }
 
     public function get_status_nikah() {
-    	return $this->belongsTo(StatusNikah::class);
+    	return $this->belongsTo(StatusNikah::class, 'status_nikah_id');
     }
 
     public function get_status_hubungan() {
-    	return $this->belongsTo(StatusHubungan::class);
+    	return $this->belongsTo(StatusHubungan::class, 'status_hubungan_id');
+    }
+
+    public function get_kematian() {
+        return $this->hasMany(Kematian::class, 'penduduk_id');
+    }
+
+    public function scopeGetAktif($query) {
+        return $query->whereNull('status');
     }
 }
 

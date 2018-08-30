@@ -15,12 +15,11 @@ class CreateKartuKeluargasTable extends Migration
     {
         Schema::create('kartu_keluargas', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->string('kepala_keluarga');
+            $table->string('kepala_keluarga')->nullable();
             $table->text('alamat');
             $table->string('rukun_tetangga');
             $table->string('rukun_warga');
             $table->string('kelurahan');
-            $table->string('kecamatan');
             $table->string('kode_pos');
             $table->date('tgl_terbit');
             $table->string('penerbit');
