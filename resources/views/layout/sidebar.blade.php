@@ -116,7 +116,13 @@
                                             <a href="/sku">Data SKU</a>
                                         </li>
                                         <li>
-                                            <a href="/sku/insert">Insert Data SKU</a>
+                                            <a href="/sku/insert">Insert SKU</a>
+                                        </li>
+                                        <li>
+                                            <a href="/sku/insert_bri">Insert SKU BRI</a>
+                                        </li>
+                                        <li>
+                                            <a href="/sku/insert_jatim_mandiri">Insert SKU Jatim Mandiri</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->

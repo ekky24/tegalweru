@@ -85,6 +85,24 @@ $(function() {
 			}
 		};
 
+
+	/* SCRIPT ON SWEET ALERT 
+	*************************************************************************
+	*************************************************************************/
+	if ($('.layout_error').length>0) {
+		var msg = "";
+
+		$('.item_error').each(function(i, item) {
+		    msg += "<li>" + $(this).text() + "</li><br>";
+		});
+
+		swal({
+			type: 'error',
+			title: 'Gagal...',
+			html: msg
+		})
+	}
+
 	/* SCRIPT ON VIEW KK.INSERT 
 	*************************************************************************
 	*************************************************************************/
@@ -344,6 +362,13 @@ $(function() {
 			link += temp_link + "agama=" + $('#filter_agama').val();
 			countClick++;
 		}
+		if ($('#filter_usia').val() != "none") {
+			if (countClick > 0) {
+				temp_link = "&";
+			}
+			link += temp_link + "usia=" + $('#filter_usia').val();
+			countClick++;
+		}
 		if ($('#search_val_penduduk').val() != "") {
 			if (countClick > 0) {
 				temp_link = "&";
@@ -355,8 +380,10 @@ $(function() {
 		window.location.href = "/penduduk" + link;
 	}
 
-	$('#filter_jk, #filter_pendidikan, #filter_pekerjaan, #filter_hubungan, #filter_agama').on('change', filter_penduduk);
-	$('#filter_search_penduduk').click(filter_penduduk);
+	$('#filter_search_penduduk, #filter_advance').click(filter_penduduk);
+	$('#filter_reset').click(function() {
+		window.location.href = "/penduduk";
+	});
 
 
 	/* SCRIPT ON VIEW PENDUDUK.STAT 
@@ -608,9 +635,24 @@ $(function() {
 	******************************************************************************
 	******************************************************************************/
 	$('#delete_penerbit, #hapus_kematian').on('click', function(e) {
-		if(!confirm('Apakah anda yakin ingin menghapus data ini?')) {
+		/*if(!confirm('Apakah anda yakin ingin menghapus data ini?')) {
 			e.preventDefault();
-		}
+		}*/
+		e.preventDefault()
+		swal({
+		 	title: 'Apakah anda yakin?',
+			text: "Anda akan menghapus data ini secara permanen.",
+			type: 'warning',
+		  	showCancelButton: true,
+		  	confirmButtonColor: '#3085d6',
+		  	cancelButtonColor: '#d33',
+		  	confirmButtonText: 'Ya',
+		  	cancelButtonText: 'Batal'
+		}).then((result) => {
+		  	if (result.value) {
+		  		window.location = $(this).attr("href")
+		  	}
+		})
 	});
 
 	/* SCRIPT ON VIEW KEMATIAN.INSERT 
@@ -792,6 +834,7 @@ $(function() {
 				},
 				onSelectItemEvent: function() {
 					$('#nama_surat').val("");
+					$('#ttl_surat').val("");
 					$('#jk_surat').val("");
 					$('#kewarganegaraan_surat').val("");
 					$('#agama_surat').val("");
@@ -805,7 +848,13 @@ $(function() {
 						$('#alamat_surat').val("-");
 					}
 
+					var temp_tempat_lahir = $('#nik_surat').getSelectedItemData().get_tempat_lahir.nama;
+					var value_tempat_lahir = temp_tempat_lahir.substr(temp_tempat_lahir.indexOf(" ") + 1);
+					var arr_tgl_lahir = $('#nik_surat').getSelectedItemData().tgl_lahir.split('-');
+					var value_tgl_lahir = arr_tgl_lahir[2] + '-' + arr_tgl_lahir[1] + '-' + arr_tgl_lahir[0];
+					var value_ttl = value_tempat_lahir + ', ' + value_tgl_lahir;
 					var value_nama = $('#nik_surat').getSelectedItemData().nama;
+					var value_agama = $('#nik_surat').getSelectedItemData().get_agama.keterangan;
 					var value_jk = $('#nik_surat').getSelectedItemData().jk;
 					var value_kewarganegaraan = $('#nik_surat').getSelectedItemData().kewarganegaraan;
 
@@ -818,6 +867,8 @@ $(function() {
 
 					$('#nama_surat').val(value_nama);
 					$('#kewarganegaraan_surat').val(value_kewarganegaraan);
+					$('#ttl_surat').val(value_ttl);
+					$('#agama_surat').val(value_agama);
 				}
 			}
 		};

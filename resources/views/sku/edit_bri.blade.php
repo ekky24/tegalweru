@@ -10,7 +10,7 @@
 
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="filter page-header">Ubah Data SKU</h1>
+		<h1 class="filter page-header">Ubah Data SKU untuk BRI</h1>
 	</div>
 </div>
 <form method="post" action="/sku/{{ $sku->id }}" autocomplete="off" class="form-horizontal">
@@ -78,38 +78,38 @@
 		<div class="col-sm-6">
 			<input name="nama_usaha" class="form-control" placeholder="Jenis Usaha" type="text" value="{{ $sku->nama_usaha }}" required>
 		</div>
-	</div>
+	</div><br>
+	<h4>Tanah Sendiri:</h4>
 	<div class="form-group">
 
-		<label class="control-label col-sm-3">Alamat Usaha</label>
+		<label class="control-label col-sm-3">Tanah Sawah</label>
 
 		<div class="col-sm-6">
-			<input name="nama_usaha" class="form-control" placeholder="Jenis Usaha" type="text" value="{{ $sku->alamat_usaha }}" required>
+			<input class="form-control" placeholder="Luas Tanah Sawah" type="number" name="sendiri_sawah" value="{{ $sku->sendiri_sawah }}">
 		</div>
 	</div>
 	<div class="form-group">
 
-		<label class="control-label col-sm-3">Keperluan</label>
+		<label class="control-label col-sm-3">Tanah Tegal</label>
 		<div class="col-sm-6">
-			<textarea id="keperluan_surat" placeholder="Masukkan Keperluan sku" class="form-control" name="keperluan" required>{{ $sku->keperluan }}</textarea>
+			<input class="form-control" placeholder="Luas Tanah Tegal" type="number" name="sendiri_tegal" value="{{ $sku->sendiri_tegal }}">
 		</div>
 	</div><br>
-	<h4>Surat Pengantar:</h4>
+	<h4>Tanah Sewa:</h4>
 	<div class="form-group">
 
-		<label class="control-label col-sm-3">Dari</label>
-
+		<label class="control-label col-sm-3">Tanah Sawah</label>
 		<div class="col-sm-6">
-			<input class="form-control" placeholder="Luas Tanah Sawah" type="text" name="dari_pengantar" value="{{ $sku->dari_pengantar }}">
+			<input class="form-control" placeholder="Luas Tanah Sawah" type="number" name="sewa_sawah" value="{{ $sku->sewa_sawah }}">
 		</div>
 	</div>
 	<div class="form-group">
 
-		<label class="control-label col-sm-3">Tanggal</label>
+		<label class="control-label col-sm-3">Tanah Tegal</label>
 		<div class="col-sm-6">
-			<input class="form-control" placeholder="Luas Tanah Tegal" type="text" name="tgl_pengantar" value="{{ $sku->tgl_pengantar }}">
+			<input class="form-control" placeholder="Luas Tanah Tegal" type="number" name="sewa_tegal" value="{{ $sku->sewa_tegal }}">
 		</div>
-	</div><br>
+	</div>
 	<div class="form-group">
 
 		<label class="control-label col-sm-3">Pilih Pejabat Penerbit</label>

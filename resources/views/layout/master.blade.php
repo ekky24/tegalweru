@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Data Tegalweru</title>
+    <title>Data Karangwidoro</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -68,6 +68,9 @@
 
     <!-- Chart.js -->
     <script src="/vendor/chart/Chart.min.js"></script>
+
+    <!-- Sweet Alert.js -->
+    <script src="/vendor/swal/sweetalert2.min.js"></script>    
 
     <!-- Custom Theme JavaScript -->
     <script src="/dist/js/sb-admin-2.js"></script>

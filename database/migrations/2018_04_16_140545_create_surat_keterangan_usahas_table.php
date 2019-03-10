@@ -17,13 +17,17 @@ class CreateSuratKeteranganUsahasTable extends Migration
             $table->increments('id');
             $table->string('nomor');
             $table->string('penduduk_id');
-            $table->string('jenis_usaha');
+            $table->string('nama_usaha');
+            $table->string('alamat_usaha')->nullable();
             $table->integer('sendiri_sawah')->nullable();
             $table->integer('sendiri_tegal')->nullable();
             $table->integer('sewa_sawah')->nullable();
             $table->integer('sewa_tegal')->nullable();
-            $table->text('keperluan');
+            $table->text('keperluan')->nullable();
+            $table->text('dari_pengantar')->nullable();
+            $table->text('tgl_pengantar')->nullable();
             $table->string('penerbit_id');
+            $table->string('jenis_surat');
             $table->timestamps();
         });
     }

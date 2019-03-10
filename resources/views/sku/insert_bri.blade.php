@@ -21,25 +21,13 @@
 			<div class="form-group">
 				<label class="control-label col-sm-3">Nama Lengkap</label>
 				<div class="col-sm-6">
-					<input id="nama_surat" class="form-control" placeholder="Nama" type="text" readonly>
+					<input id="nama_surat" class="form-control" placeholder="Masukkan Nama" type="text" readonly>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-3">Tempat, Tgl Lahir</label>
 				<div class="col-sm-6">
-					<input id="ttl_surat" class="form-control" placeholder="Tempat Tgl Lahir" type="text" readonly>
-				</div>
-			</div>
-			<div class="form-group">	        	
-				<label class="control-label col-sm-3">Agama</label>				
-				<div class="col-sm-6">
-					<input id="agama_surat" class="form-control" placeholder="Agama" type="text" readonly>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-3">Jenis Kelamin</label>
-				<div class="col-sm-6">
-					<input id="jk_surat" class="form-control" placeholder="Jenis Kelamin" type="text" readonly>
+					<input id="ttl_surat" class="form-control" placeholder="Masukkan Tempat Tgl Lahir" type="text" readonly>
 				</div>
 			</div>
 			<div class="form-group">
@@ -51,32 +39,34 @@
 			<div class="form-group">
 				<label class="control-label col-sm-3">Nama Usaha</label>	
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="Masukkan Nama Usaha" type="text" name="nama_usaha" required>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-3">Alamat Usaha</label>
-				<div class="col-sm-6">
-					<textarea id="alamat_usaha" placeholder="Masukkan Alamat Usaha" class="form-control" name="alamat_usaha" required></textarea>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-3">Keperluan</label>
-				<div class="col-sm-6">
-					<textarea id="keperluan" placeholder="Masukkan Keperluan SKU" class="form-control" name="keperluan" required></textarea>
+					<input class="form-control" placeholder="Masukkan Jenis Usaha" type="text" name="nama_usaha" required>
 				</div>
 			</div><br>
-			<h4>Surat Pengantar:</h4>
+			<h4>Tanah Sendiri:</h4>
 			<div class="form-group">
-				<label class="control-label col-sm-3">Dari</label>
+				<label class="control-label col-sm-3">Tanah Sawah</label>
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="Masukkan Pemberi Surat Pengantar" type="text" name="dari_pengantar">
+					<input class="form-control" placeholder="Masukkan Luas Tanah Sawah" type="number" name="sendiri_sawah">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-3">Tanggal</label>
+				<label class="control-label col-sm-3">Tanah Tegal</label>
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="Masukkan Tanggal Surat Pengantar" type="text" name="tgl_pengantar">
+					<input class="form-control" placeholder="Masukkan Luas Tanah Tegal" type="number" name="sendiri_tegal">
+				</div>
+			</div><br>
+			<h4>Tanah Sewa:</h4>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Tanah Sawah</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Luas Tanah Sawah" type="number" name="sewa_sawah">
+				</div>
+			</div>
+			<div class="form-group">
+				
+				<label class="control-label col-sm-3">Tanah Tegal</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Luas Tanah Tegal" type="number" name="sewa_tegal">
 				</div>
 			</div>
 			<div class="form-group">
@@ -89,8 +79,9 @@
 						@endforeach
 					</select>
 				</div>
-			</div><br>
-			<input type="hidden" name="jenis_surat" value="biasa">
+			</div>
+			<br>
+			<input type="hidden" name="jenis_surat" value="bri">
 			<div class="form-group text-center">
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>

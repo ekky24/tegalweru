@@ -22,11 +22,13 @@ html {
 body {
 	margin: 0;
 	padding: 0;
-	background-color: #0B65B1;
+	background-color: #286090;
+	font-family: 'Montserrat-Regular';
 }
 
 h1 {
 	font-family: 'Montserrat-Bold';
+	color: #286090;
 }
 
 h3 {
@@ -113,7 +115,7 @@ h3.login-text2 {
 }
 
 .navbar-inverse {
-	background-color: #0B65B1 !important;
+	background-color: #286090 !important;
 	border-color: #004e89 !important;
 }
 
@@ -126,11 +128,11 @@ ul#side-menu.nav > li > a, a.dropdown-toggle, ul#side-menu.nav > li > ul > li > 
 }
 
 ul#side-menu.nav > li > a:hover, ul#side-menu.nav > li > a:focus, ul#side-menu.nav > li > ul > li > a:hover, ul#side-menu.nav > li > ul > li > a:focus {
-	background-color: #20628e;
+	background-color: #003762;
 }
 
 a.dropdown-toggle:hover, a.dropdown-toggle:focus {
-	background-color: #20628e !important;
+	background-color: #003762 !important;
 }
 
 h1 {
@@ -176,4 +178,9 @@ form textarea {
 
 .filter {
 	margin-bottom: 30px;
+}
+
+/* SWEET ALERT STYLING */
+.swal2-popup {
+	font-size: 1.5rem !important;
 }

@@ -115,6 +115,7 @@ class PendudukController extends Controller
         $pekerjaan_choose = "";
         $hubungan_choose = "";
         $agama_choose = "";
+        $usia_choose = "";
         $search_term = "";
 
         $penduduk = Penduduk::with(['get_pendidikan', 'get_jenis_pekerjaan']);
@@ -139,6 +140,33 @@ class PendudukController extends Controller
             $penduduk = $penduduk->where('agama_id', request('agama'));
             $agama_choose = request('agama');
         }
+        if ($request->has('usia')) {
+            if (request('usia') == '0') {
+                $penduduk = $penduduk->whereRaw('(DATEDIFF(NOW(), tgl_lahir) DIV 365) < 10');
+            }
+            elseif (request('usia') == '1') {
+                $penduduk = $penduduk->whereRaw('(DATEDIFF(NOW(), tgl_lahir) DIV 365) >= 10 AND (DATEDIFF(NOW(), tgl_lahir) DIV 365) < 20');
+            }
+            elseif (request('usia') == '2') {
+                $penduduk = $penduduk->whereRaw('(DATEDIFF(NOW(), tgl_lahir) DIV 365) >= 20 AND (DATEDIFF(NOW(), tgl_lahir) DIV 365) < 30');
+            }
+            elseif (request('usia') == '3') {
+                $penduduk = $penduduk->whereRaw('(DATEDIFF(NOW(), tgl_lahir) DIV 365) >= 30 AND (DATEDIFF(NOW(), tgl_lahir) DIV 365) < 40');
+            }
+            elseif (request('usia') == '4') {
+                $penduduk = $penduduk->whereRaw('(DATEDIFF(NOW(), tgl_lahir) DIV 365) >= 40 AND (DATEDIFF(NOW(), tgl_lahir) DIV 365) < 50');
+            }
+            elseif (request('usia') == '5') {
+                $penduduk = $penduduk->whereRaw('(DATEDIFF(NOW(), tgl_lahir) DIV 365) >= 50 AND (DATEDIFF(NOW(), tgl_lahir) DIV 365) < 60');
+            }
+            elseif (request('usia') == '6') {
+                $penduduk = $penduduk->whereRaw('(DATEDIFF(NOW(), tgl_lahir) DIV 365) >= 60 AND (DATEDIFF(NOW(), tgl_lahir) DIV 365) < 70');
+            }
+            elseif (request('usia') == '7') {
+                $penduduk = $penduduk->whereRaw('(DATEDIFF(NOW(), tgl_lahir) DIV 365) > 70');
+            }
+            $usia_choose = request('usia');
+        }
         if ($request->has('q')) {
             $penduduk = $penduduk->orWhere('id', "like", "%" . request('q'). "%")->orWhere('nama', "like", "%" . request('q'). "%")->orWhere('kewarganegaraan', "like", "%" . request('q'). "%")->orWhere('no_paspor', "like", "%" . request('q'). "%")->orWhere('no_kitas', "like", "%" . request('q'). "%")->orWhere('ayah', "like", "%" . request('q'). "%")->orWhere('ibu', "like", "%" . request('q'). "%")->orWhere('kk_id', "like", "%" . request('q'). "%");
             $search_term = request('q');
@@ -150,6 +178,7 @@ class PendudukController extends Controller
         $pekerjaan = JenisPekerjaan::all();
         $hubungan = StatusHubungan::all();
         $agama = Agama::all();
+        $usia = usia_ajax();
 
         $jk_choose_report = "";
         $pendidikan_choose_report = "";
@@ -193,8 +222,8 @@ class PendudukController extends Controller
                 }
             }
         }
-        
-        return view('penduduk.show_all', compact('penduduk', 'pendidikan', 'pekerjaan', 'hubungan', 'jk_choose', 'pendidikan_choose', 'pekerjaan_choose', 'hubungan_choose', 'agama', 'agama_choose', 'search_term', 'penduduk_download', 'jk_choose_report', 'pendidikan_choose_report', 'agama_choose_report', 'pekerjaan_choose_report', 'hubungan_choose_report'));
+
+        return view('penduduk.show_all', compact('penduduk', 'pendidikan', 'pekerjaan', 'hubungan', 'jk_choose', 'pendidikan_choose', 'pekerjaan_choose', 'hubungan_choose', 'agama', 'agama_choose', 'search_term', 'penduduk_download', 'jk_choose_report', 'pendidikan_choose_report', 'agama_choose_report', 'pekerjaan_choose_report', 'hubungan_choose_report', 'usia_choose', 'usia'));
     }
 
     public function getPdf() {
@@ -269,7 +298,7 @@ class PendudukController extends Controller
     }
 
     public function penduduk_ajax_kematian() {
-        $nik = Penduduk::with(['get_kk', 'get_agama'])->getAktif()->get();
+        $nik = Penduduk::with(['get_kk', 'get_tempat_lahir', 'get_agama'])->getAktif()->get();
         return $nik;
     }
 
@@ -395,4 +424,67 @@ class PendudukController extends Controller
         
         return json_encode($age_count);
     }
+}
+
+function usia_ajax() {
+    $c = [0,0,0,0,0,0,0,0];
+        $age_name = [];
+
+        $penduduk = Penduduk::selectRaw('YEAR(CURRENT_TIMESTAMP) - YEAR(tgl_lahir) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(tgl_lahir, 5)) as age')->getAktif()->get();
+        
+        foreach ($penduduk as $row) {
+            $age = $row->age;
+
+            if ($age < 10) {
+                $c[0]++;
+            }
+            elseif ($age >= 10 && $age < 20) {
+                $c[1]++;
+            }
+            elseif ($age >= 20 && $age < 30) {
+                $c[2]++;
+            }
+            elseif ($age >= 30 && $age < 40) {
+                $c[3]++;
+            }
+            elseif ($age >= 40 && $age < 50) {
+                $c[4]++;
+            }
+            elseif ($age >= 50 && $age < 60) {
+                $c[5]++;
+            }
+            elseif ($age >= 60 && $age < 70) {
+                $c[6]++;
+            }
+            elseif ($age > 70) {
+                $c[7]++;
+            }
+        }
+
+        if ($c[0] > 0) {
+            array_push($age_name, "Kurang dari 10 thn");
+        }
+        if ($c[1] > 0) {
+            array_push($age_name, "10 - 20");
+        }
+        if ($c[2] > 0) {
+            array_push($age_name, "20 - 30");
+        }
+        if ($c[3] > 0) {
+            array_push($age_name, "30 - 40");
+        }
+        if ($c[4] > 0) {
+            array_push($age_name, "40 - 50");
+        }
+        if ($c[5] > 0) {
+            array_push($age_name, "50 - 60");
+        }
+        if ($c[6] > 0) {
+            array_push($age_name, "60 - 70");
+        }
+        if ($c[7] > 0) {
+            array_push($age_name, "Lebih dari 70 thn");
+        }
+    
+        return $age_name;
 }

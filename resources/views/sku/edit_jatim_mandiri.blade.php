@@ -10,7 +10,7 @@
 
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="filter page-header">Ubah Data SKU</h1>
+		<h1 class="filter page-header">Ubah Data SKU untuk Jatim-Mandiri</h1>
 	</div>
 </div>
 <form method="post" action="/sku/{{ $sku->id }}" autocomplete="off" class="form-horizontal">
@@ -93,23 +93,7 @@
 		<div class="col-sm-6">
 			<textarea id="keperluan_surat" placeholder="Masukkan Keperluan sku" class="form-control" name="keperluan" required>{{ $sku->keperluan }}</textarea>
 		</div>
-	</div><br>
-	<h4>Surat Pengantar:</h4>
-	<div class="form-group">
-
-		<label class="control-label col-sm-3">Dari</label>
-
-		<div class="col-sm-6">
-			<input class="form-control" placeholder="Luas Tanah Sawah" type="text" name="dari_pengantar" value="{{ $sku->dari_pengantar }}">
-		</div>
 	</div>
-	<div class="form-group">
-
-		<label class="control-label col-sm-3">Tanggal</label>
-		<div class="col-sm-6">
-			<input class="form-control" placeholder="Luas Tanah Tegal" type="text" name="tgl_pengantar" value="{{ $sku->tgl_pengantar }}">
-		</div>
-	</div><br>
 	<div class="form-group">
 
 		<label class="control-label col-sm-3">Pilih Pejabat Penerbit</label>

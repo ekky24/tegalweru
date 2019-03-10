@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Data Tegalweru</title>
+    <title>Data Karangwidoro</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +39,7 @@
 
     <div id="background-login" class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
         <h1 class="text-center login-text1">Sistem Informasi</h1>
-        <h3 class="text-center login-text2">Desa Tegalweru</h3>
+        <h3 class="text-center login-text2">Desa Karangwidoro</h3>
         <form method="post" action="/session" autocomplete="off">
             {{ csrf_field() }}
             <input class="form-control form-login" placeholder="Username" type="text" name="username" required>

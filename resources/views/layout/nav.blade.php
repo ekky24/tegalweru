@@ -7,7 +7,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Tegalweru Dashboard</a>
+                <a class="navbar-brand" href="/">Karangwidoro Dashboard</a>
             </div>
             <!-- /.navbar-header -->
 

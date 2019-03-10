@@ -169,7 +169,7 @@ class KartuKeluargaController extends Controller
             'alamat' => strtoupper(request('alamat')),
             'rukun_tetangga' => request('rt'),
             'rukun_warga' => request('rw'),
-            'kelurahan' => '3507300006',
+            'kelurahan' => '3507300003',
             'kode_pos' => '65151',
             'tgl_terbit' => request('tgl_terbit'),
             'penerbit' => strtoupper(request('penerbit'))

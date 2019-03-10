@@ -18,16 +18,33 @@ class SuratKeteranganUsahaController extends Controller
 
     public function insert() {
     	$penerbit = Penerbit::all();
-
     	return view('sku.insert', compact('penerbit'));
+    }
+
+    public function insert_bri() {
+        $penerbit = Penerbit::all();
+        return view('sku.insert_bri', compact('penerbit'));
+    }
+
+    public function insert_jatim_mandiri() {
+        $penerbit = Penerbit::all();
+        return view('sku.insert_jatim_mandiri', compact('penerbit'));
     }
 
     public function store(Request $request) {
     	$this->validate(request(), [
     		'nik' => 'required',
-    		'jenis_usaha' => 'required',
-    		'keperluan' => 'required',
-    		'penerbit_id' => 'required'
+    		'nama_usaha' => 'required',
+            'alamat_usaha' => 'nullable',
+    		'keperluan' => 'nullable',
+            'dari_pengantar' => 'nullable',
+            'tgl_pengantar' => 'nullable',
+    		'penerbit_id' => 'required',
+            'jenis_surat' => 'required',
+            'sendiri_sawah' => 'nullable',
+            'sendiri_tegal' => 'nullable',
+            'sewa_sawah' => 'nullable',
+            'sewa_tegal' => 'nullable',
     	]);
 
         if (Penduduk::find(request('nik')) == null) {
@@ -58,28 +75,55 @@ class SuratKeteranganUsahaController extends Controller
     	}
 
     	$nomor_sesudah = $nomor_sebelum + 1;
-    	$nomor_fix = "140/" . $nomor_sesudah . "/35.07.2006/" . $tahun;
+    	$nomor_fix = "517/" . $nomor_sesudah . "/35.07.22.2003/" . $tahun;
 
-    	$sku = SuratKeteranganUsaha::create([
-    		'nomor' => $nomor_fix,
-    		'penduduk_id' => request('nik'),
-    		'jenis_usaha' => strtoupper(request('jenis_usaha')),
-    		'keperluan' => strtoupper(request('keperluan')),
-    		'penerbit_id' => request('penerbit_id')
-    	]);
+        if(request('jenis_surat') == 'biasa') {
+            $sku = SuratKeteranganUsaha::create([
+                'nomor' => $nomor_fix,
+                'penduduk_id' => request('nik'),
+                'nama_usaha' => strtoupper(request('nama_usaha')),
+                'alamat_usaha' => strtoupper(request('alamat_usaha')),
+                'keperluan' => strtoupper(request('keperluan')),
+                'dari_pengantar' => strtoupper(request('dari_pengantar')),
+                'tgl_pengantar' => strtoupper(request('tgl_pengantar')),
+                'penerbit_id' => request('penerbit_id'),
+                'jenis_surat' => request('jenis_surat'),
+            ]);
+        }
+        elseif(request('jenis_surat') == 'bri') {
+            $sku = SuratKeteranganUsaha::create([
+                'nomor' => $nomor_fix,
+                'penduduk_id' => request('nik'),
+                'nama_usaha' => strtoupper(request('nama_usaha')),
+                'penerbit_id' => request('penerbit_id'),
+                'jenis_surat' => request('jenis_surat'),
+            ]);
 
-    	if ($request->has('sendiri_sawah')) {
-    		$sku->sendiri_sawah = request('sendiri_sawah');
-    	}
-		if ($request->has('sendiri_tegal')) {
-    		$sku->sendiri_tegal = request('sendiri_tegal');
-    	}  
-    	if ($request->has('sewa_sawah')) {
-    		$sku->sewa_sawah = request('sewa_sawah');
-    	}  
-    	if ($request->has('sewa_tegal')) {
-    		$sku->sewa_tegal = request('sewa_tegal');
-    	}
+            if ($request->has('sendiri_sawah')) {
+                $sku->sendiri_sawah = request('sendiri_sawah');
+            }
+            if ($request->has('sendiri_tegal')) {
+                $sku->sendiri_tegal = request('sendiri_tegal');
+            }  
+            if ($request->has('sewa_sawah')) {
+                $sku->sewa_sawah = request('sewa_sawah');
+            }  
+            if ($request->has('sewa_tegal')) {
+                $sku->sewa_tegal = request('sewa_tegal');
+            }
+        }
+        elseif(request('jenis_surat') == 'jatim_mandiri') {
+            $sku = SuratKeteranganUsaha::create([
+                'nomor' => $nomor_fix,
+                'penduduk_id' => request('nik'),
+                'nama_usaha' => strtoupper(request('nama_usaha')),
+                'alamat_usaha' => strtoupper(request('alamat_usaha')),
+                'keperluan' => strtoupper(request('keperluan')),
+                'penerbit_id' => request('penerbit_id'),
+                'jenis_surat' => request('jenis_surat'),
+            ]);
+        }
+    	
     	$sku->save();
 
     	return redirect("/sku/$sku->id");
@@ -185,10 +229,20 @@ class SuratKeteranganUsahaController extends Controller
     	return view('sku.show', compact('sku'));
     }
 
-    public function edit($id) {
+    public function edit($id, $jenis_surat) {
     	$penerbit = Penerbit::all();
     	$sku = SuratKeteranganUsaha::with(['get_penduduk', 'get_penerbit'])->find($id);
-    	return view('sku.edit', compact('sku', 'penerbit'));
+        $penduduk = Penduduk::with(['get_agama', 'get_tempat_lahir'])->find($sku->get_penduduk->id);
+
+        if($jenis_surat == 'biasa') {
+            return view('sku.edit', compact('sku', 'penerbit', 'penduduk'));
+        }
+        elseif($jenis_surat == 'bri') {
+            return view('sku.edit_bri', compact('sku', 'penerbit', 'penduduk'));
+        }
+        elseif($jenis_surat == 'jatim_mandiri') {
+            return view('sku.edit_jatim_mandiri', compact('sku', 'penerbit', 'penduduk'));
+        }
     }
 
     public function delete(SuratKeteranganUsaha $sku) {

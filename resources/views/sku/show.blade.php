@@ -33,7 +33,7 @@
 		</tr>
 		<tr>
 			<th>Jenis Usaha</th>
-			<td>{{ $sku->jenis_usaha }}</td>
+			<td>{{ $sku->nama_usaha }}</td>
 		</tr>
 		<tr>
 			<th>Tanah Sendiri ( Sawah )</th>
@@ -69,7 +69,11 @@
 		</tr>
 		<tr>
 			<th>Keperluan</th>
-			<td>{{ $sku->keperluan }}</td>
+			@if($sku->keperluan != NULL)
+				<td>{{ $sku->keperluan }}</td>
+			@else
+				<td>{{ "-" }}</td>
+			@endif
 		</tr>
 		<tr>
 			<th>Nama Pejabat Penerbit</th>
@@ -80,7 +84,7 @@
 			<td>{{ $sku->get_penerbit->jabatan }}</td>
 		</tr>
 	</table>
-	<a class="btn btn-primary" href="/sku/{{ $sku->id }}/edit">Edit Data</a>
+	<a class="btn btn-primary" href="/sku/{{ $sku->id }}/edit/{{ $sku->jenis_surat }}">Edit Data</a>
 	<a class="btn btn-primary" href="/sku/{{ $sku->id }}/download">Download</a><br><br>
 	</center>
 @endsection
