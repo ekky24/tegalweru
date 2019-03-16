@@ -93,16 +93,18 @@ Route::get('/stat_sktm_tahun', 'SuratKeteranganTidakMampuController@stat_sktm_ta
 Route::get('/stat_sktm_bulan', 'SuratKeteranganTidakMampuController@stat_sktm_bulan');
 
 Route::post('/sku/download', 'SuratKeteranganUsahaController@getPdf');
-Route::get('/sku/{sku}/download', 'SuratKeteranganUsahaController@print');
 Route::get('/sku/insert_bri', 'SuratKeteranganUsahaController@insert_bri');
 Route::get('/sku/insert', 'SuratKeteranganUsahaController@insert');
 Route::get('/sku/insert_jatim_mandiri', 'SuratKeteranganUsahaController@insert_jatim_mandiri');
+Route::get('/sku/insert_domisili_usaha', 'SuratKeteranganUsahaController@insert_domisili_usaha');
 Route::post('/sku', 'SuratKeteranganUsahaController@store');
 Route::post('/sku/{sku}', 'SuratKeteranganUsahaController@store_edit');
 Route::get('/sku/{sku}', 'SuratKeteranganUsahaController@show');
 Route::get('/sku', 'SuratKeteranganUsahaController@show_all');
 Route::get('/sku/{sku}/delete', 'SuratKeteranganUsahaController@delete');
 Route::get('/sku/{sku}/edit/{jenis_surat}', 'SuratKeteranganUsahaController@edit');
+Route::get('/sku/{sku}/download/{jenis_surat}', 'SuratKeteranganUsahaController@print');
+Route::get('/sku/insert_domisili_usaha', 'SuratKeteranganUsahaController@insert_domisili_usaha');
 Route::get('/stat_sku_tahun', 'SuratKeteranganUsahaController@stat_sku_tahun');
 Route::get('/stat_sku_bulan', 'SuratKeteranganUsahaController@stat_sku_bulan');
 

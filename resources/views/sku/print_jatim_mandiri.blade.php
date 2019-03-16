@@ -52,11 +52,15 @@
                     </tr>
                     </table>
                 
-                    <p class="text-justify body">Demikian surat keterangan ini kami buat dengan sebenar-benarnya berdasarkan Surat Pengantar dari {{ $surat->dari_pengantar }} pada tanggal {{ $surat->tgl_pengantar }} untuk dapat dipergunakan sebagaimana mestinya.</p><br><br>
+                    <p class="text-justify body">Demikian surat keterangan ini kami buat dengan sebenar-benarnya untuk dapat dipergunakan sebagaimana mestinya.</p><br><br>
 
                     <table class="bawah-ybs">
-                        <tr><td><br></td></tr>
-                        <tr><td><br></td></tr>
+                        @if($surat->get_penerbit->jabatan != 'KEPALA DESA')
+                            <tr><td><br></td></tr>
+                            <tr><td><br></td></tr>
+                        @else
+                            <tr><td><br></td></tr>
+                        @endif
                         <tr>
                             <td>Yang bersangkutan</td>
                         </tr>

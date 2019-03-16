@@ -18,7 +18,11 @@ class CreateSuratKeteranganUsahasTable extends Migration
             $table->string('nomor');
             $table->string('penduduk_id');
             $table->string('nama_usaha');
+            $table->string('tahun_pendirian_usaha')->nullable();
+            $table->string('bidang_usaha')->nullable();
             $table->string('alamat_usaha')->nullable();
+            $table->string('nama_pimpinan')->nullable();
+            $table->string('alamat_pimpinan')->nullable();
             $table->integer('sendiri_sawah')->nullable();
             $table->integer('sendiri_tegal')->nullable();
             $table->integer('sewa_sawah')->nullable();

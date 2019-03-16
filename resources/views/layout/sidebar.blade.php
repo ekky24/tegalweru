@@ -124,6 +124,9 @@
                                         <li>
                                             <a href="/sku/insert_jatim_mandiri">Insert SKU Jatim Mandiri</a>
                                         </li>
+                                        <li>
+                                            <a href="/sku/insert_domisili_usaha">Insert Domisili Usaha</a>
+                                        </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>

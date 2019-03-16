@@ -43,6 +43,11 @@ body {
                 white-space: nowrap;
             }
 
+            table.bawah-ybs {
+                float: left;
+                margin-left: 30px;
+            }
+
             table.bawah {
                 float: right;
                 margin-right: 30px;
@@ -55,5 +60,15 @@ body {
             .nama_pejabat {
                 margin-top: 100px;
                 font-weight: bold;
-                text-decoration: underline;
+            }
+
+            .bri_header {
+                font-weight: bold;
+            }
+
+            table.bri-table {
+                border-collapse: collapse;
+                margin-left: 0 !important;
+                width: 100%;
+                text-align: justify;
             }

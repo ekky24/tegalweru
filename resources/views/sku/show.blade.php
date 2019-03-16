@@ -85,6 +85,6 @@
 		</tr>
 	</table>
 	<a class="btn btn-primary" href="/sku/{{ $sku->id }}/edit/{{ $sku->jenis_surat }}">Edit Data</a>
-	<a class="btn btn-primary" href="/sku/{{ $sku->id }}/download">Download</a><br><br>
+	<a class="btn btn-primary" href="/sku/{{ $sku->id }}/download/{{ $sku->jenis_surat }}">Download</a><br><br>
 	</center>
 @endsection

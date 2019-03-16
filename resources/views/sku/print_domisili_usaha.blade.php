@@ -17,56 +17,57 @@
             <div class="size">
                 <center><img src="{{ public_path() . $image_path }}"></center>
                 <div class="isi">
-                    <center><p class="header">SURAT KETERANGAN USAHA</p></center>
+                    <center><p class="header">SURAT KETERANGAN DOMISILI USAHA</p></center>
                     <center><p class="nomor">Nomor : {{ $surat->nomor }}</p></center>
-                    <p class="text-justify body">Yang bertanda tangan di bawah ini: </p>
+                    <p class="text-justify body">Yang bertanda tangan di bawah ini Kepala Desa Karangwidoro, Kecamatan Dau, Kabupaten Malang, menerangkan bahwa: </p>
                     <table>
                         <tr>
-                            <td class="header">Nama</td>
+                            <td class="header">Nama Usaha</td>
                             <td>:</td>
-                            <td>{{ $penerbit->nama }}</td>
+                            <td><b>{{ $surat->nama_usaha }}</b></td>
                         </tr>
                         <tr>
-                            <td class="header">Jabatan</td>
+                            <td class="header">Tahun Pendirian</td>
                             <td>:</td>
-                            <td>Kepala Desa Karangwidoro Kecamatan Dau Kabupaten Malang</td>
+                            <td>{{ $surat->tahun_pendirian_usaha }}</td>
+                        </tr>
+                        <tr>
+                            <td class="header">Bidang Usaha</td>
+                            <td>:</td>
+                            <td>{{ $surat->bidang_usaha }}</td>
+                        </tr>
+                        <tr>
+                            <td class="header">Alamat Usaha</td>
+                            <td>:</td>
+                            <td>{{ $surat->alamat_usaha }}</td>
+                        </tr>
+                        <tr>
+                            <td class="header">&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="header">Nama Pimpinan</td>
+                            <td>:</td>
+                            <td>{{ $surat->nama_pimpinan }}</td>
+                        </tr>
+                        <tr>
+                            <td class="header">NIK</td>
+                            <td>:</td>
+                            <td>{{ $surat->penduduk_id }}</td>
+                        </tr>
+                        <tr>
+                            <td class="header">Alamat Pimpinan</td>
+                            <td>:</td>
+                            <td>{{ $surat->alamat_pimpinan }}</td>
                         </tr>
                     </table>
-                    <p class="text-justify body">menerangkan dengan sebenarnya bahwa: </p>
-                    @include('layout.print')
+                    <p class="text-justify body"><b>Menerangkan Bahwa: </b></p>
 
-                    <tr>
-                        <td>Keperluan</td>
-                        <td>:</td>
-                        <td>{{ $surat->keperluan }}</td>
-                    </tr>
-                    <tr>
-                        <td>Memiliki Usaha</td>
-                        <td>:</td>
-                        <td>{{ $surat->nama_usaha }}</td>
-                    </tr>
-                    <tr>
-                        <td>Tempat Usaha</td>
-                        <td>:</td>
-                        <td>{{ $surat->alamat_usaha }}</td>
-                    </tr>
-                    </table>
+                    <p class="text-justify body">Nama Usaha <b>{{ $surat->nama_usaha }}</b> benar-benar berdomisili di {{ $surat->alamat_usaha }}.</p>
                 
                     <p class="text-justify body">Demikian surat keterangan ini kami buat dengan sebenar-benarnya berdasarkan Surat Pengantar dari {{ $surat->dari_pengantar }} pada tanggal {{ $surat->tgl_pengantar }} untuk dapat dipergunakan sebagaimana mestinya.</p><br><br>
 
-                    <table class="bawah-ybs">
-                        <tr><td><br></td></tr>
-                        <tr><td><br></td></tr>
-                        <tr>
-                            <td>Yang bersangkutan</td>
-                        </tr>
-                        <tr><td><br></td></tr>
-                        <tr><td><br></td></tr>
-                        <tr><td><br></td></tr>
-                        <tr>
-                            <td class="nama_pejabat">{{ $penduduk->nama }}</td>
-                        </tr>
-                    </table>
                     <table class="bawah">
                         <tr>
                             <td>Karangwidoro, {{ $waktu->day . " " . $bulan_arr[$waktu->month-1] . " " . $waktu->year }}</td>

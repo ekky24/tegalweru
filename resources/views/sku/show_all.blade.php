@@ -34,12 +34,20 @@
 			?>
 				<tr>
 					<td>{{ $index + 1 }}</td>
-					<td><a href="/penduduk/{{ $row->penduduk_id }}">{{ $row->penduduk_id }}</a></td>
+					@if($row->jenis_surat == 'domisili_usaha')
+						<td>{{ $row->penduduk_id }}</td>
+					@else
+						<td><a href="/penduduk/{{ $row->penduduk_id }}">{{ $row->penduduk_id }}</a></td>
+					@endif
 					
 					@if(strlen($row->keperluan) > 40)
 						<td>{{ substr($row->keperluan, 0, 40) . "..."}}</td>
 					@else
-						<td>{{ $row->keperluan }}</td>
+						@if($row->keperluan != "")
+							<td>{{ $row->keperluan }}</td>
+						@else
+							<td>-</td>
+						@endif
 					@endif					
 
 					<td>{{ $row->get_penerbit->nama }}</td>
