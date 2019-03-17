@@ -55,12 +55,8 @@
                     <p class="text-justify body">Demikian surat keterangan ini kami buat dengan sebenar-benarnya untuk dapat dipergunakan sebagaimana mestinya.</p><br><br>
 
                     <table class="bawah-ybs">
-                        @if($surat->get_penerbit->jabatan != 'KEPALA DESA')
-                            <tr><td><br></td></tr>
-                            <tr><td><br></td></tr>
-                        @else
-                            <tr><td><br></td></tr>
-                        @endif
+                        <tr><td><br></td></tr>
+                        <tr><td><br></td></tr>
                         <tr>
                             <td>Yang bersangkutan</td>
                         </tr>
@@ -83,6 +79,9 @@
                                 <td>{{ $surat->get_penerbit->jabatan }}</td>
                             </tr>
                         @else
+                            <tr>
+                                <td>&nbsp;</td>
+                            </tr>
                             <tr>
                                 <td>Kepala Desa Karangwidoro</td>
                             </tr>

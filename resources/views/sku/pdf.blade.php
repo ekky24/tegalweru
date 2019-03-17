@@ -37,9 +37,17 @@
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $row->penduduk_id }}</td>
-                            <td>{{ $row->get_penduduk->nama }}</td>
-                            <td>{{ $row->jenis_usaha }}</td>
-                            <td>{{ $row->keperluan }}</td>
+                            @if($row->jenis_surat == 'domisili_usaha')
+                                <td>{{ $row->nama_pimpinan }}</td>
+                            @else
+                                <td>{{ $row->get_penduduk->nama }}</td>
+                            @endif
+                            <td>{{ $row->nama_usaha }}</td>
+                            @if($row->keperluan != "")
+                                <td>{{ $row->keperluan }}</td>
+                            @else
+                                <td>-</td>
+                            @endif
                             <td>{{ $row->get_penerbit->nama }}</td>
                         </tr>
                 @endforeach

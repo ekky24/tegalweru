@@ -76,7 +76,7 @@
 		<label class="control-label col-sm-3">Nama Usaha</label>
 
 		<div class="col-sm-6">
-			<input name="nama_usaha" class="form-control" placeholder="Jenis Usaha" type="text" value="{{ $sku->nama_usaha }}" required>
+			<input name="nama_usaha" class="form-control" placeholder="Nama Usaha" type="text" value="{{ $sku->nama_usaha }}" required>
 		</div>
 	</div>
 	<div class="form-group">
@@ -84,7 +84,7 @@
 		<label class="control-label col-sm-3">Alamat Usaha</label>
 
 		<div class="col-sm-6">
-			<input name="nama_usaha" class="form-control" placeholder="Jenis Usaha" type="text" value="{{ $sku->alamat_usaha }}" required>
+			<textarea name="alamat_usaha" placeholder="Alamat Usaha" class="form-control" required>{{ $sku->alamat_usaha }}</textarea>
 		</div>
 	</div>
 	<div class="form-group">
@@ -100,14 +100,14 @@
 		<label class="control-label col-sm-3">Dari</label>
 
 		<div class="col-sm-6">
-			<input class="form-control" placeholder="Luas Tanah Sawah" type="text" name="dari_pengantar" value="{{ $sku->dari_pengantar }}">
+			<input class="form-control" placeholder="Asal Pengantar" type="text" name="dari_pengantar" value="{{ $sku->dari_pengantar }}">
 		</div>
 	</div>
 	<div class="form-group">
 
 		<label class="control-label col-sm-3">Tanggal</label>
 		<div class="col-sm-6">
-			<input class="form-control" placeholder="Luas Tanah Tegal" type="text" name="tgl_pengantar" value="{{ $sku->tgl_pengantar }}">
+			<input class="form-control" placeholder="Tanggal Pengantar" type="text" name="tgl_pengantar" value="{{ $sku->tgl_pengantar }}">
 		</div>
 	</div><br>
 	<div class="form-group">

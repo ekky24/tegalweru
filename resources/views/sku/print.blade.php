@@ -80,6 +80,9 @@
                             </tr>
                         @else
                             <tr>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
                                 <td>Kepala Desa Karangwidoro</td>
                             </tr>
                         @endif

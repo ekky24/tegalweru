@@ -84,7 +84,7 @@
 		<label class="control-label col-sm-3">Alamat Usaha</label>
 
 		<div class="col-sm-6">
-			<input name="nama_usaha" class="form-control" placeholder="Jenis Usaha" type="text" value="{{ $sku->alamat_usaha }}" required>
+			<textarea name="alamat_usaha" placeholder="Alamat Usaha" class="form-control" required>{{ $sku->alamat_usaha }}</textarea>
 		</div>
 	</div>
 	<div class="form-group">

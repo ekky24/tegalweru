@@ -19,7 +19,7 @@
             <div class="size">
                 <center><img src="{{ public_path() . $image_path }}"></center>
                 <div class="isi">
-                    <center><p class="header">SURAT KETERANGAN USAHA</p></center>
+                    <center><p class="header" style="margin-top: 30px;">SURAT KETERANGAN USAHA</p></center>
                     <center><p class="nomor" style="margin-bottom: 30px;">Nomor: {{ $surat->nomor }}</p></center>
                     <p class="text-justify body">Yang bertanda tangan di bawah ini: </p>
                     <table>
@@ -133,10 +133,14 @@
                         @endif
                         <tr><td><br></td></tr>
                         <tr><td><br></td></tr>
+                        <tr><td><br></td></tr>
                         <tr>
                             <td class="nama_pejabat">{{ $surat->get_penerbit->nama }}</td>
                         </tr>
-                    </table><br><br><br><br><br>
+                    </table><br><br><br><br><br><br>
+                    @if($surat->get_penerbit->jabatan != 'KEPALA DESA')
+                        <br>
+                    @endif
                     <p class="text-justify body">Hasil Pemeriksaan Mantri: </p>
                     <table border=1 width='100%' class="bri-table">
                             <tr>
