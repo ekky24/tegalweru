@@ -9,6 +9,7 @@ use App\SuratKeteranganDukun;
 use Carbon\Carbon;
 use DB;
 use App\Penduduk;
+use App\Kelahiran;
 
 class SuratKeteranganDukunController extends Controller
 {
@@ -24,15 +25,20 @@ class SuratKeteranganDukunController extends Controller
 
     public function store() {
     	$this->validate(request(), [
-    		'nik' => 'required',
-    		'nama_anak' => 'required',
-    		'nama_suami' => 'required',
+    		'nik_ibu' => 'required',
+            'nik_ayah' => 'required',
+            'nik_pelapor' => 'required',
+            'hubungan_pelapor' => 'required',
     		'tgl_kelahiran' => 'required',
-    		'jam_kelahiran' => 'required',
+            'jam_kelahiran' => 'required',
+            'tempat_kelahiran' => 'required',
+    		'jk_anak' => 'required',
+            'nama_anak' => 'required',
+            'anak_ke' => 'required',
     		'penerbit_id' => 'required'
     	]);
 
-        if (Penduduk::find(request('nik')) == null) {
+        if (Penduduk::find(request('nik_ibu')) == null or Penduduk::find(request('nik_ayah')) == null or Penduduk::find(request('nik_pelapor')) == null) {
             return back()->withErrors([
                 'message' => 'NIK yang anda masukkan salah.'
             ]);
@@ -60,20 +66,33 @@ class SuratKeteranganDukunController extends Controller
     	}
 
     	$nomor_sesudah = $nomor_sebelum + 1;
-    	$nomor_fix = "140/" . $nomor_sesudah . "/35.07.2006/" . $tahun;
+    	$nomor_fix = "472.11/" . $nomor_sesudah . "/35.07.22.2003/" . $tahun;
 
     	$tgl_kelahiran = request('tgl_kelahiran');
-    	$jam_kelahiran = request('jam_kelahiran');
-    	$waktu_kelahiran = date('Y-m-d H:i:s', strtotime("$tgl_kelahiran $jam_kelahiran"));
+    	$waktu_kelahiran = date('Y-m-d', strtotime("$tgl_kelahiran"));
 
     	$skd = SuratKeteranganDukun::create([
     		'nomor' => $nomor_fix,
-    		'penduduk_id' => request('nik'),
-    		'nama_anak' => strtoupper(request('nama_anak')),
-    		'nama_suami' => strtoupper(request('nama_suami')),
-    		'waktu_lahir' => $waktu_kelahiran,
+    		'nik_ibu' => request('nik_ibu'),
+            'nik_ayah' => request('nik_ayah'),
+            'nik_pelapor' => request('nik_pelapor'),
+            'hubungan_pelapor' => strtoupper(request('hubungan_pelapor')),
+            'tgl_kelahiran' => request('tgl_kelahiran'),
+            'jam_kelahiran' => request('jam_kelahiran'),
+            'tempat_kelahiran' => strtoupper(request('tempat_kelahiran')),
+            'jk_anak' => strtoupper(request('jk_anak')),
+            'nama_anak' => strtoupper(request('nama_anak')),
+            'anak_ke' => strtoupper(request('anak_ke')),
     		'penerbit_id' => request('penerbit_id')
     	]);
+
+        Kelahiran::create([
+            'nama' => strtoupper(request('nama_anak')),
+            'jk' => request('jk_anak'),
+            'tempat_lahir' => strtoupper('3573'),
+            'tgl_lahir' => request('tgl_kelahiran'),
+            'surat_lahir_id' => $skd->id,
+        ]);
 
     	return redirect("/skd/$skd->id");
     }
@@ -83,7 +102,7 @@ class SuratKeteranganDukunController extends Controller
     	$bulan_choose = "";
     	$search_term = "";
 
-    	$skd = SuratKeteranganDukun::with(['get_penduduk', 'get_penerbit']);
+    	$skd = SuratKeteranganDukun::with(['get_penduduk_ibu', 'get_penduduk_ayah', 'get_penduduk_pelapor', 'get_penerbit']);
 
     	if ($request->has('tahun')) {
     		$tahun = request('tahun');
@@ -96,7 +115,7 @@ class SuratKeteranganDukunController extends Controller
             $bulan_choose = request('bulan');
         }
         if ($request->has('q')) {
-            $skd = $skd->orWhere('penduduk_id', "like", "%" . request('q'). "%")->orWhere('penerbit_id', "like", "%" . request('q'). "%");
+            $skd = $skd->orWhere('nik_ibu', "like", "%" . request('q'). "%")->orWhere('penerbit_id', "like", "%" . request('q'). "%");
             $search_term = request('q');
         }
 
@@ -134,33 +153,47 @@ class SuratKeteranganDukunController extends Controller
     }
 
     public function show($id) {
-    	$skd = SuratKeteranganDukun::with(['get_penduduk', 'get_penerbit'])->find($id);
-    	return view('skd.show', compact('skd'));
+    	$skd = SuratKeteranganDukun::with(['get_penerbit'])->find($id);
+        $penduduk_ibu = Penduduk::with(['get_kk'])->find($skd->nik_ibu);
+        $penduduk_ayah = Penduduk::with(['get_kk'])->find($skd->nik_ayah);
+        $penduduk_pelapor = Penduduk::with(['get_kk'])->find($skd->nik_pelapor);
+    	return view('skd.show', compact('skd', 'penduduk_ibu', 'penduduk_ayah', 'penduduk_pelapor'));
     }
 
     public function edit($id) {
     	$penerbit = Penerbit::all();
-    	$skd = SuratKeteranganDukun::with(['get_penduduk', 'get_penerbit'])->find($id);
+    	$skd = SuratKeteranganDukun::with(['get_penduduk_ibu', 'get_penduduk_ayah', 'get_penduduk_pelapor', 'get_penerbit'])->find($id);
     	return view('skd.edit', compact('skd', 'penerbit'));
     }
 
     public function store_edit(SuratKeteranganDukun $skd) {
     	$this->validate(request(), [
-    		'nik' => 'required',
-    		'nama_anak' => 'required',
-    		'nama_suami' => 'required',
-    		'tgl_kelahiran' => 'required',
-    		'jam_kelahiran' => 'required',
-    		'penerbit_id' => 'required'
+    		'nik_ibu' => 'required',
+            'nik_ayah' => 'required',
+            'nik_pelapor' => 'required',
+            'hubungan_pelapor' => 'required',
+            'tgl_kelahiran' => 'required',
+            'jam_kelahiran' => 'required',
+            'tempat_kelahiran' => 'required',
+            'jk_anak' => 'required',
+            'nama_anak' => 'required',
+            'anak_ke' => 'required',
+            'penerbit_id' => 'required'
     	]);
 
     	$tgl_kelahiran = request('tgl_kelahiran');
-    	$jam_kelahiran = request('jam_kelahiran');
-    	$waktu_kelahiran = date('Y-m-d H:i:s', strtotime("$tgl_kelahiran $jam_kelahiran"));
+    	$waktu_kelahiran = date('Y-m-d', strtotime("$tgl_kelahiran"));
 
-    	$skd->nama_anak = strtoupper(request('nama_anak'));
-    	$skd->nama_suami = strtoupper(request('nama_suami'));
-    	$skd->waktu_lahir = $waktu_kelahiran;
+    	$skd->nik_ibu = strtoupper(request('nik_ibu'));
+    	$skd->nik_ayah = strtoupper(request('nik_ayah'));
+    	$skd->nik_pelapor = strtoupper(request('nik_pelapor'));
+        $skd->hubungan_pelapor = strtoupper(request('hubungan_pelapor'));
+        $skd->tgl_kelahiran = strtoupper($waktu_kelahiran);
+        $skd->jam_kelahiran = strtoupper(request('jam_kelahiran'));
+        $skd->tempat_kelahiran = strtoupper(request('tempat_kelahiran'));
+        $skd->jk_anak = strtoupper(request('jk_anak'));
+        $skd->nama_anak = strtoupper(request('nama_anak'));
+        $skd->anak_ke = strtoupper(request('anak_ke'));
     	$skd->penerbit_id = strtoupper(request('penerbit_id'));
     	$skd->save();
 
@@ -173,7 +206,7 @@ class SuratKeteranganDukunController extends Controller
     }
 
     public function print($id) {
-    	$surat = SuratKeteranganDukun::with(['get_penduduk', 'get_penerbit'])->find($id);
+    	$surat = SuratKeteranganDukun::with(['get_penduduk_ibu', 'get_penduduk_ayah', 'get_penduduk_pelapor', 'get_penerbit'])->find($id);
         $penduduk = Penduduk::with(['get_status_nikah', 'get_jenis_pekerjaan', 'get_tempat_lahir'])->find($surat->penduduk_id);
 
     	$pdf = App::make('dompdf.wrapper'); 

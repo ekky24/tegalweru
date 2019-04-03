@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Data surat Desa Tegalweru</title>
+        <title>Data surat Desa Karangwidoro</title>
         <link href="{{ public_path() . $css_path }}" rel="stylesheet">
     </head>
         <body>

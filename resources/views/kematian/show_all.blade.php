@@ -18,23 +18,23 @@
 				<th>No. </th>
 				<th>NIK</th>
 				<th>Tempat Kematian</th>
-				<th>Waktu Kematian</th>
-				<th>Tempat Pemakaman</th>
+				<th>Tanggal Kematian</th>
+				<th>Penyebab Kematian</th>
 				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 		@foreach($kematian as $index => $row)
 			<?php
-				$waktu = Carbon::createFromFormat('Y-m-d H:i:s', $row->waktu_kematian);
+				$waktu = Carbon::createFromFormat('Y-m-d', $row->tgl_kematian);
 			?>
 				<tr>
 					<td>{{ $index + 1 }}</td>
 					<td><a href="/penduduk/{{ $row->penduduk_id }}">{{ $row->penduduk_id }}</a></td>
 					<td>{{ $row->tempat_kematian }}</td>
-					<td>{{ $waktu->format('d-m-Y H:i') }}</td>
-					<td>{{ $row->tempat_pemakaman }}</td>
-					<td class="text-center"><a class="btn btn-primary" style="width: 70px" href="/kematian/{{$row->penduduk_id}}/edit">Edit</a>
+					<td>{{ $waktu->format('d-m-Y') }}</td>
+					<td>{{ $row->penyebab_kematian }}</td>
+					<td class="text-center"><a class="btn btn-primary" style="width: 70px" href="/kematian/{{$row->penduduk_id}}">Detail</a>
 					<a id="hapus_kematian" class="btn btn-danger" style="width: 70px" href="/kematian/{{$row->penduduk_id}}/delete">Hapus</a>
 					</td>
 				</tr>

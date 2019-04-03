@@ -16,10 +16,16 @@ class CreateSuratKeteranganDukunsTable extends Migration
         Schema::create('surat_keterangan_dukuns', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nomor');
-            $table->string('penduduk_id');
+            $table->string('nik_ibu');
+            $table->string('nik_ayah');
+            $table->string('nik_pelapor');
+            $table->string('hubungan_pelapor');
+            $table->date('tgl_kelahiran');
+            $table->string('jam_kelahiran');
+            $table->string('tempat_kelahiran');
             $table->string('nama_anak');
-            $table->string('nama_suami');
-            $table->datetime('waktu_lahir');
+            $table->string('jk_anak');
+            $table->integer('anak_ke');
             $table->string('penerbit_id');
             $table->timestamps();
         });

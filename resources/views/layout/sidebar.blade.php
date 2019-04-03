@@ -97,7 +97,7 @@
                         <li>
                             <a href="#"><i class="fa fa-folder-open fa-fw"></i> Administrasi Desa<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>
+                                <!--<li>
                                     <a href="#">SKTM <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
@@ -107,8 +107,7 @@
                                             <a href="/sktm/insert">Insert Data SKTM</a>
                                         </li>
                                     </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
+                                </li>-->
                                 <li>
                                     <a href="#">Surat Keterangan Usaha <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
@@ -131,6 +130,17 @@
                                     <!-- /.nav-third-level -->
                                 </li>
                                 <li>
+                                    <a href="#">Surat Ijin Keramaian <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="/sik">Data Ijin Keramaian</a>
+                                        </li>
+                                        <li>
+                                            <a href="/sik/insert">Insert Surat Keramaian</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!--<li>
                                     <a href="#">Surat Kehilangan <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
@@ -140,7 +150,6 @@
                                             <a href="/skk/insert">Insert Data Kehilangan</a>
                                         </li>
                                     </ul>
-                                    <!-- /.nav-third-level -->
                                 </li>
                                 <li>
                                     <a href="#">Surat Kenal Lahir <span class="fa arrow"></span></a>
@@ -152,21 +161,20 @@
                                             <a href="/skkl/insert">Insert Data Kenal Lahir</a>
                                         </li>
                                     </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
+                                </li>-->
                                 <li>
-                                    <a href="#">Surat Keterangan Dukun <span class="fa arrow"></span></a>
+                                    <a href="#">Surat Kelahiran <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="/skd">Data Surat Dukun</a>
+                                            <a href="/skd">Data Kelahiran</a>
                                         </li>
                                         <li>
-                                            <a href="/skd/insert">Insert Data Dukun</a>
+                                            <a href="/skd/insert">Insert Data Kelahiran</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
-                                <li>
+                                <!--<li>
                                     <a href="#">Surat Keterangan Wali Nikah <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
@@ -176,7 +184,6 @@
                                             <a href="/skwn/insert">Insert Data Wali Nikah</a>
                                         </li>
                                     </ul>
-                                    <!-- /.nav-third-level -->
                                 </li>
                                 <li>
                                     <a href="#">Surat Pelunasan PBB <span class="fa arrow"></span></a>
@@ -188,7 +195,6 @@
                                             <a href="/sklp/insert">Insert Data Lunas PBB</a>
                                         </li>
                                     </ul>
-                                    <!-- /.nav-third-level -->
                                 </li>
                                 <li>
                                     <a href="#">SKKB <span class="fa arrow"></span></a>
@@ -200,8 +206,7 @@
                                             <a href="/skkb/insert">Insert Data SKKB</a>
                                         </li>
                                     </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
+                                </li>-->
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

@@ -2,10 +2,24 @@
 use Carbon\Carbon;
 
 $bulan_arr = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
-$waktu = Carbon::createFromFormat('Y-m-d H:i:s', $skd->waktu_lahir);
+$waktu = Carbon::createFromFormat('Y-m-d', $skd->tgl_kelahiran);
 $tgl = $waktu->toDateString();
-$jam = $waktu->toTimeString();
 $tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->year;
+
+$temp_tempat_lahir = $skd->get_penduduk_ibu->get_tempat_lahir->nama;
+$value_tempat_lahir = substr($temp_tempat_lahir, strpos($temp_tempat_lahir, " ") + 1);
+$arr_tgl_lahir = explode('-', $skd->get_penduduk_ibu->tgl_lahir);
+$value_tgl_lahir = $arr_tgl_lahir[2] . '-' . $arr_tgl_lahir[1] . '-' . $arr_tgl_lahir[0];
+
+$temp_tempat_lahir2 = $skd->get_penduduk_ayah->get_tempat_lahir->nama;
+$value_tempat_lahir2 = substr($temp_tempat_lahir2, strpos($temp_tempat_lahir2, " ") + 1);
+$arr_tgl_lahir2 = explode('-', $skd->get_penduduk_ayah->tgl_lahir);
+$value_tgl_lahir2 = $arr_tgl_lahir2[2] . '-' . $arr_tgl_lahir2[1] . '-' . $arr_tgl_lahir2[0];
+
+$temp_tempat_lahir3 = $skd->get_penduduk_pelapor->get_tempat_lahir->nama;
+$value_tempat_lahir3 = substr($temp_tempat_lahir3, strpos($temp_tempat_lahir3, " ") + 1);
+$arr_tgl_lahir3 = explode('-', $skd->get_penduduk_ibu->tgl_lahir);
+$value_tgl_lahir3 = $arr_tgl_lahir3[2] . '-' . $arr_tgl_lahir3[1] . '-' . $arr_tgl_lahir3[0];
 ?>
 
 @extends('layout.master')
@@ -14,7 +28,7 @@ $tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->y
 
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="filter page-header">Ubah Data Surat Keterangan Dukun</h1>
+		<h1 class="filter page-header">Ubah Data Surat Keterangan Kelahiran</h1>
 	</div>
 </div>
 <div class="row">
@@ -28,63 +42,103 @@ $tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->y
 					<input class="form-control" placeholder="Nomor Surat" type="text" value="{{ $skd->nomor }}" readonly>
 				</div>
 			</div>
+			<h4>Data Ibu:</h4>
 			<div class="form-group">
-				
 				<label class="control-label col-sm-3">NIK</label>
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="NIK" type="number" name="nik" value="{{ $skd->penduduk_id }}" readonly>
+					<input id="nik_surat" class="form-control" placeholder="Masukkan NIK" type="number" name="nik_ibu" value="{{ $skd->nik_ibu }}" required>
 				</div>
 			</div>
 			<div class="form-group">
-				
 				<label class="control-label col-sm-3">Nama Lengkap</label>
 				<div class="col-sm-6">
-					<input id="nama_surat" class="form-control" placeholder="Nama" value="{{ $skd->get_penduduk->nama }}" type="text" readonly>
+					<input id="nama_surat" class="form-control" placeholder="Nama" type="text" value="{{ $skd->get_penduduk_ibu->nama }}" readonly>
 				</div>
 			</div>
 			<div class="form-group">
-				
-				<label class="control-label col-sm-3">Jenis Kelamin</label>
+				<label class="control-label col-sm-3">Tempat, Tgl Lahir</label>
 				<div class="col-sm-6">
-					@if($skd->get_penduduk->jk == 'L')
-					<input id="jk_surat" class="form-control" placeholder="Jenis Kelamin" value="{{ 'LAKI-LAKI' }}" type="text" readonly>
-					@else
-					<input id="jk_surat" class="form-control" placeholder="Jenis Kelamin" value="{{ 'PEREMPUAN' }}" type="text" readonly>
-					@endif
+					<input id="ttl_surat" class="form-control" placeholder="Nama" value="{{ $value_tempat_lahir . ', ' . $value_tgl_lahir }}" type="text" readonly>
 				</div>
 			</div>
 			<div class="form-group">
-				
-				<label class="control-label col-sm-3">Kewarganegaraan</label>
-				<div class="col-sm-6">
-					<input id="kewarganegaraan_surat" class="form-control" placeholder="Kewarganegaraan" type="text" value="{{ $skd->get_penduduk->kewarganegaraan }}" readonly>
-				</div>
-			</div>
-			<div class="form-group">
-				
 				<label class="control-label col-sm-3">Alamat</label>
 				<div class="col-sm-6">
-					@if($skd->get_penduduk->get_kk == null)
+					@if($skd->get_penduduk_ibu->get_kk == null)
 					<textarea id="alamat_surat" placeholder="Alamat" class="form-control" readonly>{{ "-" }}</textarea>
 					@else
-					<textarea id="alamat_surat" placeholder="Alamat" class="form-control" readonly>{{ $skd->get_penduduk->get_kk->alamat }}</textarea>
+					<textarea id="alamat_surat" placeholder="Alamat" class="form-control" readonly>{{ $skd->get_penduduk_ibu->get_kk->alamat }}</textarea>
+					@endif
+				</div>
+			</div>
+
+			<h4>Data Ayah:</h4>
+			<div class="form-group">
+				<label class="control-label col-sm-3">NIK</label>
+				<div class="col-sm-6">
+					<input id="nik_ayah" class="form-control" placeholder="Masukkan NIK" type="number" name="nik_ayah" value="{{ $skd->nik_ayah }}" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Nama Lengkap</label>
+				<div class="col-sm-6">
+					<input id="nama_ayah" class="form-control" placeholder="Nama" type="text" value="{{ $skd->get_penduduk_ayah->nama }}" readonly>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Tempat, Tgl Lahir</label>
+				<div class="col-sm-6">
+					<input id="ttl_ayah" class="form-control" placeholder="Tempat Tgl Lahir" type="text" value="{{ $value_tempat_lahir2 . ', ' . $value_tgl_lahir2 }}" readonly>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Alamat</label>
+				<div class="col-sm-6">
+					@if($skd->get_penduduk_ayah->get_kk == null)
+					<textarea id="alamat_ayah" placeholder="Alamat" class="form-control" readonly>{{ "-" }}</textarea>
+					@else
+					<textarea id="alamat_ayah" placeholder="Alamat" class="form-control" readonly>{{ $skd->get_penduduk_ayah->get_kk->alamat }}</textarea>
+					@endif
+				</div>
+			</div>
+
+			<h4>Data Pelapor:</h4>
+			<div class="form-group">
+				<label class="control-label col-sm-3">NIK</label>
+				<div class="col-sm-6">
+					<input id="nik_pelapor" class="form-control" placeholder="Masukkan NIK" type="number" name="nik_pelapor" value="{{ $skd->nik_pelapor }}" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Nama Lengkap</label>
+				<div class="col-sm-6">
+					<input id="nama_pelapor" class="form-control" placeholder="Nama" type="text" value="{{ $skd->get_penduduk_pelapor->nama }}" readonly>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Tempat, Tgl Lahir</label>
+				<div class="col-sm-6">
+					<input id="ttl_pelapor" class="form-control" placeholder="Tempat Tgl Lahir" type="text" value="{{ $value_tempat_lahir3 . ', ' . $value_tgl_lahir3 }}" readonly>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Alamat</label>
+				<div class="col-sm-6">
+					@if($skd->get_penduduk_pelapor->get_kk == null)
+					<textarea id="alamat_pelapor" placeholder="Alamat" class="form-control" readonly>{{ "-" }}</textarea>
+					@else
+					<textarea id="alamat_pelapor" placeholder="Alamat" class="form-control" readonly>{{ $skd->get_penduduk_pelapor->get_kk->alamat }}</textarea>
 					@endif
 				</div>
 			</div>
 			<div class="form-group">
 				
-				<label class="control-label col-sm-3">Nama Anak</label>
+				<label class="control-label col-sm-3">Hubungan Pelapor</label>
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="Masukkan Nama Anak" type="text" name="nama_anak" value="{{ $skd->nama_anak }}" required>
+					<input class="form-control" placeholder="Masukkan Hubungan Pelapor" type="text" name="hubungan_pelapor" value="{{ $skd->hubungan_pelapor }}" required>
 				</div>
 			</div>
-			<div class="form-group">
-				
-				<label class="control-label col-sm-3">Nama Suami</label>
-				<div class="col-sm-6">
-					<input class="form-control" placeholder="Masukkan Nama Anak" type="text" name="nama_suami" value="{{ $skd->nama_suami }}" required>
-				</div>
-			</div>
+			<h4>Data Kelahiran:</h4>
 			<div class="form-group">
 				
 				<label class="control-label col-sm-3">Tanggal Kelahiran</label>
@@ -104,7 +158,43 @@ $tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->y
 				
 				<label class="control-label col-sm-3">Jam Kelahiran</label>
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="Masukkan Jam Kelahiran" type="time" name="jam_kelahiran" value="{{ $jam }}" required>
+					<input class="form-control" placeholder="Masukkan Jam Kelahiran" type="text" name="jam_kelahiran" value="{{ $skd->jam_kelahiran }}" required>
+				</div>
+			</div>
+			<div class="form-group">
+				
+				<label class="control-label col-sm-3">Tempat Kelahiran</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Tempat Kelahiran" type="text" name="tempat_kelahiran" value="{{ $skd->tempat_kelahiran }}" required>
+				</div>
+			</div>
+			<div class="form-group">
+				
+				<label class="control-label col-sm-3">Nama Anak</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Nama Anak" type="text" name="nama_anak" value="{{ $skd->nama_anak }}" required>
+				</div>
+			</div>
+			<div class="form-group">
+				
+				<label class="control-label col-sm-3">Pilih Jenis Kelamin Anak</label>
+				<div class="col-sm-6">
+					<select name="jk_anak" class="form-control">
+						@if($skd->jk_anak == "L")
+						<option value="L" selected>LAKI-LAKI</option>
+						<option value="P">Perempuan</option>
+						@else
+						<option value="L">Laki-Laki</option>
+						<option value="P" selected>PEREMPUAN</option>
+						@endif
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				
+				<label class="control-label col-sm-3">Anak Ke</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Anak Ke" type="number" name="anak_ke" value="{{ $skd->anak_ke }}" required>
 				</div>
 			</div>
 			<div class="form-group">

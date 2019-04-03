@@ -20,7 +20,7 @@ $(function() {
 				},
 				hideAnimation: {
 					type: "slide",
-					time: 200,
+					time: 50,
 				},
 				onSelectItemEvent: function() {$('#nama_surat').val("");
 					$(':focus').closest('div.col-md-4').next().children().val("");
@@ -51,7 +51,7 @@ $(function() {
 				},
 				hideAnimation: {
 					type: "slide",
-					time: 200,
+					time: 50,
 				}
 			}
 		};
@@ -77,7 +77,7 @@ $(function() {
 				},
 				hideAnimation: {
 					type: "slide",
-					time: 200,
+					time: 50,
 				},
 				onSelectItemEvent: function() {
 					value = $('#kecamatan_form').getSelectedItemData().id;
@@ -272,7 +272,7 @@ $(function() {
 				},
 				hideAnimation: {
 					type: "slide",
-					time: 200,
+					time: 50,
 				}
 			}
 		};
@@ -678,20 +678,26 @@ $(function() {
 				},
 				hideAnimation: {
 					type: "slide",
-					time: 200,
+					time: 50,
 				},
 				onSelectItemEvent: function() {
 					$('#nama_kematian').val("");
 					$('#jk_kematian').val("");
-					$('#no_kk_kematian').val("");
+					$('#alamat_kematian').val("");
 
 					var value_nama = $('#nik_kematian').getSelectedItemData().nama;
 					var value_jk = $('#nik_kematian').getSelectedItemData().jk;
-					var value_no_kk = $('#nik_kematian').getSelectedItemData().kk_id;
+					var value_alamat = $('#nik_kematian').getSelectedItemData().get_kk.alamat;
+
+					if (value_jk == "L") {
+						$('#jk_kematian').val("LAKI-LAKI");
+					}
+					else {
+						$('#jk_kematian').val("PEREMPUAN");
+					}
 
 					$('#nama_kematian').val(value_nama);
-					$('#jk_kematian').val(value_jk);
-					$('#no_kk_kematian').val(value_no_kk);
+					$('#alamat_kematian').val(value_alamat);
 				}
 			}
 		};
@@ -789,7 +795,7 @@ $(function() {
 				},
 				hideAnimation: {
 					type: "slide",
-					time: 200,
+					time: 50,
 				},
 				onSelectItemEvent: function() {
 					$('#nama_pindah').val("");
@@ -830,7 +836,7 @@ $(function() {
 				},
 				hideAnimation: {
 					type: "slide",
-					time: 200,
+					time: 50,
 				},
 				onSelectItemEvent: function() {
 					$('#nama_surat').val("");
@@ -874,6 +880,142 @@ $(function() {
 		};
 
 	$('#nik_surat').easyAutocomplete(options_nik_surat);
+
+	/* SCRIPT ON VIEW KELAHIRAN.INSERT (DATA AYAH) 
+	******************************************************************************
+	******************************************************************************/
+	var options_nik_ayah = {
+			url: "/penduduk_ajax_kematian",
+			requestDelay: 300,
+			getValue: "id",
+			template: {
+				type: "description",
+				fields: {
+					description: "nama"
+				}
+			},
+			list: {
+				match: {
+					enabled: true
+				},
+				showAnimation: {
+					type: "slide",
+					time: 200,
+				},
+				hideAnimation: {
+					type: "slide",
+					time: 50,
+				},
+				onSelectItemEvent: function() {
+					$('#nama_ayah').val("");
+					$('#ttl_ayah').val("");
+					$('#jk_ayah').val("");
+					$('#kewarganegaraan_ayah').val("");
+					$('#agama_ayah').val("");
+					$('#alamat_ayah').val("");
+
+					if ($('#nik_ayah').getSelectedItemData().get_kk != null) {
+						var value_alamat = $('#nik_ayah').getSelectedItemData().get_kk.alamat;
+						$('#alamat_ayah').val(value_alamat);
+					}
+					else {
+						$('#alamat_ayah').val("-");
+					}
+
+					var temp_tempat_lahir = $('#nik_ayah').getSelectedItemData().get_tempat_lahir.nama;
+					var value_tempat_lahir = temp_tempat_lahir.substr(temp_tempat_lahir.indexOf(" ") + 1);
+					var arr_tgl_lahir = $('#nik_ayah').getSelectedItemData().tgl_lahir.split('-');
+					var value_tgl_lahir = arr_tgl_lahir[2] + '-' + arr_tgl_lahir[1] + '-' + arr_tgl_lahir[0];
+					var value_ttl = value_tempat_lahir + ', ' + value_tgl_lahir;
+					var value_nama = $('#nik_ayah').getSelectedItemData().nama;
+					var value_agama = $('#nik_ayah').getSelectedItemData().get_agama.keterangan;
+					var value_jk = $('#nik_ayah').getSelectedItemData().jk;
+					var value_kewarganegaraan = $('#nik_ayah').getSelectedItemData().kewarganegaraan;
+
+					if (value_jk == "L") {
+						$('#jk_ayah').val("LAKI-LAKI");
+					}
+					else {
+						$('#jk_ayah').val("PEREMPUAN");
+					}
+
+					$('#nama_ayah').val(value_nama);
+					$('#kewarganegaraan_ayah').val(value_kewarganegaraan);
+					$('#ttl_ayah').val(value_ttl);
+					$('#agama_ayah').val(value_agama);
+				}
+			}
+		};
+
+	$('#nik_ayah').easyAutocomplete(options_nik_ayah);
+
+	/* SCRIPT ON VIEW SURAT.INSERT 
+	******************************************************************************
+	******************************************************************************/
+	var options_nik_pelapor = {
+			url: "/penduduk_ajax_kematian",
+			requestDelay: 300,
+			getValue: "id",
+			template: {
+				type: "description",
+				fields: {
+					description: "nama"
+				}
+			},
+			list: {
+				match: {
+					enabled: true
+				},
+				showAnimation: {
+					type: "slide",
+					time: 200,
+				},
+				hideAnimation: {
+					type: "slide",
+					time: 50,
+				},
+				onSelectItemEvent: function() {
+					$('#nama_pelapor').val("");
+					$('#ttl_pelapor').val("");
+					$('#jk_pelapor').val("");
+					$('#kewarganegaraan_pelapor').val("");
+					$('#agama_pelapor').val("");
+					$('#alamat_pelapor').val("");
+
+					if ($('#nik_pelapor').getSelectedItemData().get_kk != null) {
+						var value_alamat = $('#nik_pelapor').getSelectedItemData().get_kk.alamat;
+						$('#alamat_pelapor').val(value_alamat);
+					}
+					else {
+						$('#alamat_pelapor').val("-");
+					}
+
+					var temp_tempat_lahir = $('#nik_pelapor').getSelectedItemData().get_tempat_lahir.nama;
+					var value_tempat_lahir = temp_tempat_lahir.substr(temp_tempat_lahir.indexOf(" ") + 1);
+					var arr_tgl_lahir = $('#nik_pelapor').getSelectedItemData().tgl_lahir.split('-');
+					var value_tgl_lahir = arr_tgl_lahir[2] + '-' + arr_tgl_lahir[1] + '-' + arr_tgl_lahir[0];
+					var value_ttl = value_tempat_lahir + ', ' + value_tgl_lahir;
+					var value_nama = $('#nik_pelapor').getSelectedItemData().nama;
+					var value_agama = $('#nik_pelapor').getSelectedItemData().get_agama.keterangan;
+					var value_jk = $('#nik_pelapor').getSelectedItemData().jk;
+					var value_kewarganegaraan = $('#nik_pelapor').getSelectedItemData().kewarganegaraan;
+
+					if (value_jk == "L") {
+						$('#jk_pelapor').val("LAKI-LAKI");
+					}
+					else {
+						$('#jk_pelapor').val("PEREMPUAN");
+					}
+
+					$('#nama_pelapor').val(value_nama);
+					$('#kewarganegaraan_pelapor').val(value_kewarganegaraan);
+					$('#ttl_pelapor').val(value_ttl);
+					$('#agama_pelapor').val(value_agama);
+				}
+			}
+		};
+
+	$('#nik_pelapor').easyAutocomplete(options_nik_pelapor);
 
 
 	/* SCRIPT TO CUSTOMIZE DATEPICKER

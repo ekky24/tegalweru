@@ -11,55 +11,89 @@
 	<div class="col-lg-12">
 		<form method="post" action="/skd" autocomplete="off" class="form-horizontal">
 			{{ csrf_field() }}
+			<h4>Data Ibu:</h4>
 			<div class="form-group">
-				
 				<label class="control-label col-sm-3">NIK</label>
 				<div class="col-sm-6">
-					<input id="nik_surat" class="form-control" placeholder="Masukkan NIK" type="number" name="nik" required>
+					<input id="nik_surat" class="form-control" placeholder="Masukkan NIK" type="number" name="nik_ibu" required>
 				</div>
 			</div>
 			<div class="form-group">
-				
 				<label class="control-label col-sm-3">Nama Lengkap</label>
 				<div class="col-sm-6">
-					<input id="nama_surat" class="form-control" placeholder="Masukkan Nama" type="text" readonly>
+					<input id="nama_surat" class="form-control" placeholder="Nama" type="text" readonly>
 				</div>
 			</div>
 			<div class="form-group">
-				
-				<label class="control-label col-sm-3">Jenis Kelamin</label>
+				<label class="control-label col-sm-3">Tempat, Tgl Lahir</label>
 				<div class="col-sm-6">
-					<input id="jk_surat" class="form-control" placeholder="Masukkan Jenis Kelamin" type="text" readonly>
+					<input id="ttl_surat" class="form-control" placeholder="Tempat Tgl Lahir" type="text" readonly>
 				</div>
 			</div>
 			<div class="form-group">
-				
-				<label class="control-label col-sm-3">Kewarganegaraan</label>
-				<div class="col-sm-6">
-					<input id="kewarganegaraan_surat" class="form-control" placeholder="Kewarganegaraan" type="text" readonly>
-				</div>
-			</div>
-			<div class="form-group">
-				
 				<label class="control-label col-sm-3">Alamat</label>
 				<div class="col-sm-6">
 					<textarea id="alamat_surat" placeholder="Alamat" class="form-control" readonly></textarea>
 				</div>
 			</div>
+			<h4>Data Ayah:</h4>
 			<div class="form-group">
-				
-				<label class="control-label col-sm-3">Nama Anak</label>
+				<label class="control-label col-sm-3">NIK</label>
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="Masukkan Nama Anak" type="text" name="nama_anak" required>
+					<input id="nik_ayah" class="form-control" placeholder="Masukkan NIK" type="number" name="nik_ayah" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Nama Lengkap</label>
+				<div class="col-sm-6">
+					<input id="nama_ayah" class="form-control" placeholder="Nama" type="text" readonly>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Tempat, Tgl Lahir</label>
+				<div class="col-sm-6">
+					<input id="ttl_ayah" class="form-control" placeholder="Tempat Tgl Lahir" type="text" readonly>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Alamat</label>
+				<div class="col-sm-6">
+					<textarea id="alamat_ayah" placeholder="Alamat" class="form-control" readonly></textarea>
+				</div>
+			</div>
+			<h4>Data Pelapor:</h4>
+			<div class="form-group">
+				<label class="control-label col-sm-3">NIK</label>
+				<div class="col-sm-6">
+					<input id="nik_pelapor" class="form-control" placeholder="Masukkan NIK" type="number" name="nik_pelapor" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Nama Lengkap</label>
+				<div class="col-sm-6">
+					<input id="nama_pelapor" class="form-control" placeholder="Nama" type="text" readonly>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Tempat, Tgl Lahir</label>
+				<div class="col-sm-6">
+					<input id="ttl_pelapor" class="form-control" placeholder="Tempat Tgl Lahir" type="text" readonly>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Alamat</label>
+				<div class="col-sm-6">
+					<textarea id="alamat_pelapor" placeholder="Alamat" class="form-control" readonly></textarea>
 				</div>
 			</div>
 			<div class="form-group">
 				
-				<label class="control-label col-sm-3">Nama Suami</label>
+				<label class="control-label col-sm-3">Hubungan Pelapor</label>
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="Masukkan Nama Suami" type="text" name="nama_suami" required>
+					<input class="form-control" placeholder="Masukkan Hubungan Pelapor" type="text" name="hubungan_pelapor" required>
 				</div>
 			</div>
+			<h4>Data Kelahiran:</h4>
 			<div class="form-group">
 				
 				<label class="control-label col-sm-3">Tanggal Kelahiran</label>
@@ -79,7 +113,39 @@
 				
 				<label class="control-label col-sm-3">Jam Kelahiran</label>
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="Masukkan Jam Kelahiran" type="time" name="jam_kelahiran" required>
+					<input class="form-control" placeholder="Masukkan Jam Kelahiran" type="text" name="jam_kelahiran" required>
+				</div>
+			</div>
+			<div class="form-group">
+				
+				<label class="control-label col-sm-3">Tempat Kelahiran</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Tempat Kelahiran" type="text" name="tempat_kelahiran" required>
+				</div>
+			</div>
+			<div class="form-group">
+				
+				<label class="control-label col-sm-3">Nama Anak</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Nama Anak" type="text" name="nama_anak" required>
+				</div>
+			</div>
+			<div class="form-group">
+				
+				<label class="control-label col-sm-3">Pilih Jenis Kelamin Anak</label>
+				<div class="col-sm-6">
+					<select name="jk_anak" class="form-control">
+						<option value="" selected disabled hidden>Pilih Jenis Kelamin</option>
+						<option value="L">Laki-Laki</option>
+						<option value="P">Perempuan</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				
+				<label class="control-label col-sm-3">Anak Ke</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Anak Ke" type="number" name="anak_ke" required>
 				</div>
 			</div>
 			<div class="form-group">

@@ -15,9 +15,14 @@ class CreateKematiansTable extends Migration
     {
         Schema::create('kematians', function (Blueprint $table) {
             $table->string('penduduk_id')->primary();
+            $table->string('nomor');
             $table->string('tempat_kematian');
-            $table->datetime('waktu_kematian');
-            $table->string('tempat_pemakaman');
+            $table->date('tgl_kematian');
+            $table->string('jam_kematian');
+            $table->string('penyebab_kematian');
+            $table->string('nik_pelapor');
+            $table->string('hubungan_pelapor');
+            $table->string('penerbit_id');
             $table->timestamps();
         });
     }

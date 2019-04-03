@@ -66,6 +66,8 @@ Route::post('/penerbit/{penerbit}', 'PenerbitController@store_edit');
 
 Route::post('/kematian/download', 'KematianController@getPdf');
 Route::get('/kematian/insert', 'KematianController@insert');
+Route::get('/kematian/{kematian}/download', 'KematianController@print');
+Route::get('/kematian/{kematian}', 'KematianController@show');
 Route::post('/kematian', 'KematianController@store');
 Route::get('/kematian', 'KematianController@show_all');
 Route::get('/kematian/{kematian}/edit', 'KematianController@edit');
@@ -179,6 +181,16 @@ Route::get('/skkl/{skkl}/edit', 'SuratKeteranganKenalLahirController@edit');
 Route::post('/skkl/{skkl}', 'SuratKeteranganKenalLahirController@store_edit');
 Route::get('/stat_skkl_tahun', 'SuratKeteranganKenalLahirController@stat_skkl_tahun');
 Route::get('/stat_skkl_bulan', 'SuratKeteranganKenalLahirController@stat_skkl_bulan');
+
+Route::post('/sik/download', 'SuratIjinKeramaianController@getPdf');
+Route::get('/sik/{sik}/download', 'SuratIjinKeramaianController@print');
+Route::get('/sik/insert', 'SuratIjinKeramaianController@insert');
+Route::post('/sik', 'SuratIjinKeramaianController@store');
+Route::post('/sik/{sik}', 'SuratIjinKeramaianController@store_edit');
+Route::get('/sik/{sik}', 'SuratIjinKeramaianController@show');
+Route::get('/sik', 'SuratIjinKeramaianController@show_all');
+Route::get('/sik/{sik}/delete', 'SuratIjinKeramaianController@delete');
+Route::get('/sik/{sik}/edit', 'SuratIjinKeramaianController@edit');
 
 Route::get('/login', 'SessionController@create');
 Route::get('/ubah_pass', 'SessionController@ubah_pass');

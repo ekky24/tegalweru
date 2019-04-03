@@ -11,7 +11,7 @@
 	
 	<div class="row">
         <div class="col-lg-12">
-            <h1 class="filter page-header">Data Surat Keterangan Dukun</h1>
+            <h1 class="filter page-header">Data Surat Keterangan Kelahiran</h1>
         </div>
     </div>
 	@include('pindah.filter');
@@ -20,31 +20,47 @@
 		<thead>
 			<tr>
 				<th>No. </th>
-				<th>NIK</th>
 				<th>Nama Anak</th>
-				<th>Waktu Lahir</th>
-				<th>Waktu Pembuatan</th>
+				<th>Tempat, Tanggal Lahir</th>
+				<th>Jenis Kelamin</th>
+				<th>Nama Ayah</th>
+				<th>Nama Ibu</th>
 				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 		@foreach($skd as $index => $row)
 			<?php
-				$waktu_lahir = Carbon::createFromFormat('Y-m-d H:i:s', $row->waktu_lahir);
+				$waktu_lahir = Carbon::createFromFormat('Y-m-d', $row->tgl_kelahiran);
 				$waktu = Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at);
 			?>
 				<tr>
 					<td>{{ $index + 1 }}</td>
-					<td><a href="/penduduk/{{ $row->penduduk_id }}">{{ $row->penduduk_id }}</a></td>
 					
-					@if(strlen($row->nama_anak) > 40)
-						<td>{{ substr($row->nama_anak, 0, 40) . "..."}}</td>
+					@if(strlen($row->nama_anak) > 20)
+						<td>{{ substr($row->nama_anak, 0, 20) . "..."}}</td>
 					@else
 						<td>{{ $row->nama_anak }}</td>
 					@endif					
 
-					<td>{{ $waktu_lahir->format('d-m-Y H:i') }}</td>
-					<td>{{ strtoupper($bulan_arr[$waktu->month - 1] . " " . $waktu->format('Y')) }}</td>
+					<td>{{ $row->tempat_kelahiran . ", " . $waktu_lahir->format('d-m-Y') }}</td>
+					@if($row->jk_anak == 'L')
+						<td>{{ 'LAKI-LAKI' }}</td>
+					@else
+						<td>{{ 'PEREMPUAN' }}</td>
+					@endif
+
+					@if(strlen($row->get_penduduk_ayah->nama) > 20)
+						<td>{{ substr($row->get_penduduk_ayah->nama, 0, 20) . "..."}}</td>
+					@else
+						<td>{{ $row->get_penduduk_ayah->nama }}</td>
+					@endif
+
+					@if(strlen($row->get_penduduk_ibu->nama) > 20)
+						<td>{{ substr($row->get_penduduk_ibu->nama, 0, 20) . "..."}}</td>
+					@else
+						<td>{{ $row->get_penduduk_ibu->nama }}</td>
+					@endif
 					<td class="text-center"><a class="btn btn-primary" style="width: 70px" href="/skd/{{$row->id}}">Detail</a>
 					<a id="hapus_kematian" class="btn btn-danger" style="width: 70px" href="/skd/{{$row->id}}/delete">Hapus</a>
 					</td>

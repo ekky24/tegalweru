@@ -6,12 +6,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Laporan Data Kepindahan Desa Tegalweru</title>
+        <title>Laporan Data Ijin Keramaian Desa Karangwidoro</title>
         <link href="{{ public_path() . '/css/pdf.css' }}" rel="stylesheet">
+
         <body>
   
             <div style="font-family:Arial; font-size:12px;">
-                <center><h2>Data Surat Keterangan Usaha Desa Karangwidoro</h2></center>  
+                <center><h2>Data Ijin Keramaian Desa Karangwidoro</h2></center>  
             </div>
             <br>
             <h5>Tahun: {{ $tahun_choose }}</h5>
@@ -27,9 +28,9 @@
                         <th>No. </th>
                         <th>NIK</th>
                         <th>Nama Lengkap</th>
-                        <th>Jenis Usaha</th>
-                        <th>Keperluan</th>
+                        <th>Nama Acara</th>
                         <th>Nama Pejabat</th>
+                        <th>Jabatan</th>
                     </tr>
                 </thead>
                 <tbody id="list_kk">
@@ -37,18 +38,10 @@
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $row->penduduk_id }}</td>
-                            @if($row->jenis_surat == 'domisili_usaha')
-                                <td>{{ $row->nama_pimpinan }}</td>
-                            @else
-                                <td>{{ $row->get_penduduk->nama }}</td>
-                            @endif
-                            <td>{{ $row->nama_usaha }}</td>
-                            @if($row->keperluan != "")
-                                <td>{{ $row->keperluan }}</td>
-                            @else
-                                <td>-</td>
-                            @endif
+                            <td>{{ $row->get_penduduk->nama }}</td>
+                            <td>{{ $row->nama_acara }}</td>
                             <td>{{ $row->get_penerbit->nama }}</td>
+                            <td>{{ $row->get_penerbit->jabatan }}</td>
                         </tr>
                 @endforeach
                 </tbody>
