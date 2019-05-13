@@ -20,7 +20,7 @@
             <div class="size">
                 <center><img src="{{ public_path() . $image_path }}"></center>
                 <div class="isi">
-                    <center><p class="header">SURAT KETERANGAN KEHILANGAN</p></center>
+                    <center><p class="header">SURAT KETERANGAN DOMISILI</p></center>
                     <center><p class="nomor">Nomor : {{ $surat->nomor }}</p></center>
                     <p class="text-justify body">Yang bertanda tangan dibawah ini Kepala Desa Karangwidoro  Kecamatan Dau Kabupaten Malang menerangkan bahwa :</p>
                     
@@ -94,11 +94,11 @@
                         </tr>
                         <tr>
                             <td>2. </td>
-                            <td>Orang tersebut di atas telah kehilangan {{ $surat->keterangan }} </td>
+                            <td>Orang tersebut diatas benar-benar berdomisili di {{ $surat->get_penduduk->get_kk->alamat }} Desa Karangwidoro Kecamatan Dau Kabupaten Malang.</td>
                         </tr>
                     </table>
 
-                    <p class="text-justify body">Demikian surat keterangan ini dibuat untuk dapat dipergunakan sebagaimana mestinya.</p><br><br>
+                    <p class="text-justify body">Demikian surat keterangan ini dibuat dengan benar, berdasarkan surat pengantar dari {{ $surat->dari_pengantar }} pada tanggal {{ $surat->tgl_pengantar }} untuk dapat dipergunakan sebagaimana mestinya.</p><br><br>
 
                     <table class="bawah">
                         <tr>

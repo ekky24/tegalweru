@@ -90,20 +90,16 @@
 			@endif
 		</tr>
 		<tr>
-			<th>Nomor KITAS/KITAP</th>
-			@if($penduduk->no_kitas == "")
-				<td>{{ "-" }}</td>
-			@else
-				<td>{{ $penduduk->no_kitas }}</td>
-			@endif
+			<th>Penyandang Cacat</th>
+			<td>{{ $penduduk->get_penyandang_cacat->keterangan }}</td>
 		</tr>
 		<tr>
 			<th>Ayah</th>
-			<td>{{ $penduduk->ayah }}</td>
+			<td>{{ $penduduk->nama_ayah }}</td>
 		</tr>
 		<tr>
 			<th>Ibu</th>
-			<td>{{ $penduduk->ibu }}</td>
+			<td>{{ $penduduk->nama_ibu }}</td>
 		</tr>
 		<tr>
 			<th>Status</th>

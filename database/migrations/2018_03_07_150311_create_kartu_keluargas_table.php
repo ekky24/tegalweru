@@ -21,8 +21,7 @@ class CreateKartuKeluargasTable extends Migration
             $table->string('rukun_warga');
             $table->string('kelurahan');
             $table->string('kode_pos');
-            $table->date('tgl_terbit');
-            $table->string('penerbit');
+            $table->date('tgl_pengurusan');
             $table->timestamps();
         });
     }

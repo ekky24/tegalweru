@@ -9,7 +9,12 @@
     $image_path = '/img/kop.jpg';
     $css_path = '/css/print.css';
 
-    $hari = strtoupper($hari_arr[$tgl_kematian->format('N') - 1])
+    $hari = strtoupper($hari_arr[$tgl_kematian->format('N') - 1]);
+    $now = Carbon::now();
+
+    $lahir_pelapor = Carbon::createFromFormat('Y-m-d', $pelapor->tgl_lahir);
+    $diff_pelapor = $now->diffInSeconds($lahir_pelapor);
+    $umur_pelapor = ceil($diff_pelapor / (365*24*60* 60));
 ?>
 <html>
     <head>
@@ -109,13 +114,14 @@
                             <td>{{ $pelapor->id }}</td>
                         </tr>
                         <tr>
-                            <td class="header">Jenis Kelamin</td>
+                            <td class="header">Umur</td>
                             <td>:</td>
-                            @if($pelapor->jk == 'L')
-                                <td>{{ 'LAKI-LAKI' }}</td>
-                            @else
-                                <td>{{ 'PEREMPUAN' }}</td>
-                            @endif
+                            <td>{{ $umur_pelapor . " TAHUN" }}</td>
+                        </tr>
+                        <tr>
+                            <td class="header">Pekerjaan</td>
+                            <td>:</td>
+                            <td>{{ $pelapor->get_jenis_pekerjaan->keterangan }}</td>
                         </tr>
                         <tr>
                             <td class="header">Alamat</td>

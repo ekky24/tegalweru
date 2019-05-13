@@ -21,16 +21,29 @@ $tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->y
 			{{ csrf_field() }}
 			<div class="form-group">
 				
+				<label class="control-label col-sm-3">Nama Lengkap</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Nama Lengkap" type="text" name="nama" value="{{$penduduk->nama}}" required>
+				</div>
+			</div>
+			<div class="form-group">
+				
 				<label class="control-label col-sm-3">NIK</label>
 				<div class="col-sm-6">
 					<input class="form-control" placeholder="Masukkan NIK" type="number" name="nik" value="{{$penduduk->id}}" required readonly>
 				</div>
 			</div>
 			<div class="form-group">
-				
-				<label class="control-label col-sm-3">Nama Lengkap</label>
+		   		<label class="control-label col-sm-3">Alamat Sebelumnya</label>
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="Masukkan Nama Lengkap" type="text" name="nama" value="{{$penduduk->nama}}" required>
+					<textarea placeholder="Masukkan alamat" name="alamat_sebelum" class="form-control">{{ $penduduk->alamat_sebelumnya }}</textarea>
+				</div>
+		    </div>
+		    <div class="form-group">
+				
+				<label class="control-label col-sm-3">No. Paspor</label>
+				<div class="col-sm-6">
+					<input type="number" name="paspor" class="form-control" placeholder="Masukkan Nomor Paspor" value="{{$penduduk->no_paspor}}">
 				</div>
 			</div>
 			<div class="form-group">
@@ -71,12 +84,89 @@ $tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->y
 				</div>
 			</div>
 			<div class="form-group">
+				<label class="control-label col-sm-3">Nomor Akta Lahir</label>
+				<div class="col-sm-6">
+					<input type="text" name="akta_lahir" class="form-control" placeholder="Masukkan Nomor Akta Lahir" value="{{ $penduduk->no_akta_lahir }}">
+				</div>
+			</div>
+			<div class="form-group">
 				
 				<label class="control-label col-sm-3">Pilih Agama</label>
 				<div class="col-sm-6">
-					<select name="agama_id" class="form-control" required>
+					<select id="agama_form" name="agama_id" class="form-control" required>
 						@foreach($agama as $row)
 						@if($row->id == $penduduk->agama_id)
+						<option value="{{ $row->id }}" selected>{{ $row->keterangan }}</option>
+						@else
+						<option value="{{ $row->id }}">{{ $row->keterangan }}</option>
+						@endif
+						@endforeach
+					</select>
+				</div>
+			</div>
+			@if($penduduk->nama_organisasi != NULL)
+			<div class="form-group" id="agama_optional">
+				<label class="control-label col-sm-3">Nama Organisasi</label>
+				<div class="col-sm-6">
+					<input type="text" name="nama_organisasi" class="form-control" placeholder="Masukkan Nama Organisasi" value="{{ $penduduk->nama_organisasi }}">
+				</div>
+			</div>
+			@else
+			<div class="form-group" id="agama_optional" style="display: none">
+				<label class="control-label col-sm-3">Nama Organisasi</label>
+				<div class="col-sm-6">
+					<input type="text" name="nama_organisasi" class="form-control" placeholder="Masukkan Nama Organisasi">
+				</div>
+			</div>
+			@endif
+			<div class="form-group">
+				
+				<label class="control-label col-sm-3">Pilih Status Pernikahan</label>
+				<div class="col-sm-6">
+					<select name="status_nikah_id" class="form-control" required>
+						@foreach($status_nikah as $row)
+						@if($row->id == $penduduk->status_nikah_id)
+						<option value="{{ $row->id }}" selected>{{ $row->keterangan }}</option>
+						@else
+						<option value="{{ $row->id }}">{{ $row->keterangan }}</option>
+						@endif
+						@endforeach
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Nomor Akta Pernikahan</label>
+				<div class="col-sm-6">
+					<input type="text" name="akta_nikah" class="form-control" placeholder="Masukkan Nomor Akta Nikah" value="{{ $penduduk->no_akta_nikah }}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Nomor Akta Perceraian</label>
+				<div class="col-sm-6">
+					<input type="text" name="akta_cerai" class="form-control" placeholder="Masukkan Nomor Akta Cerai" value="{{ $penduduk->no_akta_cerai }}">
+				</div>
+			</div>
+			<div class="form-group">
+				
+				<label class="control-label col-sm-3">Pilih Status Hubungan Keluarga</label>
+				<div class="col-sm-6">
+					<select name="status_hubungan_id" class="form-control" required>
+						@foreach($status_hubungan as $row)
+						@if($row->id == $penduduk->status_hubungan_id)
+						<option value="{{ $row->id }}" selected>{{ $row->keterangan }}</option>
+						@else
+						<option value="{{ $row->id }}">{{ $row->keterangan }}</option>
+						@endif
+						@endforeach
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Kelainan Fisik dan Mental</label>
+				<div class="col-sm-6">
+					<select id="cacat_form" class="form-control" name="penyandang_cacat_id">
+						@foreach($penyandang_cacat as $row)
+						@if($row->id == $penduduk->penyandang_cacat_id)
 						<option value="{{ $row->id }}" selected>{{ $row->keterangan }}</option>
 						@else
 						<option value="{{ $row->id }}">{{ $row->keterangan }}</option>
@@ -117,36 +207,6 @@ $tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->y
 			</div>
 			<div class="form-group">
 				
-				<label class="control-label col-sm-3">Pilih Status Pernikahan</label>
-				<div class="col-sm-6">
-					<select name="status_nikah_id" class="form-control" required>
-						@foreach($status_nikah as $row)
-						@if($row->id == $penduduk->status_nikah_id)
-						<option value="{{ $row->id }}" selected>{{ $row->keterangan }}</option>
-						@else
-						<option value="{{ $row->id }}">{{ $row->keterangan }}</option>
-						@endif
-						@endforeach
-					</select>
-				</div>
-			</div>
-			<div class="form-group">
-				
-				<label class="control-label col-sm-3">Pilih Status Hubungan Keluarga</label>
-				<div class="col-sm-6">
-					<select name="status_hubungan_id" class="form-control" required>
-						@foreach($status_hubungan as $row)
-						@if($row->id == $penduduk->status_hubungan_id)
-						<option value="{{ $row->id }}" selected>{{ $row->keterangan }}</option>
-						@else
-						<option value="{{ $row->id }}">{{ $row->keterangan }}</option>
-						@endif
-						@endforeach
-					</select>
-				</div>
-			</div>
-			<div class="form-group">
-				
 				<label class="control-label col-sm-3">Pilih Kewarganegaraan</label>
 				<div class="col-sm-6">
 					<select name="kewarganegaraan" class="form-control" required>
@@ -162,30 +222,30 @@ $tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->y
 			</div>
 			<div class="form-group">
 				
-				<label class="control-label col-sm-3">No. Paspor</label>
+				<label class="control-label col-sm-3">NIK Ayah</label>
 				<div class="col-sm-6">
-					<input type="number" name="paspor" class="form-control" placeholder="Masukkan Nomor Paspor" value="{{$penduduk->no_paspor}}">
-				</div>
-			</div>
-			<div class="form-group">
-				
-				<label class="control-label col-sm-3">No. KITAS/KITAP</label>
-				<div class="col-sm-6">
-					<input type="number" name="kitas" class="form-control" placeholder="Masukkan Nomor KITAS/KITAP" value="{{$penduduk->no_kitas}}">
+					<input type="number" name="nik_ayah" class="form-control" placeholder="Masukkan NIK Ayah" value="{{ $penduduk->nik_ayah }}">
 				</div>
 			</div>
 			<div class="form-group">
 				
 				<label class="control-label col-sm-3">Nama Ayah</label>
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="Masukkan Nama Ayah" type="text" value="{{$penduduk->ayah}}" name="ayah" required>
+					<input class="form-control" placeholder="Masukkan Nama Ayah" type="text" value="{{$penduduk->nama_ayah}}" name="nama_ayah" required>
+				</div>
+			</div>
+			<div class="form-group">
+				
+				<label class="control-label col-sm-3">NIK Ibu</label>
+				<div class="col-sm-6">
+					<input type="number" name="nik_ibu" class="form-control" placeholder="Masukkan NIK Ibu" value="{{ $penduduk->nik_ibu }}">
 				</div>
 			</div>
 			<div class="form-group">
 				
 				<label class="control-label col-sm-3">Nama Ibu</label>
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="Masukkan Nama Ibu" type="text" value="{{$penduduk->ibu}}" name="ibu" required>
+					<input class="form-control" placeholder="Masukkan Nama Ibu" type="text" value="{{$penduduk->nama_ibu}}" name="nama_ibu" required>
 				</div>
 			</div>
 			<br>

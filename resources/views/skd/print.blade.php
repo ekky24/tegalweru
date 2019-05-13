@@ -46,7 +46,7 @@
                         <td>Dau</td>
                     </tr>
                     <tr>
-                        <td class="header">Kelurahan</td>
+                        <td class="header">Desa/Kelurahan</td>
                         <td>:</td>
                         <td>KARANGWIDORO</td>
                     </tr>

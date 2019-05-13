@@ -182,9 +182,9 @@ $value_tgl_lahir3 = $arr_tgl_lahir3[2] . '-' . $arr_tgl_lahir3[1] . '-' . $arr_t
 					<select name="jk_anak" class="form-control">
 						@if($skd->jk_anak == "L")
 						<option value="L" selected>LAKI-LAKI</option>
-						<option value="P">Perempuan</option>
+						<option value="P">PEREMPUAN</option>
 						@else
-						<option value="L">Laki-Laki</option>
+						<option value="L">LAKI-LAKI</option>
 						<option value="P" selected>PEREMPUAN</option>
 						@endif
 					</select>

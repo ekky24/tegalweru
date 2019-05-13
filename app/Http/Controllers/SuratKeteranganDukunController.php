@@ -10,6 +10,12 @@ use Carbon\Carbon;
 use DB;
 use App\Penduduk;
 use App\Kelahiran;
+use App\Agama;
+use App\Pendidikan;
+use App\JenisPekerjaan;
+use App\StatusNikah;
+use App\StatusHubungan;
+use App\Kota;
 
 class SuratKeteranganDukunController extends Controller
 {
@@ -59,7 +65,7 @@ class SuratKeteranganDukunController extends Controller
     			$nomor_sebelum = 0;
     		}
     		else {
-    			$get_last = substr($nomor_temp, 4);
+    			$get_last = substr($nomor_temp, 7);
     			$pos = strpos($get_last, '/');
     			$nomor_sebelum = substr($get_last, 0, $pos);
     		}
@@ -153,7 +159,7 @@ class SuratKeteranganDukunController extends Controller
     }
 
     public function show($id) {
-    	$skd = SuratKeteranganDukun::with(['get_penerbit'])->find($id);
+    	$skd = SuratKeteranganDukun::with(['get_penerbit', 'get_kelahiran'])->find($id);
         $penduduk_ibu = Penduduk::with(['get_kk'])->find($skd->nik_ibu);
         $penduduk_ayah = Penduduk::with(['get_kk'])->find($skd->nik_ayah);
         $penduduk_pelapor = Penduduk::with(['get_kk'])->find($skd->nik_pelapor);
@@ -200,7 +206,66 @@ class SuratKeteranganDukunController extends Controller
     	return redirect("/skd/$skd->id");
     }
 
+    public function daftar_penduduk($id) {
+        $agama = Agama::all();
+        $pendidikan = Pendidikan::all();
+        $pekerjaan = JenisPekerjaan::all();
+        $status_nikah = StatusNikah::all();
+        $status_hubungan = StatusHubungan::all();
+        $skd = SuratKeteranganDukun::with(['get_penduduk_ibu', 'get_penduduk_ayah', 'get_penduduk_pelapor', 'get_penerbit'])->find($id);
+        return view('skd.daftar_penduduk', compact('skd', 'agama', 'pendidikan', 'pekerjaan', 'status_nikah', 'status_hubungan'));
+    }
+
+    public function store_daftar_penduduk($id) {
+        $this->validate(request(), [
+            'nik' => 'required|numeric',
+            'nama' => 'required',
+            'jk' => 'required',
+            'tempat_lahir' => 'required',
+            'tgl_lahir' => 'required|date',
+            'agama_id' => 'required|numeric',
+            'pendidikan_id' => 'required|numeric',
+            'jenis_pekerjaan_id' => 'required|numeric',
+            'status_nikah_id' => 'required|numeric',
+            'status_hubungan_id' => 'required|numeric',
+            'kewarganegaraan' => 'required',
+            'ayah' => 'required',
+            'ibu' => 'required'
+        ]);
+
+        $tempat_lahir = Kota::select('id')->where('nama', request('tempat_lahir'))->get();
+
+        Penduduk::create([
+            'id' => request('nik'),
+            'nama' => strtoupper(request('nama')),
+            'jk' => request('jk'),
+            'tempat_lahir' => $tempat_lahir[0]->id,
+            'tgl_lahir' => request('tgl_lahir'),
+            'agama_id' => request('agama_id'),
+            'pendidikan_id' => request('pendidikan_id'),
+            'jenis_pekerjaan_id' => request('jenis_pekerjaan_id'),
+            'status_nikah_id' => request('status_nikah_id'),
+            'status_hubungan_id' => request('status_hubungan_id'),
+            'kewarganegaraan' => request('kewarganegaraan'),
+            'ayah' => strtoupper(request('ayah')),
+            'ibu' => strtoupper(request('ibu')),
+            'no_kitas' => request('kitas'),
+            'no_paspor' => request('paspor')
+        ]);
+
+        $kelahiran = Kelahiran::where('surat_lahir_id', $id)->first();
+        $kelahiran->delete();
+
+        return redirect('/penduduk');
+    }
+
     public function delete(SuratKeteranganDukun $skd) {
+        $kelahiran = Kelahiran::where('surat_lahir_id', $skd->id)->first();
+        
+        if($kelahiran != NULL) {
+            $kelahiran->delete();
+        }
+
     	$skd->delete();
     	return redirect('/skd');
     }

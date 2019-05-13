@@ -4,7 +4,7 @@
 
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="filter page-header">Input Surat Keterangan Dukun</h1>
+		<h1 class="filter page-header">Input Surat Kelahiran</h1>
 	</div>
 </div>
 <div class="row">
@@ -163,6 +163,7 @@
 			<br>
 			<div class="form-group text-center">
 				<button type="submit" class="btn btn-primary">Submit</button>
+				<a class="btn btn-primary" href="/pdf/kelahiran.pdf" target="_blank">Form Dispenduk</a><br><br>
 			</div>
 		</form>	
 		@include('layout.error')

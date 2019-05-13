@@ -65,6 +65,14 @@
 			<td>{{ $skd->jam_kelahiran . " WIB"}}</td>
 		</tr>
 		<tr>
+			<th>Status Kependudukan Anak</th>
+			@if($skd->get_kelahiran == NULL)
+				<td>{{ 'SUDAH TERDAFTAR' }}</td>
+			@else
+				<td>{{ 'BELUM TERDAFTAR' }}</td>
+			@endif
+		</tr>
+		<tr>
 			<th>Nama Pejabat Penerbit</th>
 			<td>{{ $skd->get_penerbit->nama }}</td>
 		</tr>
@@ -74,6 +82,10 @@
 		</tr>
 	</table>
 	<a class="btn btn-primary" href="/skd/{{ $skd->id }}/edit">Edit Data</a>
-	<a class="btn btn-primary" href="/skd/{{ $skd->id }}/download">Download</a><br><br>
+	<a class="btn btn-primary" href="/skd/{{ $skd->id }}/download">Download</a>
+	@if($skd->get_kelahiran != NULL)
+		<a class="btn btn-primary" href="/skd/{{ $skd->id }}/daftar_penduduk">Daftar Penduduk</a>
+	@endif
+	<br><br>
 	</center>
 @endsection

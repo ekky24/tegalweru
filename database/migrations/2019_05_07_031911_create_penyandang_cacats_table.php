@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSuratKeteranganKehilangansTable extends Migration
+class CreatePenyandangCacatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateSuratKeteranganKehilangansTable extends Migration
      */
     public function up()
     {
-        Schema::create('surat_keterangan_kehilangans', function (Blueprint $table) {
+        Schema::create('penyandang_cacats', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nomor');
-            $table->string('penduduk_id');
-            $table->text('keterangan');
-            $table->string('penerbit_id');
+            $table->string('keterangan');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateSuratKeteranganKehilangansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('surat_keterangan_kehilangans');
+        Schema::dropIfExists('penyandang_cacats');
     }
 }

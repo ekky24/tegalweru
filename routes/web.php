@@ -1,8 +1,13 @@
 <?php
 
-Route::get('/', function () {
-    return view('layout.index');
-})->middleware('auth');
+Route::get('/', function() {
+	if (auth()->check()) {
+        return view('layout.index');
+     }
+     else {
+         return redirect('/penduduk/stat');
+     }
+});
 
 Route::get('/kk/stat', 'KartuKeluargaController@stat');
 Route::get('/kk/stat_rw_warga_ajax', 'KartuKeluargaController@stat_rw_warga_ajax');
@@ -48,6 +53,7 @@ Route::get('/penduduk/stat_pendidikan_ajax', 'PendudukController@stat_pendidikan
 Route::get('/penduduk/stat_jenis_pekerjaan_ajax', 'PendudukController@stat_jenis_pekerjaan_ajax');
 Route::get('/penduduk/stat_status_hubungan_ajax', 'PendudukController@stat_status_hubungan_ajax');
 Route::get('/penduduk/stat_kewarganegaraan_ajax', 'PendudukController@stat_kewarganegaraan_ajax');
+Route::get('/penduduk/stat_status_ajax', 'PendudukController@stat_status_ajax');
 
 Route::get('/penduduk/stat', 'PendudukController@stat');
 Route::get('/penduduk/insert', 'PendudukController@insert');
@@ -131,6 +137,9 @@ Route::get('/skd/{skd}', 'SuratKeteranganDukunController@show');
 Route::get('/skd', 'SuratKeteranganDukunController@show_all');
 Route::get('/skd/{skd}/delete', 'SuratKeteranganDukunController@delete');
 Route::get('/skd/{skd}/edit', 'SuratKeteranganDukunController@edit');
+Route::post('/skd/download', 'SuratKeteranganDukunController@getPdf');
+Route::get('/skd/{skd}/daftar_penduduk', 'SuratKeteranganDukunController@daftar_penduduk');
+Route::post('/skd/{skd}/daftar_penduduk', 'SuratKeteranganDukunController@store_daftar_penduduk');
 Route::get('/stat_skd_tahun', 'SuratKeteranganDukunController@stat_skd_tahun');
 Route::get('/stat_skd_bulan', 'SuratKeteranganDukunController@stat_skd_bulan');
 
@@ -191,6 +200,16 @@ Route::get('/sik/{sik}', 'SuratIjinKeramaianController@show');
 Route::get('/sik', 'SuratIjinKeramaianController@show_all');
 Route::get('/sik/{sik}/delete', 'SuratIjinKeramaianController@delete');
 Route::get('/sik/{sik}/edit', 'SuratIjinKeramaianController@edit');
+
+Route::post('/skdom/download', 'SuratDomisiliController@getPdf');
+Route::get('/skdom/{skdom}/download', 'SuratDomisiliController@print');
+Route::get('/skdom/insert', 'SuratDomisiliController@insert');
+Route::post('/skdom', 'SuratDomisiliController@store');
+Route::post('/skdom/{skdom}', 'SuratDomisiliController@store_edit');
+Route::get('/skdom/{skdom}', 'SuratDomisiliController@show');
+Route::get('/skdom', 'SuratDomisiliController@show_all');
+Route::get('/skdom/{skdom}/delete', 'SuratDomisiliController@delete');
+Route::get('/skdom/{skdom}/edit', 'SuratDomisiliController@edit');
 
 Route::get('/login', 'SessionController@create');
 Route::get('/ubah_pass', 'SessionController@ubah_pass');

@@ -12,13 +12,15 @@ use App\StatusNikah;
 use App\StatusHubungan;
 use App\Kota;
 use App\Penduduk;
+use App\Kelahiran;
+use App\PenyandangCacat;
 use DB;
 use Carbon\Carbon;
 
 class PendudukController extends Controller
 {
     public function __construct() {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['stat', 'stat_agama_ajax', 'stat_pendidikan_ajax', 'stat_kewarganegaraan_ajax', 'stat_jk_ajax', 'stat_usia_ajax', 'stat_status_nikah_ajax', 'stat_jenis_pekerjaan_ajax', 'stat_status_hubungan_ajax', 'stat_status_ajax']);
     }
     
     public function insert() {
@@ -26,46 +28,63 @@ class PendudukController extends Controller
     	$pendidikan = Pendidikan::all();
     	$pekerjaan = JenisPekerjaan::all();
     	$status_nikah = StatusNikah::all();
-    	$status_hubungan = StatusHubungan::all();
+        $status_hubungan = StatusHubungan::all();
+    	$penyandang_cacat = PenyandangCacat::all();
     	
-    	return view('penduduk.insert', compact('agama', 'pendidikan', 'pekerjaan', 'status_nikah', 'status_hubungan'));
+    	return view('penduduk.insert', compact('agama', 'pendidikan', 'pekerjaan', 'status_nikah', 'status_hubungan', 'penyandang_cacat'));
     }
 
     public function store() {
     	$this->validate(request(), [
     		'nik' => 'required|numeric',
-    		'nama' => 'required',
+            'nama' => 'required',
+    		'alamat_sebelum' => 'nullable',
+            'paspor' => 'nullable',
     		'jk' => 'required',
     		'tempat_lahir' => 'required',
     		'tgl_lahir' => 'required|date',
+            'akta_lahir' => 'nullable',
     		'agama_id' => 'required|numeric',
+            'nama_organisasi' => 'nullable',
+            'status_nikah_id' => 'required|numeric',
+            'akta_nikah' => 'nullable',
+            'akta_cerai' => 'nullable',
+            'status_hubungan_id' => 'required|numeric',
+            'penyandang_cacat_id' => 'nullable',
     		'pendidikan_id' => 'required|numeric',
     		'jenis_pekerjaan_id' => 'required|numeric',
-    		'status_nikah_id' => 'required|numeric',
-    		'status_hubungan_id' => 'required|numeric',
     		'kewarganegaraan' => 'required',
-    		'ayah' => 'required',
-    		'ibu' => 'required'
+            'nik_ayah' => 'nullable',
+            'nama_ayah' => 'nullable',
+    		'nik_ibu' => 'nullable',
+    		'nama_ibu' => 'nullable'
     	]);
 
     	$tempat_lahir = Kota::select('id')->where('nama', request('tempat_lahir'))->get();
 
     	Penduduk::create([
     		'id' => request('nik'),
-    		'nama' => strtoupper(request('nama')),
+            'nama' => strtoupper(request('nama')),
+    		'alamat_sebelumnya' => strtoupper(request('alamat_sebelum')),
+            'no_paspor' => request('paspor'),
     		'jk' => request('jk'),
     		'tempat_lahir' => $tempat_lahir[0]->id,
-    		'tgl_lahir' => request('tgl_lahir'),
+            'tgl_lahir' => request('tgl_lahir'),
+    		'no_akta_lahir' => request('akta_lahir'),
     		'agama_id' => request('agama_id'),
+            'nama_organisasi' => strtoupper(request('nama_organisasi')),
+            'status_nikah_id' => request('status_nikah_id'),
+            'no_akta_nikah' => request('akta_nikah'),
+            'no_akta_cerai' => request('akta_cerai'),
+            'status_hubungan_id' => request('status_hubungan_id'),
+            'penyandang_cacat_id' => request('penyandang_cacat_id'),
     		'pendidikan_id' => request('pendidikan_id'),
     		'jenis_pekerjaan_id' => request('jenis_pekerjaan_id'),
-    		'status_nikah_id' => request('status_nikah_id'),
-    		'status_hubungan_id' => request('status_hubungan_id'),
     		'kewarganegaraan' => request('kewarganegaraan'),
-    		'ayah' => strtoupper(request('ayah')),
-    		'ibu' => strtoupper(request('ibu')),
-    		'no_kitas' => request('kitas'),
-    		'no_paspor' => request('paspor')
+            'nik_ayah' => strtoupper(request('nik_ayah')),
+    		'nama_ayah' => strtoupper(request('nama_ayah')),
+            'nik_ibu' => strtoupper(request('nik_ibu')),
+    		'nama_ibu' => strtoupper(request('nama_ibu')),
     	]);
 
     	return redirect('/penduduk');
@@ -75,35 +94,56 @@ class PendudukController extends Controller
         $this->validate(request(), [
             'nik' => 'required|numeric',
             'nama' => 'required',
+            'alamat_sebelum' => 'nullable',
+            'paspor' => 'nullable',
             'jk' => 'required',
             'tempat_lahir' => 'required',
             'tgl_lahir' => 'required|date',
+            'akta_lahir' => 'nullable',
             'agama_id' => 'required|numeric',
+            'nama_organisasi' => 'nullable',
+            'status_nikah_id' => 'required|numeric',
+            'akta_nikah' => 'nullable',
+            'akta_cerai' => 'nullable',
+            'status_hubungan_id' => 'required|numeric',
+            'penyandang_cacat_id' => 'nullable',
             'pendidikan_id' => 'required|numeric',
             'jenis_pekerjaan_id' => 'required|numeric',
-            'status_nikah_id' => 'required|numeric',
-            'status_hubungan_id' => 'required|numeric',
             'kewarganegaraan' => 'required',
-            'ayah' => 'required',
-            'ibu' => 'required'
+            'nik_ayah' => 'nullable',
+            'nama_ayah' => 'nullable',
+            'nik_ibu' => 'nullable',
+            'nama_ibu' => 'nullable'
         ]);
 
         $tempat_lahir = Kota::select('id')->where('nama', request('tempat_lahir'))->get();
 
         $penduduk->nama = strtoupper(request('nama'));
+        $penduduk->alamat_sebelumnya = strtoupper(request('alamat_sebelum'));
+        $penduduk->no_paspor = strtoupper(request('paspor'));
         $penduduk->jk = request('jk');
         $penduduk->tempat_lahir = $tempat_lahir[0]->id;
         $penduduk->tgl_lahir = request('tgl_lahir');
+        $penduduk->no_akta_lahir = strtoupper(request('akta_lahir'));
         $penduduk->agama_id = request('agama_id');
+        if (request('agama_id') != 7) {
+            $penduduk->nama_organisasi = null;
+        }
+        else {
+            $penduduk->nama_organisasi = strtoupper(request('nama_organisasi'));
+        }
+        $penduduk->status_nikah_id = request('status_nikah_id');
+        $penduduk->no_akta_nikah = strtoupper(request('akta_nikah'));
+        $penduduk->no_akta_cerai = strtoupper(request('akta_cerai'));
+        $penduduk->status_hubungan_id = request('status_hubungan_id');
+        $penduduk->penyandang_cacat_id = request('penyandang_cacat_id');
         $penduduk->pendidikan_id = request('pendidikan_id');
         $penduduk->jenis_pekerjaan_id = request('jenis_pekerjaan_id');
-        $penduduk->status_nikah_id = request('status_nikah_id');
-        $penduduk->status_hubungan_id = request('status_hubungan_id');
         $penduduk->kewarganegaraan = request('kewarganegaraan');
-        $penduduk->ayah = strtoupper(request('ayah'));
-        $penduduk->ibu = strtoupper(request('ibu'));
-        $penduduk->no_kitas = request('kitas');
-        $penduduk->no_paspor = request('paspor');
+        $penduduk->nik_ayah = strtoupper(request('nik_ayah'));
+        $penduduk->nama_ayah = strtoupper(request('nama_ayah'));
+        $penduduk->nik_ibu = strtoupper(request('nik_ibu'));
+        $penduduk->nama_ibu = strtoupper(request('nama_ibu'));
         $penduduk->save();
 
         return redirect("/penduduk/$penduduk->id");
@@ -275,7 +315,8 @@ class PendudukController extends Controller
         $pekerjaan = JenisPekerjaan::all();
         $status_nikah = StatusNikah::all();
         $status_hubungan = StatusHubungan::all();
-        return view('penduduk.edit', compact('penduduk', 'agama', 'pendidikan', 'pekerjaan', 'status_nikah', 'status_hubungan'));
+        $penyandang_cacat = PenyandangCacat::all();
+        return view('penduduk.edit', compact('penduduk', 'agama', 'pendidikan', 'pekerjaan', 'status_nikah', 'status_hubungan', 'penyandang_cacat'));
     }
 
     public function penduduk_ajax_kota() {
@@ -339,6 +380,18 @@ class PendudukController extends Controller
     public function stat_kewarganegaraan_ajax() {
         $count_kewarganegaraan = Penduduk::selectRaw('count(kewarganegaraan) as count')->orderBy('kewarganegaraan')->groupBy('kewarganegaraan')->getAktif()->get();
         return json_encode($count_kewarganegaraan);
+    }
+
+    public function stat_status_ajax() {
+        $data = [];
+        $count_penduduk = Penduduk::getAktif()->count();
+        $count_penduduk = ['count' => $count_penduduk];
+        array_push($data, $count_penduduk);
+
+        $count_kelahiran = Kelahiran::get()->count();
+        $count_kelahiran = ['count' => $count_kelahiran];
+        array_push($data, $count_kelahiran);
+        return $data;
     }
 
     public function stat_jk_ajax() {

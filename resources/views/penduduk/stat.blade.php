@@ -27,9 +27,13 @@
 		</div>
 	</div><br>
 	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
+		<div class="col-md-6">
 			<h3 class="text-center">Kewarganegaraan</h3>
 			<canvas id="kewarganegaraan_chart"></canvas>
+		</div>
+		<div class="col-md-6">
+			<h3 class="text-center">Status Penduduk</h3>
+			<canvas id="status_chart"></canvas>
 		</div>
 	</div><br>
 	<div class="row">

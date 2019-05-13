@@ -2,7 +2,7 @@
 use Carbon\Carbon;
 
 $bulan_arr = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
-$waktu = Carbon::createFromFormat('Y-m-d', $kk->tgl_terbit);
+$waktu = Carbon::createFromFormat('Y-m-d', $kk->tgl_pengurusan);
 $tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->year;
 ?>
 
@@ -100,9 +100,9 @@ $tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->y
 			</div>
 			<div class="form-group">
 				
-				<label class="control-label col-sm-3">Tanggal Terbit</label>
+				<label class="control-label col-sm-3">Tanggal Pengurusan</label>
 				<div class="col-sm-6">
-					<input class="form-control" id="date_custom" placeholder="Masukkan Tanggal Kematian" type="date" name="tgl_terbit" value="{{ $kk->tgl_terbit }}" style="display: none;" required>
+					<input class="form-control" id="date_custom" placeholder="Masukkan Tanggal Kematian" type="date" name="tgl_pengurusan" value="{{ $kk->tgl_pengurusan }}" style="display: none;" required>
 					<div class="form-group" id="div_dummy">
 						<div class="col-md-10">
 							<input type="text" class="form-control" id="date_dummy" value="{{ $tgl_dummy }}" readonly>
@@ -111,13 +111,6 @@ $tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->y
 							<button id="button_dummy" class="form-control col-md-2 btn btn-primary">Edit</button>
 						</div>
 					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				
-				<label class="control-label col-sm-3">Penerbit</label>
-				<div class="col-sm-6">
-					<input class="form-control" placeholder="Masukkan Pejabat Penerbit" type="text" name="penerbit" value="{{$kk->penerbit}}" required>
 				</div>
 			</div>
 

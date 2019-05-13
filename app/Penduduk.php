@@ -8,6 +8,7 @@ use App\StatusNikah;
 use App\StatusHubungan;
 use App\Kota;
 use App\KartuKeluarga;
+use App\PenyandangCacat;
 
 class Penduduk extends Model
 {
@@ -39,6 +40,10 @@ class Penduduk extends Model
 
     public function get_status_hubungan() {
     	return $this->belongsTo(StatusHubungan::class, 'status_hubungan_id');
+    }
+
+    public function get_penyandang_cacat() {
+        return $this->belongsTo(PenyandangCacat::class, 'penyandang_cacat_id');
     }
 
     public function get_kematian() {

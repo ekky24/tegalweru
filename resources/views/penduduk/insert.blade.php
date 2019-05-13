@@ -13,16 +13,29 @@
 			{{ csrf_field() }}
 			<div class="form-group">
 				
+				<label class="control-label col-sm-3">Nama Lengkap</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Nama Lengkap" type="text" name="nama" required>
+				</div>
+			</div>
+			<div class="form-group">
+				
 				<label class="control-label col-sm-3">NIK</label>
 				<div class="col-sm-6">
 					<input class="form-control" placeholder="Masukkan NIK" type="number" name="nik" required>
 				</div>
 			</div>
 			<div class="form-group">
-				
-				<label class="control-label col-sm-3">Nama Lengkap</label>
+		   		<label class="control-label col-sm-3">Alamat Sebelumnya</label>
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="Masukkan Nama Lengkap" type="text" name="nama" required>
+					<textarea placeholder="Masukkan alamat" name="alamat_sebelum" class="form-control"></textarea>
+				</div>
+		    </div>
+		    <div class="form-group">
+				
+				<label class="control-label col-sm-3">No. Paspor</label>
+				<div class="col-sm-6">
+					<input type="number" name="paspor" class="form-control" placeholder="Masukkan Nomor Paspor">
 				</div>
 			</div>
 			<div class="form-group">
@@ -59,12 +72,71 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label class="control-label col-sm-3">Nomor Akta Lahir</label>
+				<div class="col-sm-6">
+					<input type="text" name="akta_lahir" class="form-control" placeholder="Masukkan Nomor Akta Lahir">
+				</div>
+			</div>
+			<div class="form-group">
 				
 				<label class="control-label col-sm-3">Pilih Agama</label>
 				<div class="col-sm-6">
-					<select name="agama_id" class="form-control" required>
+					<select id="agama_form" name="agama_id" class="form-control" required>
 						<option value="" selected disabled hidden>Pilih Agama</option>
 						@foreach($agama as $row)
+						<option value="{{ $row->id }}">{{ $row->keterangan }}</option>
+						@endforeach
+					</select>
+				</div>
+			</div>
+			<div class="form-group" id="agama_optional" style="display: none">
+				<label class="control-label col-sm-3">Nama Organisasi</label>
+				<div class="col-sm-6">
+					<input type="text" name="nama_organisasi" class="form-control" placeholder="Masukkan Nama Organisasi">
+				</div>
+			</div>
+			<div class="form-group">
+				
+				<label class="control-label col-sm-3">Pilih Status Pernikahan</label>
+				<div class="col-sm-6">
+					<select name="status_nikah_id" class="form-control" required>
+						<option value="" selected disabled hidden>Pilih Status Pernikahan</option>
+						@foreach($status_nikah as $row)
+						<option value="{{ $row->id }}">{{ $row->keterangan }}</option>
+						@endforeach
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Nomor Akta Pernikahan</label>
+				<div class="col-sm-6">
+					<input type="text" name="akta_nikah" class="form-control" placeholder="Masukkan Nomor Akta Nikah">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Nomor Akta Perceraian</label>
+				<div class="col-sm-6">
+					<input type="text" name="akta_cerai" class="form-control" placeholder="Masukkan Nomor Akta Cerai">
+				</div>
+			</div>
+			<div class="form-group">
+				
+				<label class="control-label col-sm-3">Pilih Status Hubungan Keluarga</label>
+				<div class="col-sm-6">
+					<select name="status_hubungan_id" class="form-control" required>
+						<option value="" selected disabled hidden>Pilih Status Hubungan</option>
+						@foreach($status_hubungan as $row)
+						<option value="{{ $row->id }}">{{ $row->keterangan }}</option>
+						@endforeach
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Kelainan Fisik dan Mental</label>
+				<div class="col-sm-6">
+					<select id="cacat_form" class="form-control" name="penyandang_cacat_id" >
+						<option value="" selected disabled hidden>Pilih Penyandang Cacat</option>
+						@foreach($penyandang_cacat as $row)
 						<option value="{{ $row->id }}">{{ $row->keterangan }}</option>
 						@endforeach
 					</select>
@@ -96,30 +168,6 @@
 			</div>
 			<div class="form-group">
 				
-				<label class="control-label col-sm-3">Pilih Status Pernikahan</label>
-				<div class="col-sm-6">
-					<select name="status_nikah_id" class="form-control" required>
-						<option value="" selected disabled hidden>Pilih Status Pernikahan</option>
-						@foreach($status_nikah as $row)
-						<option value="{{ $row->id }}">{{ $row->keterangan }}</option>
-						@endforeach
-					</select>
-				</div>
-			</div>
-			<div class="form-group">
-				
-				<label class="control-label col-sm-3">Pilih Status Hubungan Keluarga</label>
-				<div class="col-sm-6">
-					<select name="status_hubungan_id" class="form-control" required>
-						<option value="" selected disabled hidden>Pilih Status Hubungan</option>
-						@foreach($status_hubungan as $row)
-						<option value="{{ $row->id }}">{{ $row->keterangan }}</option>
-						@endforeach
-					</select>
-				</div>
-			</div>
-			<div class="form-group">
-				
 				<label class="control-label col-sm-3">Pilih Kewarganegaraan</label>
 				<div class="col-sm-6">
 					<select name="kewarganegaraan" class="form-control" required>
@@ -131,30 +179,30 @@
 			</div>
 			<div class="form-group">
 				
-				<label class="control-label col-sm-3">No. Paspor</label>
+				<label class="control-label col-sm-3">NIK Ibu</label>
 				<div class="col-sm-6">
-					<input type="number" name="paspor" class="form-control" placeholder="Masukkan Nomor Paspor">
-				</div>
-			</div>
-			<div class="form-group">
-				
-				<label class="control-label col-sm-3">No. KITAS/KITAP</label>
-				<div class="col-sm-6">
-					<input type="number" name="kitas" class="form-control" placeholder="Masukkan Nomor KITAS/KITAP">
-				</div>
-			</div>
-			<div class="form-group">
-				
-				<label class="control-label col-sm-3">Nama Ayah</label>
-				<div class="col-sm-6">
-					<input class="form-control" placeholder="Masukkan Nama Ayah" type="text" name="ayah" required>
+					<input type="number" name="nik_ibu" class="form-control" placeholder="Masukkan NIK Ibu">
 				</div>
 			</div>
 			<div class="form-group">
 				
 				<label class="control-label col-sm-3">Nama Ibu</label>
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="Masukkan Nama Ibu" type="text" name="ibu" required>
+					<input class="form-control" placeholder="Masukkan Nama Ibu" type="text" name="nama_ibu">
+				</div>
+			</div>
+			<div class="form-group">
+				
+				<label class="control-label col-sm-3">NIK Ayah</label>
+				<div class="col-sm-6">
+					<input type="number" name="nik_ayah" class="form-control" placeholder="Masukkan NIK Ayah">
+				</div>
+			</div>
+			<div class="form-group">
+				
+				<label class="control-label col-sm-3">Nama Ayah</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Nama Ayah" type="text" name="nama_ayah">
 				</div>
 			</div>
 			<br>

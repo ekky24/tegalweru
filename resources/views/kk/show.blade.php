@@ -1,7 +1,7 @@
 <?php
 	use Carbon\Carbon;
 	$bulan_arr = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
-	$waktu = Carbon::createFromFormat('Y-m-d', $kk->tgl_terbit);
+	$waktu = Carbon::createFromFormat('Y-m-d', $kk->tgl_pengurusan);
 	$tgl = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->year;
 ?>
 
@@ -49,31 +49,27 @@
 		</tr>
 		<tr>
 			<th>Desa/Kelurahan</th>
-			<td>{{ $kk->get_kelurahan->nama }}</td>
+			<td>KARANGWIDORO</td>
 		</tr>
 		<tr>
 			<th>Kecamatan</th>
-			<td>{{ $kk->get_kelurahan->get_kecamatan->nama }}</td>
+			<td>DAU</td>
 		</tr>
 		<tr>
 			<th>Kabupaten/Kota</th>
-			<td>{{ $kk->get_kelurahan->get_kecamatan->get_kota->nama }}</td>
+			<td>MALANG</td>
 		</tr>
 		<tr>
 			<th>Kode Pos</th>
-			<td>{{ "65151" }}</td>
+			<td>65151</td>
 		</tr>
 		<tr>
 			<th>Provinsi</th>
-			<td>{{ $kk->get_kelurahan->get_kecamatan->get_kota->get_provinsi->nama }}</td>
+			<td>JAWA TIMUR</td>
 		</tr>
 		<tr>
-			<th>Tanggal Terbit</th>
+			<th>Tanggal Pengurusan</th>
 			<td>{{ strtoupper($tgl) }}</td>
-		</tr>
-		<tr>
-			<th>Penerbit</th>
-			<td>{{ $kk->penerbit }}</td>
 		</tr>
 	</table>
 	<br><br><h2>Daftar Anggota Keluarga</h2>

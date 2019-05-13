@@ -124,6 +124,7 @@
 			</div><br>
 			<div class="form-group text-center">
 				<button type="submit" class="btn btn-primary">Submit</button>
+				<a class="btn btn-primary" href="/pdf/kematian.pdf" target="_blank">Form Dispenduk</a>
 			</div>
 		</form>
 		@include('layout.error')

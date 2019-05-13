@@ -25,7 +25,7 @@ class SuratKeteranganKehilanganController extends Controller
     public function store() {
     	$this->validate(request(), [
     		'nik' => 'required',
-    		'keperluan' => 'required',
+            'keterangan' => 'required',
     		'penerbit_id' => 'required'
     	]);
 
@@ -57,12 +57,12 @@ class SuratKeteranganKehilanganController extends Controller
     	}
 
     	$nomor_sesudah = $nomor_sebelum + 1;
-    	$nomor_fix = "140/" . $nomor_sesudah . "/35.07.2006/" . $tahun;
+    	$nomor_fix = "471/" . $nomor_sesudah . "/35.07.22.2003/" . $tahun;
 
     	$skk = SuratKeteranganKehilangan::create([
     		'nomor' => $nomor_fix,
     		'penduduk_id' => request('nik'),
-    		'keperluan' => strtoupper(request('keperluan')),
+    		'keterangan' => strtoupper(request('keterangan')),
     		'penerbit_id' => request('penerbit_id')
     	]);
 
@@ -126,7 +126,8 @@ class SuratKeteranganKehilanganController extends Controller
 
     public function show($id) {
     	$skk = SuratKeteranganKehilangan::with(['get_penduduk', 'get_penerbit'])->find($id);
-    	return view('skk.show', compact('skk'));
+        $penduduk = Penduduk::with(['get_kk'])->find($skk->penduduk_id);
+    	return view('skk.show', compact('skk', 'penduduk'));
     }
 
     public function edit($id) {
@@ -138,11 +139,11 @@ class SuratKeteranganKehilanganController extends Controller
     public function store_edit(SuratKeteranganKehilangan $skk) {
     	$this->validate(request(), [
     		'nik' => 'required',
-    		'keperluan' => 'required',
+    		'keterangan' => 'required',
     		'penerbit_id' => 'required'
     	]);
 
-    	$skk->keperluan = strtoupper(request('keperluan'));
+    	$skk->keterangan = strtoupper(request('keterangan'));
     	$skk->penerbit_id = strtoupper(request('penerbit_id'));
     	$skk->save();
 

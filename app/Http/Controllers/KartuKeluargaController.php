@@ -137,8 +137,7 @@ class KartuKeluargaController extends Controller
     		'alamat' => 'required',
     		'rt' => 'required|numeric',
     		'rw' => 'required|numeric',
-    		'tgl_terbit' => 'required',
-    		'penerbit' => 'required'
+    		'tgl_pengurusan' => 'required',
     	]);
 
         if (request('list_nik') !== null) {
@@ -171,8 +170,7 @@ class KartuKeluargaController extends Controller
             'rukun_warga' => request('rw'),
             'kelurahan' => '3507300003',
             'kode_pos' => '65151',
-            'tgl_terbit' => request('tgl_terbit'),
-            'penerbit' => strtoupper(request('penerbit'))
+            'tgl_pengurusan' => request('tgl_pengurusan'),
         ]);
 
     	return redirect('/kk');
@@ -186,8 +184,7 @@ class KartuKeluargaController extends Controller
             'alamat' => 'required',
             'rt' => 'required|numeric',
             'rw' => 'required|numeric',
-            'tgl_terbit' => 'required',
-            'penerbit' => 'required'
+            'tgl_pengurusan' => 'required',
         ]);
 
         if (request('list_nik') !== null) {
@@ -237,8 +234,7 @@ class KartuKeluargaController extends Controller
         $kk->rukun_warga = request('rw');
         $kk->kelurahan = '3507300006';
         $kk->kode_pos = '65151';
-        $kk->tgl_terbit = request('tgl_terbit');
-        $kk->penerbit = strtoupper(request('penerbit'));
+        $kk->tgl_pengurusan = request('tgl_pengurusan');
         $kk->save();
 
         return redirect("/kk/$kk->id");

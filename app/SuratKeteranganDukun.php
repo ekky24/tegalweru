@@ -19,4 +19,8 @@ class SuratKeteranganDukun extends Model
     public function get_penerbit() {
     	return $this->belongsTo(Penerbit::class, 'penerbit_id');
     }
+
+    public function get_kelahiran() {
+        return $this->hasOne(Kelahiran::class, 'surat_lahir_id');
+    }
 }

@@ -20,10 +20,10 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
+                        @if(auth()->check())
                         <li><a href="/ubah_pass"><i class="fa fa-wrench fa-fw"></i> Ubah Password</a>
                         </li>
                         <li class="divider"></li>
-                        @if(auth()->check())
                             <li><a href="/logout"><i class="fa fa-sign-out-alt fa-fw"></i> Logout</a>
                         @else
                             <li><a href="/login"><i class="fa fa-sign-in-alt fa-fw"></i> Login</a>

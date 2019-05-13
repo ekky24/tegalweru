@@ -32,7 +32,7 @@
 						<select name="rw" class="form-control" id="rw_form" required>
 							<option value="" selected disabled hidden>Pilih RW</option>
 							@foreach($rw as $row)
-								<option value="{{ $row->id }}">{{ $row->nama }}</option>
+								<option value="{{ $row->id }}">RW {{ $row->nama }}</option>
 							@endforeach
 						</select>
 					</div>
@@ -83,9 +83,9 @@
 		        </div>
 		        <div class="form-group">
 		   
-						<label class="control-label col-sm-3">Tanggal Terbit</label>
+						<label class="control-label col-sm-3">Tanggal Pengurusan</label>
 					<div class="col-sm-6">
-						<input class="form-control" id="date_custom" placeholder="Masukkan Tanggal Kematian" type="date" name="tgl_terbit" required>
+						<input class="form-control" id="date_custom" placeholder="Masukkan Tanggal Kematian" type="date" name="tgl_pengurusan" required>
 						<div class="form-group" id="div_dummy" style="display: none;">
 							<div class="col-md-10">
 								<input type="text" class="form-control" id="date_dummy" readonly>
@@ -94,13 +94,6 @@
 								<button id="button_dummy" class="form-control col-md-2 btn btn-primary">Edit</button>
 							</div>
 						</div>
-					</div>
-		        </div>
-		        <div class="form-group">
-		   
-						<label class="control-label col-sm-3">Penerbit</label>
-					<div class="col-sm-6">
-						<input class="form-control" placeholder="Masukkan Pejabat Penerbit" type="text" name="penerbit" required>
 					</div>
 		        </div>
 

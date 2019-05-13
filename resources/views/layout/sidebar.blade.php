@@ -4,6 +4,23 @@
                         <li>
                             <a href="/"><i class="fa fa-tachometer-alt fa-fw"></i> Dashboard</a>
                         </li>
+                        @if(!Auth::check())
+                        <li>
+                            <a href="#"><i class="fa fa-file fa-fw"></i> Download Form<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/pdf/pengurusan_kk.pdf" target="_blank">Pengurusan KK</a>
+                                </li>
+                                <li>
+                                    <a href="/pdf/kelahiran.pdf" target="_blank">Akta Kelahiran</a>
+                                </li>
+                                <li>
+                                    <a href="/pdf/kematian.pdf" target="_blank">Akta Kematian</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        @else
                         <li>
                             <a href="#"><i class="fa fa-user fa-fw"></i> Penduduk<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -34,7 +51,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
+                        <!--<li>
                             <a href="#"><i class="fa fa-truck-moving fa-fw"></i> Kepindahan Penduduk<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -43,19 +60,7 @@
                                 <li>
                                     <a href="/pindah/insert">Insert Data Pindah</a>
                                 </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-hospital-alt fa-fw"></i> Kematian<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="/kematian">Data Kematian</a>
-                                </li>
-                                <li>
-                                    <a href="/kematian/insert">Insert Data Kematian</a>
-                                </li>
-                            </ul>
+                            </ul>-->
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
@@ -140,7 +145,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <!--<li>
+                                <li>
                                     <a href="#">Surat Kehilangan <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
@@ -151,7 +156,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li>
+                                <!--<li>
                                     <a href="#">Surat Kenal Lahir <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
@@ -170,6 +175,30 @@
                                         </li>
                                         <li>
                                             <a href="/skd/insert">Insert Data Kelahiran</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                    <a href="#">Surat Kematian <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="/kematian">Data Kematian</a>
+                                        </li>
+                                        <li>
+                                            <a href="/kematian/insert">Insert Data Kematian</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-second-level -->
+                                </li>
+                                <li>
+                                    <a href="#">Surat Domisili <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="/skdom">Data Domisili</a>
+                                        </li>
+                                        <li>
+                                            <a href="/skdom/insert">Insert Data Domisili</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
@@ -210,6 +239,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        @endif
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
