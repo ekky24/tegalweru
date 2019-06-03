@@ -8,6 +8,7 @@ use App\Kematian;
 use App\Penduduk;
 use App\Penerbit;
 use Carbon\Carbon;
+use DB;
 
 class KematianController extends Controller
 {
@@ -198,5 +199,55 @@ class KematianController extends Controller
 
     	$kematian->delete();
     	return redirect('/kematian');
+    }
+
+    public function stat_kematian_tahun(Request $request) {
+        $data = [];
+        $i = [0,0,0,0,0,0,0,0,0,0,0,0];
+
+        if ($request->has('tahun')) {
+            $count_month = Kematian::selectRaw('count(penduduk_id) as count, month(created_at) as month')->orderByRaw('month(created_at)')->whereRaw('YEAR(created_at) = ' . request('tahun'))->groupBy(DB::raw('month(created_at)'))->get();    
+        }
+        else {
+            $now = Carbon::now();
+            $count_month = Kematian::selectRaw('count(penduduk_id) as count, month(created_at) as month')->orderByRaw('month(created_at)')->whereRaw('YEAR(created_at) = ' . $now->year)->groupBy(DB::raw('month(created_at)'))->get();
+        }
+
+        foreach ($count_month as $row) {
+            $i[$row->month - 1] = $row->count;
+        }
+        
+        foreach ($i as $index => $row) {
+            $send['count'] = $row;
+            $send['month'] = $index + 1;
+            array_push($data, $send);
+        }
+
+        return json_encode($data);
+    }
+
+    public function stat_kematian_bulan(Request $request) {
+        $data = [];
+        $i = [0,0,0,0];
+
+        if ($request->has('bulan')) {
+            $count_week = Kematian::selectRaw("FLOOR(((DAY(`created_at`) - 1) / 7) + 1) `week`, COUNT(`penduduk_id`) AS `count`")->whereRaw('YEAR(created_at) = ' . request('tahun') . ' AND MONTH(created_at) = ' . request('bulan'))->groupBy('week')->orderByRaw("month(`created_at`), `week`")->get();
+        }
+        else {
+            $now = Carbon::now();
+            $count_week = Kematian::selectRaw("FLOOR(((DAY(`created_at`) - 1) / 7) + 1) `week`, COUNT(`penduduk_id`) AS `count`")->whereRaw('YEAR(created_at) = ' . $now->year . ' AND MONTH(created_at) = ' . $now->month)->groupBy('week')->orderByRaw("month(`created_at`), `week`")->get();
+        }
+
+        foreach ($count_week as $row) {
+            $i[$row->week - 1] = $row->count;
+        }
+        
+        foreach ($i as $index => $row) {
+            $send['count'] = $row;
+            $send['week'] = $index + 1;
+            array_push($data, $send);
+        }
+
+        return json_encode($data);
     }
 }

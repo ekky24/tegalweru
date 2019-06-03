@@ -79,26 +79,8 @@ Route::get('/kematian', 'KematianController@show_all');
 Route::get('/kematian/{kematian}/edit', 'KematianController@edit');
 Route::post('/kematian/{kematian}', 'KematianController@store_edit');
 Route::get('/kematian/{kematian}/delete', 'KematianController@delete');
-
-Route::post('/pindah/download', 'PindahController@getPdf');
-Route::get('/pindah/insert', 'PindahController@insert');
-Route::post('/pindah', 'PindahController@store');
-Route::get('/pindah', 'PindahController@show_all');
-Route::get('/pindah/{pindah}/edit', 'PindahController@edit');
-Route::post('/pindah/{pindah}', 'PindahController@store_edit');
-Route::get('/pindah/{pindah}/delete', 'PindahController@delete');
-
-Route::post('/sktm/download', 'SuratKeteranganTidakMampuController@getPdf');
-Route::get('/sktm/{sktm}/download', 'SuratKeteranganTidakMampuController@print');
-Route::get('/sktm/insert', 'SuratKeteranganTidakMampuController@insert');
-Route::post('/sktm', 'SuratKeteranganTidakMampuController@store');
-Route::get('/sktm', 'SuratKeteranganTidakMampuController@show_all');
-Route::get('/sktm/{sktm}', 'SuratKeteranganTidakMampuController@show');
-Route::get('/sktm/{sktm}/delete', 'SuratKeteranganTidakMampuController@delete');
-Route::post('/sktm/{sktm}', 'SuratKeteranganTidakMampuController@store_edit');
-Route::get('/sktm/{sktm}/edit', 'SuratKeteranganTidakMampuController@edit');
-Route::get('/stat_sktm_tahun', 'SuratKeteranganTidakMampuController@stat_sktm_tahun');
-Route::get('/stat_sktm_bulan', 'SuratKeteranganTidakMampuController@stat_sktm_bulan');
+Route::get('/stat_kematian_tahun', 'KematianController@stat_kematian_tahun');
+Route::get('/stat_kematian_bulan', 'KematianController@stat_kematian_bulan');
 
 Route::post('/sku/download', 'SuratKeteranganUsahaController@getPdf');
 Route::get('/sku/insert_bri', 'SuratKeteranganUsahaController@insert_bri');
@@ -143,54 +125,6 @@ Route::post('/skd/{skd}/daftar_penduduk', 'SuratKeteranganDukunController@store_
 Route::get('/stat_skd_tahun', 'SuratKeteranganDukunController@stat_skd_tahun');
 Route::get('/stat_skd_bulan', 'SuratKeteranganDukunController@stat_skd_bulan');
 
-Route::post('/skkb/download', 'SuratKeteranganKelakuanBaikController@getPdf');
-Route::get('/skkb/{skkb}/download', 'SuratKeteranganKelakuanBaikController@print');
-Route::get('/skkb/insert', 'SuratKeteranganKelakuanBaikController@insert');
-Route::post('/skkb', 'SuratKeteranganKelakuanBaikController@store');
-Route::post('/skkb/{skkb}', 'SuratKeteranganKelakuanBaikController@store_edit');
-Route::get('/skkb/{skkb}', 'SuratKeteranganKelakuanBaikController@show');
-Route::get('/skkb', 'SuratKeteranganKelakuanBaikController@show_all');
-Route::get('/skkb/{skkb}/delete', 'SuratKeteranganKelakuanBaikController@delete');
-Route::get('/skkb/{skkb}/edit', 'SuratKeteranganKelakuanBaikController@edit');
-Route::get('/stat_skkb_tahun', 'SuratKeteranganKelakuanBaikController@stat_skkb_tahun');
-Route::get('/stat_skkb_bulan', 'SuratKeteranganKelakuanBaikController@stat_skkb_bulan');
-
-Route::post('/skwn/download', 'SuratKeteranganWaliNikahController@getPdf');
-Route::get('/skwn/{skwn}/download', 'SuratKeteranganWaliNikahController@print');
-Route::get('/skwn/insert', 'SuratKeteranganWaliNikahController@insert');
-Route::post('/skwn', 'SuratKeteranganWaliNikahController@store');
-Route::post('/skwn/{skwn}', 'SuratKeteranganWaliNikahController@store_edit');
-Route::get('/skwn/{skwn}', 'SuratKeteranganWaliNikahController@show');
-Route::get('/skwn', 'SuratKeteranganWaliNikahController@show_all');
-Route::get('/skwn/{skwn}/delete', 'SuratKeteranganWaliNikahController@delete');
-Route::get('/skwn/{skwn}/edit', 'SuratKeteranganWaliNikahController@edit');
-Route::get('/stat_skwn_tahun', 'SuratKeteranganWaliNikahController@stat_skwn_tahun');
-Route::get('/stat_skwn_bulan', 'SuratKeteranganWaliNikahController@stat_skwn_bulan');
-
-Route::post('/sklp/download', 'SuratKeteranganLunasPbbController@getPdf');
-Route::get('/sklp/{sklp}/download', 'SuratKeteranganLunasPbbController@print');
-Route::get('/sklp/insert', 'SuratKeteranganLunasPbbController@insert');
-Route::post('/sklp', 'SuratKeteranganLunasPbbController@store');
-Route::post('/sklp/{sklp}', 'SuratKeteranganLunasPbbController@store_edit');
-Route::get('/sklp/{sklp}', 'SuratKeteranganLunasPbbController@show');
-Route::get('/sklp', 'SuratKeteranganLunasPbbController@show_all');
-Route::get('/sklp/{sklp}/delete', 'SuratKeteranganLunasPbbController@delete');
-Route::get('/sklp/{sklp}/edit', 'SuratKeteranganLunasPbbController@edit');
-Route::get('/stat_sklp_tahun', 'SuratKeteranganLunasPbbController@stat_sklp_tahun');
-Route::get('/stat_sklp_bulan', 'SuratKeteranganLunasPbbController@stat_sklp_bulan');
-
-Route::post('/skkl/download', 'SuratKeteranganKenalLahirController@getPdf');
-Route::get('/skkl/{skkl}/download', 'SuratKeteranganKenalLahirController@print');
-Route::get('/skkl/insert', 'SuratKeteranganKenalLahirController@insert');
-Route::post('/skkl', 'SuratKeteranganKenalLahirController@store');
-Route::get('/skkl/{skkl}', 'SuratKeteranganKenalLahirController@show');
-Route::get('/skkl', 'SuratKeteranganKenalLahirController@show_all');
-Route::get('/skkl/{skkl}/delete', 'SuratKeteranganKenalLahirController@delete');
-Route::get('/skkl/{skkl}/edit', 'SuratKeteranganKenalLahirController@edit');
-Route::post('/skkl/{skkl}', 'SuratKeteranganKenalLahirController@store_edit');
-Route::get('/stat_skkl_tahun', 'SuratKeteranganKenalLahirController@stat_skkl_tahun');
-Route::get('/stat_skkl_bulan', 'SuratKeteranganKenalLahirController@stat_skkl_bulan');
-
 Route::post('/sik/download', 'SuratIjinKeramaianController@getPdf');
 Route::get('/sik/{sik}/download', 'SuratIjinKeramaianController@print');
 Route::get('/sik/insert', 'SuratIjinKeramaianController@insert');
@@ -200,6 +134,8 @@ Route::get('/sik/{sik}', 'SuratIjinKeramaianController@show');
 Route::get('/sik', 'SuratIjinKeramaianController@show_all');
 Route::get('/sik/{sik}/delete', 'SuratIjinKeramaianController@delete');
 Route::get('/sik/{sik}/edit', 'SuratIjinKeramaianController@edit');
+Route::get('/stat_sik_tahun', 'SuratIjinKeramaianController@stat_sik_tahun');
+Route::get('/stat_sik_bulan', 'SuratIjinKeramaianController@stat_sik_bulan');
 
 Route::post('/skdom/download', 'SuratDomisiliController@getPdf');
 Route::get('/skdom/{skdom}/download', 'SuratDomisiliController@print');
@@ -210,6 +146,8 @@ Route::get('/skdom/{skdom}', 'SuratDomisiliController@show');
 Route::get('/skdom', 'SuratDomisiliController@show_all');
 Route::get('/skdom/{skdom}/delete', 'SuratDomisiliController@delete');
 Route::get('/skdom/{skdom}/edit', 'SuratDomisiliController@edit');
+Route::get('/stat_skdom_tahun', 'SuratDomisiliController@stat_skdom_tahun');
+Route::get('/stat_skdom_bulan', 'SuratDomisiliController@stat_skdom_bulan');
 
 Route::get('/login', 'SessionController@create');
 Route::get('/ubah_pass', 'SessionController@ubah_pass');

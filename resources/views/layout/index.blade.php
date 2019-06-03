@@ -53,13 +53,13 @@
         </div>
     </div>
     
-    <h3>SKTM</h3>
+    <h3>Surat Ijin Keramaian</h3>
     <div class="row">
         <div class="col-md-6">
-            <canvas id="sktm_dashboard_tahun"></canvas>
+            <canvas id="sik_dashboard_tahun"></canvas>
         </div>
         <div class="col-md-6">
-            <canvas id="sktm_dashboard_bulan"></canvas>
+            <canvas id="sik_dashboard_bulan"></canvas>
         </div>
     </div><br>
 
@@ -85,17 +85,7 @@
         </div>
     </div><br>
 
-    <h3>Surat Keterangan Kenal Lahir</h3>
-    <div class="row">
-        <div class="col-md-6">
-            <canvas id="skkl_dashboard_tahun"></canvas>
-        </div>
-        <div class="col-md-6">
-            <canvas id="skkl_dashboard_bulan"></canvas>
-        </div>
-    </div><br>
-
-    <h3>Surat Keterangan Dukun</h3>
+    <h3>Surat Kelahiran</h3>
     <div class="row">
         <div class="col-md-6">
             <canvas id="skd_dashboard_tahun"></canvas>
@@ -105,23 +95,23 @@
         </div>
     </div><br>
 
-    <h3>Surat Keterangan Wali Nikah</h3>
+    <h3>Surat Kematian</h3>
     <div class="row">
         <div class="col-md-6">
-            <canvas id="skwn_dashboard_tahun"></canvas>
+            <canvas id="kematian_dashboard_tahun"></canvas>
         </div>
         <div class="col-md-6">
-            <canvas id="skwn_dashboard_bulan"></canvas>
+            <canvas id="kematian_dashboard_bulan"></canvas>
         </div>
     </div><br>
 
-    <h3>Surat Keterangan Lunas PBB</h3>
+    <h3>Surat Domisili</h3>
     <div class="row">
         <div class="col-md-6">
-            <canvas id="sklp_dashboard_tahun"></canvas>
+            <canvas id="skdom_dashboard_tahun"></canvas>
         </div>
         <div class="col-md-6">
-            <canvas id="sklp_dashboard_bulan"></canvas>
+            <canvas id="skdom_dashboard_bulan"></canvas>
         </div>
     </div><br>
 

@@ -587,51 +587,45 @@ $(function() {
 	******************************************************************************
 	******************************************************************************/
 	if (document.getElementById("dashboard") != null) {
-		var ctx_sktm_bulan = document.getElementById("sktm_dashboard_bulan").getContext('2d');
-		var ctx_sktm_tahun = document.getElementById("sktm_dashboard_tahun").getContext('2d');
+		var ctx_sik_bulan = document.getElementById("sik_dashboard_bulan").getContext('2d');
+		var ctx_sik_tahun = document.getElementById("sik_dashboard_tahun").getContext('2d');
 		var ctx_sku_bulan = document.getElementById("sku_dashboard_bulan").getContext('2d');
 		var ctx_sku_tahun = document.getElementById("sku_dashboard_tahun").getContext('2d');
 		var ctx_skk_bulan = document.getElementById("skk_dashboard_bulan").getContext('2d');
 		var ctx_skk_tahun = document.getElementById("skk_dashboard_tahun").getContext('2d');
-		var ctx_skkl_bulan = document.getElementById("skkl_dashboard_bulan").getContext('2d');
-		var ctx_skkl_tahun = document.getElementById("skkl_dashboard_tahun").getContext('2d');
+		var ctx_kematian_bulan = document.getElementById("kematian_dashboard_bulan").getContext('2d');
+		var ctx_kematian_tahun = document.getElementById("kematian_dashboard_tahun").getContext('2d');
 		var ctx_skd_bulan = document.getElementById("skd_dashboard_bulan").getContext('2d');
 		var ctx_skd_tahun = document.getElementById("skd_dashboard_tahun").getContext('2d');
-		var ctx_skwn_bulan = document.getElementById("skwn_dashboard_bulan").getContext('2d');
-		var ctx_skwn_tahun = document.getElementById("skwn_dashboard_tahun").getContext('2d');
-		var ctx_sklp_bulan = document.getElementById("sklp_dashboard_bulan").getContext('2d');
-		var ctx_sklp_tahun = document.getElementById("sklp_dashboard_tahun").getContext('2d');
+		var ctx_skdom_bulan = document.getElementById("skdom_dashboard_bulan").getContext('2d');
+		var ctx_skdom_tahun = document.getElementById("skdom_dashboard_tahun").getContext('2d');
 
-		stat_penduduk_ajax('/stat_sktm_tahun', ctx_sktm_tahun, "sktm_tahun", "line");
-		stat_penduduk_ajax('/stat_sktm_bulan', ctx_sktm_bulan, "sktm_bulan", "line");
+		stat_penduduk_ajax('/stat_sik_tahun', ctx_sik_tahun, "sik_tahun", "line");
+		stat_penduduk_ajax('/stat_sik_bulan', ctx_sik_bulan, "sik_bulan", "line");
 		stat_penduduk_ajax('/stat_sku_tahun', ctx_sku_tahun, "sktm_tahun", "line");
 		stat_penduduk_ajax('/stat_sku_bulan', ctx_sku_bulan, "sktm_bulan", "line");
 		stat_penduduk_ajax('/stat_skk_tahun', ctx_skk_tahun, "sktm_tahun", "line");
 		stat_penduduk_ajax('/stat_skk_bulan', ctx_skk_bulan, "sktm_bulan", "line");
-		stat_penduduk_ajax('/stat_skkl_tahun', ctx_skkl_tahun, "sktm_tahun", "line");
-		stat_penduduk_ajax('/stat_skkl_bulan', ctx_skkl_bulan, "sktm_bulan", "line");
+		stat_penduduk_ajax('/stat_kematian_tahun', ctx_kematian_tahun, "sktm_tahun", "line");
+		stat_penduduk_ajax('/stat_kematian_bulan', ctx_kematian_bulan, "sktm_bulan", "line");
 		stat_penduduk_ajax('/stat_skd_tahun', ctx_skd_tahun, "sktm_tahun", "line");
 		stat_penduduk_ajax('/stat_skd_bulan', ctx_skd_bulan, "sktm_bulan", "line");
-		stat_penduduk_ajax('/stat_skwn_tahun', ctx_skwn_tahun, "sktm_tahun", "line");
-		stat_penduduk_ajax('/stat_skwn_bulan', ctx_skwn_bulan, "sktm_bulan", "line");
-		stat_penduduk_ajax('/stat_sklp_tahun', ctx_sklp_tahun, "sktm_tahun", "line");
-		stat_penduduk_ajax('/stat_sklp_bulan', ctx_sklp_bulan, "sktm_bulan", "line");
+		stat_penduduk_ajax('/stat_skdom_tahun', ctx_skdom_tahun, "sktm_tahun", "line");
+		stat_penduduk_ajax('/stat_skdom_bulan', ctx_skdom_bulan, "sktm_bulan", "line");
 
 		$('#filter_tahun_sktm, #filter_bulan_sktm').on('change', function(e) {
-			stat_penduduk_ajax('/stat_sktm_tahun?tahun=' + $('#filter_tahun_sktm').val(), ctx_sktm_tahun, "sktm_tahun", "line");
-			stat_penduduk_ajax('/stat_sktm_bulan?tahun=' + $('#filter_tahun_sktm').val() + '&bulan=' + $('#filter_bulan_sktm').val(), ctx_sktm_bulan, "sktm_bulan", "line");
+			stat_penduduk_ajax('/stat_sik_tahun?tahun=' + $('#filter_tahun_sktm').val(), ctx_sik_tahun, "sktm_tahun", "line");
+			stat_penduduk_ajax('/stat_sik_bulan?tahun=' + $('#filter_tahun_sktm').val() + '&bulan=' + $('#filter_bulan_sktm').val(), ctx_sik_bulan, "sktm_bulan", "line");
 			stat_penduduk_ajax('/stat_sku_tahun?tahun=' + $('#filter_tahun_sktm').val(), ctx_sku_tahun, "sktm_tahun", "line");
 			stat_penduduk_ajax('/stat_sku_bulan?tahun=' + $('#filter_tahun_sktm').val() + '&bulan=' + $('#filter_bulan_sktm').val(), ctx_sku_bulan, "sktm_bulan", "line");
 			stat_penduduk_ajax('/stat_skk_tahun?tahun=' + $('#filter_tahun_sktm').val(), ctx_skk_tahun, "sktm_tahun", "line");
 			stat_penduduk_ajax('/stat_skk_bulan?tahun=' + $('#filter_tahun_sktm').val() + '&bulan=' + $('#filter_bulan_sktm').val(), ctx_skk_bulan, "sktm_bulan", "line");
-			stat_penduduk_ajax('/stat_skkl_tahun?tahun=' + $('#filter_tahun_sktm').val(), ctx_skkl_tahun, "sktm_tahun", "line");
-			stat_penduduk_ajax('/stat_skkl_bulan?tahun=' + $('#filter_tahun_sktm').val() + '&bulan=' + $('#filter_bulan_sktm').val(), ctx_skkl_bulan, "sktm_bulan", "line");
+			stat_penduduk_ajax('/stat_kematian_tahun?tahun=' + $('#filter_tahun_sktm').val(), ctx_kematian_tahun, "sktm_tahun", "line");
+			stat_penduduk_ajax('/stat_kematian_bulan?tahun=' + $('#filter_tahun_sktm').val() + '&bulan=' + $('#filter_bulan_sktm').val(), ctx_kematian_bulan, "sktm_bulan", "line");
 			stat_penduduk_ajax('/stat_skd_tahun?tahun=' + $('#filter_tahun_sktm').val(), ctx_skd_tahun, "sktm_tahun", "line");
 			stat_penduduk_ajax('/stat_skd_bulan?tahun=' + $('#filter_tahun_sktm').val() + '&bulan=' + $('#filter_bulan_sktm').val(), ctx_skd_bulan, "sktm_bulan", "line");
-			stat_penduduk_ajax('/stat_skwn_tahun?tahun=' + $('#filter_tahun_sktm').val(), ctx_skwn_tahun, "sktm_tahun", "line");
-			stat_penduduk_ajax('/stat_skwn_bulan?tahun=' + $('#filter_tahun_sktm').val() + '&bulan=' + $('#filter_bulan_sktm').val(), ctx_skwn_bulan, "sktm_bulan", "line");
-			stat_penduduk_ajax('/stat_sklp_tahun?tahun=' + $('#filter_tahun_sktm').val(), ctx_sklp_tahun, "sktm_tahun", "line");
-			stat_penduduk_ajax('/stat_sklp_bulan?tahun=' + $('#filter_tahun_sktm').val() + '&bulan=' + $('#filter_bulan_sktm').val(), ctx_sklp_bulan, "sktm_bulan", "line");
+			stat_penduduk_ajax('/stat_skdom_tahun?tahun=' + $('#filter_tahun_sktm').val(), ctx_skdom_tahun, "sktm_tahun", "line");
+			stat_penduduk_ajax('/stat_skdom_bulan?tahun=' + $('#filter_tahun_sktm').val() + '&bulan=' + $('#filter_bulan_sktm').val(), ctx_skdom_bulan, "sktm_bulan", "line");
 		});
 	}
 
