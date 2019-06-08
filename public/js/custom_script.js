@@ -600,8 +600,8 @@ $(function() {
 		var ctx_skdom_bulan = document.getElementById("skdom_dashboard_bulan").getContext('2d');
 		var ctx_skdom_tahun = document.getElementById("skdom_dashboard_tahun").getContext('2d');
 
-		stat_penduduk_ajax('/stat_sik_tahun', ctx_sik_tahun, "sik_tahun", "line");
-		stat_penduduk_ajax('/stat_sik_bulan', ctx_sik_bulan, "sik_bulan", "line");
+		stat_penduduk_ajax('/stat_sik_tahun', ctx_sik_tahun, "sktm_tahun", "line");
+		stat_penduduk_ajax('/stat_sik_bulan', ctx_sik_bulan, "sktm_bulan", "line");
 		stat_penduduk_ajax('/stat_sku_tahun', ctx_sku_tahun, "sktm_tahun", "line");
 		stat_penduduk_ajax('/stat_sku_bulan', ctx_sku_bulan, "sktm_bulan", "line");
 		stat_penduduk_ajax('/stat_skk_tahun', ctx_skk_tahun, "sktm_tahun", "line");

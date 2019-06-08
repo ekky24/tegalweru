@@ -22,13 +22,13 @@ html {
 body {
 	margin: 0;
 	padding: 0;
-	background-color: #286090;
+	background-color: #263544;
 	font-family: 'Montserrat-Regular';
 }
 
 h1 {
 	font-family: 'Montserrat-Bold';
-	color: #286090;
+	color: #263544;
 }
 
 h3 {
@@ -46,7 +46,7 @@ body.body-login {
 h1.login-text1 {
 	font-family: 'Montserrat-Bold';
 	margin-bottom: 0;
-	color: #286090;
+	color: #263544;
 }
 
 h3.login-text2 {
@@ -56,8 +56,8 @@ h3.login-text2 {
 }
 
 #side-menu a.active, #side-menu a.active:hover {
-	background-color: #ffffff !important;
-	color: #003d66 !important;
+	background-color: inherit !important;
+	color: #42a5f5 !important;
 }
 
 .fa {
@@ -71,24 +71,39 @@ h3.login-text2 {
 
 .sidebar .nav-third-level li a {
 	color: #ffffff !important;
-	background-color: #003d66;
+	background-color: #1d2531;
 }
 
 .sidebar .nav-second-level .nav-third-level li a:hover {
-	background-color: #052b44 !important;
+	background-color: inherit !important;
+	color: #fff;
+}
+
+.sidebar .nav-second-level .nav-third-level li a:active {
+	background-color: inherit !important;
+	color: #42a5f5;
 }
 
 .nav-second-level {
-	background-color: #145a89;
+	background-color: #1d2531;
 }
 
 .nav-second-level:active {
-	background-color: #003d66;
+	color: #42a5f5;
+	background-color: inherit;
+}
+
+.sidebar .nav-second-level li a {
+	color: #b3b3b3 !important;
 }
 
 .sidebar .nav-second-level li a:hover {
-	background-color: #003d66 !important;
 	color: #ffffff !important;
+}
+
+.sidebar .nav-second-level li a:focus {
+	color: #42a5f5;
+	background-color: inherit;
 }
 
 #background-login {
@@ -115,8 +130,8 @@ h3.login-text2 {
 }
 
 .navbar-inverse {
-	background-color: #286090 !important;
-	border-color: #004e89 !important;
+	background-color: #263544 !important;
+	border-color: #262626 !important;
 }
 
 .navbar-brand {
@@ -124,15 +139,16 @@ h3.login-text2 {
 }
 
 ul#side-menu.nav > li > a, a.dropdown-toggle, ul#side-menu.nav > li > ul > li > a {
-	color: #ffffff;
+	color: #e6e6e6;
 }
 
 ul#side-menu.nav > li > a:hover, ul#side-menu.nav > li > a:focus, ul#side-menu.nav > li > ul > li > a:hover, ul#side-menu.nav > li > ul > li > a:focus {
-	background-color: #003762;
+	color: #fff;
+	background-color: #1d2531;
 }
 
 a.dropdown-toggle:hover, a.dropdown-toggle:focus {
-	background-color: #003762 !important;
+	background-color: #1d2531 !important;
 }
 
 h1 {
