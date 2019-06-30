@@ -121,7 +121,7 @@ class SuratKeteranganDukunController extends Controller
             $bulan_choose = request('bulan');
         }
         if ($request->has('q')) {
-            $skd = $skd->orWhere('nik_ibu', "like", "%" . request('q'). "%")->orWhere('penerbit_id', "like", "%" . request('q'). "%");
+            $skd = $skd->orWhere('nik_ibu', "like", "%" . request('q'). "%")->orWhere('nama_anak', "like", "%" . request('q'). "%")->orWhere('penerbit_id', "like", "%" . request('q'). "%")->orWhere('nik_ayah', "like", "%" . request('q'). "%")->orWhere('nomor', "like", "%" . request('q'). "%");
             $search_term = request('q');
         }
 
@@ -154,7 +154,7 @@ class SuratKeteranganDukunController extends Controller
 
         $pdf = App::make('dompdf.wrapper'); 
         $pdf->loadView('skd.pdf', compact('surat', 'tahun_choose', 'bulan_choose', 'search_term'));
-        $pdf->setPaper('legal', 'portrait');
+        $pdf->setPaper('legal', 'landscape');
         return $pdf->stream();
     }
 
@@ -276,7 +276,7 @@ class SuratKeteranganDukunController extends Controller
 
     	$pdf = App::make('dompdf.wrapper'); 
         $pdf->loadView('skd.print', compact('surat', 'penduduk'));
-        $pdf->setPaper('legal', 'portrait');
+        $pdf->setPaper('legal', 'landscape');
         return $pdf->stream();
     }
 

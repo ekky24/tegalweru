@@ -5,6 +5,7 @@ table {
             table, th, td {
                 border: 1px solid gray;
                 font-size: 12px;
+                margin-top: 10px;
             }
 
             th {
@@ -14,4 +15,9 @@ table {
             th, td {
                 padding: 10px;
                 text-align: left;
+            }
+
+            h5 {
+                margin-top: 0;
+                margin-bottom: 0;
             }

@@ -740,11 +740,11 @@ $(function() {
 		else if (window.location.href.indexOf("/pindah") > -1) {
 			window.location.href = "/pindah" + link;
 		}
-		else if (window.location.href.indexOf("/sktm") > -1) {
-			window.location.href = "/sktm" + link;
+		else if (window.location.href.indexOf("/sik") > -1) {
+			window.location.href = "/sik" + link;
 		}	
-		else if (window.location.href.indexOf("/skkl") > -1) {
-			window.location.href = "/skkl" + link;
+		else if (window.location.href.indexOf("/skdom") > -1) {
+			window.location.href = "/skdom" + link;
 		}
 		else if (window.location.href.indexOf("/sklp") > -1) {
 			window.location.href = "/sklp" + link;

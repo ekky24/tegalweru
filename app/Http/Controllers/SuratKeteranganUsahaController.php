@@ -173,7 +173,7 @@ class SuratKeteranganUsahaController extends Controller
             $bulan_choose = request('bulan');
         }
         if ($request->has('q')) {
-            $sku = $sku->orWhere('penduduk_id', "like", "%" . request('q'). "%")->orWhere('keperluan', "like", "%" . request('q'). "%")->orWhere('penerbit_id', "like", "%" . request('q'). "%");
+            $sku = $sku->orWhere('penduduk_id', "like", "%" . request('q'). "%")->orWhere('keperluan', "like", "%" . request('q'). "%")->orWhere('penerbit_id', "like", "%" . request('q'). "%")->orWhere('nomor', "like", "%" . request('q'). "%");
             $search_term = request('q');
         }
 
@@ -206,7 +206,7 @@ class SuratKeteranganUsahaController extends Controller
 
         $pdf = App::make('dompdf.wrapper'); 
         $pdf->loadView('sku.pdf', compact('surat', 'tahun_choose', 'bulan_choose', 'search_term'));
-        $pdf->setPaper('legal', 'portrait');
+        $pdf->setPaper('legal', 'landscape');
         return $pdf->stream();
     }
 
@@ -231,7 +231,7 @@ class SuratKeteranganUsahaController extends Controller
             $pdf->loadView('sku.print_domisili_usaha', compact('surat', 'penerbit'));
         }
 
-        $pdf->setPaper('legal', 'portrait');
+        $pdf->setPaper('legal', 'landscape');
         return $pdf->stream();
     }
 

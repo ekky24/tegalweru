@@ -50,16 +50,24 @@
 						<td>{{ 'PEREMPUAN' }}</td>
 					@endif
 
-					@if(strlen($row->get_penduduk_ayah->nama) > 20)
-						<td>{{ substr($row->get_penduduk_ayah->nama, 0, 20) . "..."}}</td>
+					@if($row->get_penduduk_ayah != NULL)
+						@if(strlen($row->get_penduduk_ayah->nama) > 20)
+							<td>{{ substr($row->get_penduduk_ayah->nama, 0, 20) . "..."}}</td>
+						@else
+							<td>{{ $row->get_penduduk_ayah->nama }}</td>
+						@endif
 					@else
-						<td>{{ $row->get_penduduk_ayah->nama }}</td>
+						<td>-</td>
 					@endif
 
-					@if(strlen($row->get_penduduk_ibu->nama) > 20)
-						<td>{{ substr($row->get_penduduk_ibu->nama, 0, 20) . "..."}}</td>
+					@if($row->get_penduduk_ibu != NULL)
+						@if(strlen($row->get_penduduk_ibu->nama) > 20)
+							<td>{{ substr($row->get_penduduk_ibu->nama, 0, 20) . "..."}}</td>
+						@else
+							<td>{{ $row->get_penduduk_ibu->nama }}</td>
+						@endif
 					@else
-						<td>{{ $row->get_penduduk_ibu->nama }}</td>
+						<td>-</td>
 					@endif
 					<td class="text-center"><a class="btn btn-primary" style="width: 70px" href="/skd/{{$row->id}}">Detail</a>
 					<a id="hapus_kematian" class="btn btn-danger" style="width: 70px" href="/skd/{{$row->id}}/delete">Hapus</a>

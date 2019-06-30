@@ -22,7 +22,7 @@
                 <h5>Bulan: {{ $bulan_choose }}</h5>
             @endif
             <h5>Kata Kunci: {{ $search_term }}</h5>
-            <table>
+            <table width="100%">
                 <thead>
                     <tr>
                         <th>No. </th>
@@ -30,7 +30,7 @@
                         <th>Nama Ayah</th>
                         <th>Nama Anak</th>
                         <th>Waktu Kelahiran Anak</th>
-                        <th>Pejabat Desa</th>
+                        <th>Nama Pejabat</th>
                     </tr>
                 </thead>
                 <tbody id="list_kk">
@@ -41,10 +41,10 @@
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $row->nik_ayah }}</td>
-                            <td>{{ $row->get_penduduk_ayah->nama }}</td>
+                            <td>@if($row->get_penduduk_ayah != NULL) {{ $row->get_penduduk_ayah->nama }} @else {{ '-'}} @endif </td>
                             <td>{{ $row->nama_anak }}</td>
                             <td>{{ $waktu->format('d-m-Y') }}</td>
-                            <td>{{ $row->get_penerbit->jabatan }}</td>
+                            <td>{{ $row->get_penerbit->nama }}</td>
                         </tr>
                 @endforeach
                 </tbody>

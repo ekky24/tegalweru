@@ -36,14 +36,18 @@
 					<td>{{ $index + 1 }}</td>
 					<td><a href="/penduduk/{{ $row->penduduk_id }}">{{ $row->penduduk_id }}</a></td>
 					
-					@if(strlen($row->get_penduduk->get_kk->alamat) > 40)
-						<td>{{ substr($row->get_penduduk->get_kk->alamat, 0, 40) . "..."}}</td>
-					@else
-						@if($row->get_penduduk->get_kk->alamat != "")
-							<td>{{ $row->get_penduduk->get_kk->alamat }}</td>
+					@if($row->get_penduduk != NULL)
+						@if(strlen($row->get_penduduk->get_kk->alamat) > 40)
+							<td>{{ substr($row->get_penduduk->get_kk->alamat, 0, 40) . "..."}}</td>
 						@else
-							<td>-</td>
+							@if($row->get_penduduk->get_kk->alamat != "")
+								<td>{{ $row->get_penduduk->get_kk->alamat }}</td>
+							@else
+								<td>-</td>
+							@endif
 						@endif
+					@else
+						<td>-</td>
 					@endif					
 
 					<td>{{ $row->get_penerbit->nama }}</td>

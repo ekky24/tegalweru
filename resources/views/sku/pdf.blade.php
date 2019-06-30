@@ -21,7 +21,7 @@
                 <h5>Bulan: {{ $bulan_choose }}</h5>
             @endif
             <h5>Kata Kunci: {{ $search_term }}</h5>
-            <table>
+            <table width="100%">
                 <thead>
                     <tr>
                         <th>No. </th>

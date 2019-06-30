@@ -22,7 +22,7 @@
                 <h5>Bulan: {{ $bulan_choose }}</h5>
             @endif
             <h5>Kata Kunci: {{ $search_term }}</h5>
-            <table>
+            <table width="100%">
                 <thead>
                     <tr>
                         <th>No. </th>
@@ -30,21 +30,21 @@
                         <th>Nama Lengkap</th>
                         <th>Tempat Kematian</th>
                         <th>Waktu Kematian</th>
-                        <th>Tempat Pemakaman</th>
+                        <th>Penyebab</th>
                     </tr>
                 </thead>
                 <tbody id="list_kk">
                 @foreach($kematian as $index => $row)
                     <?php
-                        $waktu = Carbon::createFromFormat('Y-m-d H:i:s', $row->waktu_kematian);
+                        $waktu = Carbon::createFromFormat('Y-m-d', $row->tgl_kematian);
                     ?>
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $row->penduduk_id }}</td>
                             <td>{{ $row->get_penduduk->nama }}</td>
                             <td>{{ $row->tempat_kematian }}</td>
-                            <td>{{ $waktu->format('d-m-Y H:i') }}</td>
-                            <td>{{ $row->tempat_pemakaman }}</td>
+                            <td>{{ $waktu->format('d-m-Y') }}</td>
+                            <td>{{ $row->penyebab_kematian }}</td>
                         </tr>
                 @endforeach
                 </tbody>

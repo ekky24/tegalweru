@@ -92,7 +92,7 @@ class SuratDomisiliController extends Controller
             $bulan_choose = request('bulan');
         }
         if ($request->has('q')) {
-            $skdom = $skdom->orWhere('nik_ibu', "like", "%" . request('q'). "%")->orWhere('penerbit_id', "like", "%" . request('q'). "%");
+            $skdom = $skdom->orWhere('penduduk_id', "like", "%" . request('q'). "%")->orWhere('penerbit_id', "like", "%" . request('q'). "%")->orWhere('dari_pengantar', "like", "%" . request('q'). "%")->orWhere('nomor', "like", "%" . request('q'). "%");
             $search_term = request('q');
         }
 
@@ -125,7 +125,7 @@ class SuratDomisiliController extends Controller
 
         $pdf = App::make('dompdf.wrapper'); 
         $pdf->loadView('skdom.pdf', compact('surat', 'tahun_choose', 'bulan_choose', 'search_term'));
-        $pdf->setPaper('legal', 'portrait');
+        $pdf->setPaper('legal', 'landscape');
         return $pdf->stream();
     }
 
@@ -171,7 +171,7 @@ class SuratDomisiliController extends Controller
 
     	$pdf = App::make('dompdf.wrapper'); 
         $pdf->loadView('skdom.print', compact('surat', 'penduduk', 'penerbit'));
-        $pdf->setPaper('legal', 'portrait');
+        $pdf->setPaper('legal', 'landscape');
         return $pdf->stream();
     }
 

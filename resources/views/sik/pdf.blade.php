@@ -22,15 +22,15 @@
                 <h5>Bulan: {{ $bulan_choose }}</h5>
             @endif
             <h5>Kata Kunci: {{ $search_term }}</h5>
-            <table>
+            <table width="100%">
                 <thead>
                     <tr>
                         <th>No. </th>
                         <th>NIK</th>
                         <th>Nama Lengkap</th>
                         <th>Nama Acara</th>
+                        <th>Tempat Acara</th>
                         <th>Nama Pejabat</th>
-                        <th>Jabatan</th>
                     </tr>
                 </thead>
                 <tbody id="list_kk">
@@ -40,8 +40,8 @@
                             <td>{{ $row->penduduk_id }}</td>
                             <td>{{ $row->get_penduduk->nama }}</td>
                             <td>{{ $row->nama_acara }}</td>
+                            <td>{{ $row->tempat_acara }}</td>
                             <td>{{ $row->get_penerbit->nama }}</td>
-                            <td>{{ $row->get_penerbit->jabatan }}</td>
                         </tr>
                 @endforeach
                 </tbody>

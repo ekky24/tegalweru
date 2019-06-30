@@ -22,7 +22,11 @@
 		</tr>
 		<tr>
 			<th>Nama Ibu</th>
-			<td>{{ $penduduk_ibu->nama }}</td>
+			@if($penduduk_ibu != NULL)
+				<td>{{ $penduduk_ibu->nama }}</td>
+			@else
+				<td>-</td>
+			@endif
 		</tr>
 		<tr>
 			<th>NIK Ayah</th>
@@ -30,7 +34,11 @@
 		</tr>
 		<tr>
 			<th>Nama Ayah</th>
-			<td>{{ $penduduk_ayah->nama }}</td>
+			@if($penduduk_ayah != NULL)
+				<td>{{ $penduduk_ayah->nama }}</td>
+			@else
+				<td>-</td>
+			@endif
 		</tr>
 		<tr>
 			<th>NIK Pelapor</th>
@@ -38,7 +46,11 @@
 		</tr>
 		<tr>
 			<th>Nama Pelapor</th>
-			<td>{{ $penduduk_pelapor->nama }}</td>
+			@if($penduduk_pelapor != NULL)
+				<td>{{ $penduduk_pelapor->nama }}</td>
+			@else
+				<td>-</td>
+			@endif
 		</tr>
 		<tr>
 			<th>Hubungan Pelapor</th>

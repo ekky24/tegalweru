@@ -54,7 +54,7 @@ class KematianController extends Controller
                 $nomor_sebelum = 0;
             }
             else {
-                $get_last = substr($nomor_temp, 4);
+                $get_last = substr($nomor_temp, 7);
                 $pos = strpos($get_last, '/');
                 $nomor_sebelum = substr($get_last, 0, $pos);
             }
@@ -103,7 +103,7 @@ class KematianController extends Controller
             $bulan_choose = request('bulan');
         }
         if ($request->has('q')) {
-            $kematian = $kematian->orWhere('penduduk_id', "like", "%" . request('q'). "%")->orWhere('tempat_kematian', "like", "%" . request('q'). "%")->orWhere('tgl_kematian', "like", "%" . request('q'). "%")->orWhere('penyebab_kematian', "like", "%" . request('q'). "%")->orWhere('created_at', "like", "%" . request('q'). "%");
+            $kematian = $kematian->orWhere('penduduk_id', "like", "%" . request('q'). "%")->orWhere('tempat_kematian', "like", "%" . request('q'). "%")->orWhere('tgl_kematian', "like", "%" . request('q'). "%")->orWhere('penyebab_kematian', "like", "%" . request('q'). "%")->orWhere('created_at', "like", "%" . request('q'). "%")->orWhere('nomor', "like", "%" . request('q'). "%");
             $search_term = request('q');
         }
 
@@ -136,7 +136,7 @@ class KematianController extends Controller
 
         $pdf = App::make('dompdf.wrapper'); 
         $pdf->loadView('kematian.pdf', compact('kematian', 'tahun_choose', 'bulan_choose', 'search_term'));
-        $pdf->setPaper('legal', 'portrait');
+        $pdf->setPaper('legal', 'landscape');
         return $pdf->stream();
     }
 
@@ -188,7 +188,7 @@ class KematianController extends Controller
 
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('kematian.print', compact('surat', 'penerbit', 'pelapor', 'penduduk'));
-        $pdf->setPaper('legal', 'portrait');
+        $pdf->setPaper('legal', 'landscape');
         return $pdf->stream();
     }
 
