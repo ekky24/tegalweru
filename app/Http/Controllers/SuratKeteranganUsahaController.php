@@ -231,7 +231,7 @@ class SuratKeteranganUsahaController extends Controller
             $pdf->loadView('sku.print_domisili_usaha', compact('surat', 'penerbit'));
         }
 
-        $pdf->setPaper('legal', 'landscape');
+        $pdf->setPaper('legal', 'portrait');
         return $pdf->stream();
     }
 

@@ -4,6 +4,12 @@
 	<div class="row">
         <div class="col-lg-12">
             <h1 class="filter page-header">Statistik Penduduk</h1>
+            @if(auth()->check())
+            	<form action="/penduduk/stat/download" method="get">
+            		{{ csrf_field() }}
+            		<button type="submit" class="btn btn-primary btn-lg">Download</button>
+            	</form>
+            @endif
         </div>
     </div>
 	<div class="row">

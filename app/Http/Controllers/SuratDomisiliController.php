@@ -32,11 +32,9 @@ class SuratDomisiliController extends Controller
     	]);
 
         if (Penduduk::find(request('nik')) == null) {
-            if(request('jenis_surat') != 'domisili_usaha') {
-                return back()->withErrors([
-                    'message' => 'NIK yang anda masukkan salah.'
-                ]);
-            }
+            return back()->withErrors([
+                'message' => 'NIK yang anda masukkan salah.'
+            ]);
         }
 
         $cek = SuratDomisili::latest()->first();
@@ -171,7 +169,7 @@ class SuratDomisiliController extends Controller
 
     	$pdf = App::make('dompdf.wrapper'); 
         $pdf->loadView('skdom.print', compact('surat', 'penduduk', 'penerbit'));
-        $pdf->setPaper('legal', 'landscape');
+        $pdf->setPaper('legal', 'portrait');
         return $pdf->stream();
     }
 

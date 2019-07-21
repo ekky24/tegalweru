@@ -218,7 +218,7 @@ class SuratIjinKeramaianController extends Controller
             $pdf->loadView('sik.print_tanpa_camat', compact('surat', 'penduduk', 'penerbit'));
         }
 
-        $pdf->setPaper('legal', 'landscape');
+        $pdf->setPaper('legal', 'portrait');
         return $pdf->stream();
     }
 

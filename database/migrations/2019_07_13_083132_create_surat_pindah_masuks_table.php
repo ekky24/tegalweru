@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSuratKeteranganTidakMampusTable extends Migration
+class CreateSuratPindahMasuksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateSuratKeteranganTidakMampusTable extends Migration
      */
     public function up()
     {
-        Schema::create('surat_keterangan_tidak_mampus', function (Blueprint $table) {
+        Schema::create('surat_pindah_masuks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nomor');
-            $table->string('penduduk_id');
-            $table->text('keperluan');
-            $table->string('penerbit_id');
+            $table->string('nama_pemohon');
+            $table->string('kk_lama')->nullable();
+            $table->text('alamat_asal');
+            $table->text('alamat_tujuan');
+            $table->string('alasan_pindah');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateSuratKeteranganTidakMampusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('surat_keterangan_tidak_mampus');
+        Schema::dropIfExists('surat_pindah_masuks');
     }
 }

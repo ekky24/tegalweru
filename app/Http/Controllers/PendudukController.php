@@ -208,7 +208,7 @@ class PendudukController extends Controller
             $usia_choose = request('usia');
         }
         if ($request->has('q')) {
-            $penduduk = $penduduk->orWhere('id', "like", "%" . request('q'). "%")->orWhere('nama', "like", "%" . request('q'). "%")->orWhere('kewarganegaraan', "like", "%" . request('q'). "%")->orWhere('no_paspor', "like", "%" . request('q'). "%")->orWhere('no_kitas', "like", "%" . request('q'). "%")->orWhere('ayah', "like", "%" . request('q'). "%")->orWhere('ibu', "like", "%" . request('q'). "%")->orWhere('kk_id', "like", "%" . request('q'). "%");
+            $penduduk = $penduduk->orWhere('id', "like", "%" . request('q'). "%")->orWhere('nama', "like", "%" . request('q'). "%")->orWhere('kewarganegaraan', "like", "%" . request('q'). "%")->orWhere('no_paspor', "like", "%" . request('q'). "%")->orWhere('nama_ayah', "like", "%" . request('q'). "%")->orWhere('nik_ayah', "like", "%" . request('q'). "%")->orWhere('nama_ibu', "like", "%" . request('q'). "%")->orWhere('kk_id', "like", "%" . request('q'). "%");
             $search_term = request('q');
         }
         
@@ -301,7 +301,7 @@ class PendudukController extends Controller
 
         $pdf = App::make('dompdf.wrapper'); 
         $pdf->loadView('penduduk.pdf', compact('penduduk', 'jk_choose', 'pendidikan_choose', 'pekerjaan_choose', 'agama_choose', 'hubungan_choose', 'search_term'));
-        $pdf->setPaper('legal', 'portrait');
+        $pdf->setPaper('legal', 'landscape');
         return $pdf->stream();
     }
 
@@ -400,7 +400,7 @@ class PendudukController extends Controller
     }
 
     public function stat_usia_ajax() {
-        $c = [0,0,0,0,0,0,0,0];
+        $c = [0,0,0,0,0,0,0,0,0,0,0,0,0];
         $age_count = [];
 
         $penduduk = Penduduk::selectRaw('YEAR(CURRENT_TIMESTAMP) - YEAR(tgl_lahir) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(tgl_lahir, 5)) as age')->getAktif()->get();
@@ -408,74 +408,199 @@ class PendudukController extends Controller
         foreach ($penduduk as $row) {
             $age = $row->age;
 
-            if ($age < 10) {
+            if ($age >= 0 && $age <= 5) {
                 $c[0]++;
             }
-            elseif ($age >= 10 && $age < 20) {
+            elseif ($age > 5 && $age <= 10) {
                 $c[1]++;
             }
-            elseif ($age >= 20 && $age < 30) {
+            elseif ($age > 10 && $age <= 15) {
                 $c[2]++;
             }
-            elseif ($age >= 30 && $age < 40) {
+            elseif ($age > 15 && $age <= 20) {
                 $c[3]++;
             }
-            elseif ($age >= 40 && $age < 50) {
+            elseif ($age > 20 && $age <= 25) {
                 $c[4]++;
             }
-            elseif ($age >= 50 && $age < 60) {
+            elseif ($age > 25 && $age <= 30) {
                 $c[5]++;
             }
-            elseif ($age >= 60 && $age < 70) {
+            elseif ($age > 30 && $age <= 35) {
                 $c[6]++;
             }
-            elseif ($age > 70) {
+            elseif ($age > 35 && $age <= 40) {
                 $c[7]++;
+            }
+            elseif ($age > 40 && $age <= 45) {
+                $c[8]++;
+            }
+            elseif ($age > 45 && $age <= 50) {
+                $c[9]++;
+            }
+            elseif ($age > 50 && $age <= 55) {
+                $c[10]++;
+            }
+            elseif ($age > 55 && $age <= 60) {
+                $c[11]++;
+            }
+            elseif ($age > 60) {
+                $c[12]++;
             }
         }
 
         if ($c[0] > 0) {
             $send['count'] = $c[0];
-            $send['nama'] = "< 10";
+            $send['nama'] = "0 - 5";
             array_push($age_count, $send);
         }
         if ($c[1] > 0) {
             $send['count'] = $c[1];
-            $send['nama'] = "10 - 20";
+            $send['nama'] = "6 - 10";
             array_push($age_count, $send);
         }
         if ($c[2] > 0) {
             $send['count'] = $c[2];
-            $send['nama'] = "20 - 30";
+            $send['nama'] = "11 - 15";
             array_push($age_count, $send);
         }
         if ($c[3] > 0) {
             $send['count'] = $c[3];
-            $send['nama'] = "30 - 40";
+            $send['nama'] = "16 - 20";
             array_push($age_count, $send);
         }
         if ($c[4] > 0) {
             $send['count'] = $c[4];
-            $send['nama'] = "40 - 50";
+            $send['nama'] = "21 - 25";
             array_push($age_count, $send);
         }
         if ($c[5] > 0) {
             $send['count'] = $c[5];
-            $send['nama'] = "50 - 60";
+            $send['nama'] = "26 - 30";
             array_push($age_count, $send);
         }
         if ($c[6] > 0) {
             $send['count'] = $c[6];
-            $send['nama'] = "60 - 70";
+            $send['nama'] = "31 - 35";
             array_push($age_count, $send);
         }
         if ($c[7] > 0) {
             $send['count'] = $c[7];
-            $send['nama'] = "> 70";
+            $send['nama'] = "36 - 40";
+            array_push($age_count, $send);
+        }
+        if ($c[8] > 0) {
+            $send['count'] = $c[8];
+            $send['nama'] = "41 - 45";
+            array_push($age_count, $send);
+        }
+        if ($c[9] > 0) {
+            $send['count'] = $c[9];
+            $send['nama'] = "46 - 50";
+            array_push($age_count, $send);
+        }
+        if ($c[10] > 0) {
+            $send['count'] = $c[10];
+            $send['nama'] = "51 - 55";
+            array_push($age_count, $send);
+        }
+        if ($c[11] > 0) {
+            $send['count'] = $c[11];
+            $send['nama'] = "56 - 60";
+            array_push($age_count, $send);
+        }
+        if ($c[12] > 0) {
+            $send['count'] = $c[12];
+            $send['nama'] = "> 60";
             array_push($age_count, $send);
         }
         
         return json_encode($age_count);
+    }
+
+    public function stat_download() {
+        // AGAMA
+        $data =  json_decode($this->stat_agama_ajax());
+        $counter = 0;
+        $agama_arr = [];
+        foreach ($data as $row) $counter += $row->count;
+
+        foreach ($data as $row) {
+            $presentase = round($row->count / $counter * 100, 2);
+            array_push($agama_arr, [$row->get_agama->keterangan, $row->count, $presentase]);
+        }
+        
+        // STATUS NIKAH
+        $data =  json_decode($this->stat_status_nikah_ajax());
+        $counter = 0;
+        $status_nikah_arr = [];
+        foreach ($data as $row) $counter += $row->count;
+
+        foreach ($data as $row) {
+            $presentase = round($row->count / $counter * 100, 2);
+            array_push($status_nikah_arr, [$row->get_status_nikah->keterangan, $row->count, $presentase]);
+        }
+
+        // PENDIDIKAN
+        $data =  json_decode($this->stat_pendidikan_ajax());
+        $counter = 0;
+        $pendidikan_arr = [];
+        foreach ($data as $row) $counter += $row->count;
+
+        foreach ($data as $row) {
+            $presentase = round($row->count / $counter * 100, 2);
+            array_push($pendidikan_arr, [$row->get_pendidikan->keterangan, $row->count, $presentase]);
+        }
+
+        // JENIS PEKERJAAN
+        $data =  json_decode($this->stat_jenis_pekerjaan_ajax());
+        $counter = 0;
+        $jenis_pekerjaan_arr = [];
+        foreach ($data as $row) $counter += $row->count;
+
+        foreach ($data as $row) {
+            $presentase = round($row->count / $counter * 100, 2);
+            array_push($jenis_pekerjaan_arr, [$row->get_jenis_pekerjaan->keterangan, $row->count, $presentase]);
+        }
+
+        // STATUS HUBUNGAN
+        $data =  json_decode($this->stat_status_hubungan_ajax());
+        $counter = 0;
+        $status_hubungan_arr = [];
+        foreach ($data as $row) $counter += $row->count;
+
+        foreach ($data as $row) {
+            $presentase = round($row->count / $counter * 100, 2);
+            array_push($status_hubungan_arr, [$row->get_status_hubungan->keterangan, $row->count, $presentase]);
+        }   
+
+        // JENIS KELAMIN
+        $data =  json_decode($this->stat_jk_ajax());
+        $counter = 0;
+        $jk_arr = [];
+        foreach ($data as $row) $counter += $row->count;
+
+        foreach ($data as $i => $row) {
+            $presentase = round($row->count / $counter * 100, 2);
+            if($i == 0) array_push($jk_arr, ["L", $row->count, $presentase]);
+            else array_push($jk_arr, ["P", $row->count, $presentase]);
+        }    
+
+        // USIA
+        $data =  json_decode($this->stat_usia_ajax());
+        $counter = 0;
+        $usia_arr = [];
+        foreach ($data as $row) $counter += $row->count;
+
+        foreach ($data as $row) {
+            $presentase = round($row->count / $counter * 100, 2);
+            array_push($usia_arr, [$row->nama, $row->count, $presentase]);
+        } 
+
+        $pdf = App::make('dompdf.wrapper'); 
+        $pdf->loadView('penduduk.stat_download', compact('agama_arr', 'status_nikah_arr', 'pendidikan_arr', 'jenis_pekerjaan_arr', 'status_hubungan_arr', 'jk_arr', 'usia_arr'));
+        $pdf->setPaper('legal', 'portrait');
+        return $pdf->stream();
     }
 }
 

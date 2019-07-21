@@ -67,7 +67,7 @@ $tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->y
 				
 				<label class="control-label col-sm-3">Kelurahan</label>
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="Nama Kelurahan" type="text" value="TEGALWERU" name="kelurahan" required readonly>
+					<input class="form-control" placeholder="Nama Kelurahan" type="text" value="KARANGWIDORO" name="kelurahan" required readonly>
 				</div>
 			</div>
 			<div class="form-group">
@@ -88,14 +88,14 @@ $tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->y
 				
 				<label class="control-label col-sm-3">Provinsi</label>
 				<div class="col-sm-6">
-					<input id="provinsi" class="form-control" placeholder="Nama Provinsi" type="text" name="provinsi" value="PROVINSI" required readonly>
+					<input id="provinsi" class="form-control" placeholder="Nama Provinsi" type="text" name="provinsi" value="JAWA TIMUR" required readonly>
 				</div>
 			</div>
 			<div class="form-group">
 				
 				<label class="control-label col-sm-3">Kode Pos</label>
 				<div class="col-sm-6">
-					<input id="kode_pos_form" class="form-control" placeholder="Masukkan Kode Pos" type="text" value="65151" name="kode_pos" required readonly>
+					<input id="kode_pos_form" class="form-control" placeholder="Masukkan Kode Pos" type="text" value="65149" name="kode_pos" required readonly>
 				</div>
 			</div>
 			<div class="form-group">

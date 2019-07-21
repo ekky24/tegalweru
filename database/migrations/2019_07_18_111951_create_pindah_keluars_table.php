@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePindahsTable extends Migration
+class CreatePindahKeluarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreatePindahsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pindahs', function (Blueprint $table) {
-            $table->string('penduduk_id')->primary();
-            $table->text('alamat_asal');
-            $table->text('alamat_tujuan');
-            $table->string('alasan');
+        Schema::create('pindah_keluars', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('penduduk_id');
+            $table->integer('surat_keluar_id');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreatePindahsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pindahs');
+        Schema::dropIfExists('pindah_keluars');
     }
 }

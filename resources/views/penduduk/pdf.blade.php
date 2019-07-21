@@ -16,7 +16,7 @@
             <h5>Agama: {{ $agama_choose }}</h5>
             <h5>Status Hubungan: {{ $hubungan_choose }}</h5>
             <h5>Kata Kunci: {{ $search_term }}</h5>
-            <table>
+            <table width="100%">
                 <thead>
                     <tr>
                         <th>No. </th>

@@ -192,6 +192,30 @@
                                     <!-- /.nav-second-level -->
                                 </li>
                                 <li>
+                                    <a href="#">Surat Pindah Masuk <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="/pindah_masuk">Data Pindah Masuk</a>
+                                        </li>
+                                        <li>
+                                            <a href="/pindah_masuk/insert">Insert Data</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-second-level -->
+                                </li>
+                                <li>
+                                    <a href="#">Surat Pindah Keluar <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="/pindah_keluar">Data Pindah Keluar</a>
+                                        </li>
+                                        <li>
+                                            <a href="/pindah_keluar/insert">Insert Data</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-second-level -->
+                                </li>
+                                <li>
                                     <a href="#">Surat Domisili <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSuratKeteranganLunasPbbsTable extends Migration
+class CreateSuratPindahKeluarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateSuratKeteranganLunasPbbsTable extends Migration
      */
     public function up()
     {
-        Schema::create('surat_keterangan_lunas_pbbs', function (Blueprint $table) {
+        Schema::create('surat_pindah_keluars', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nomor');
             $table->string('penduduk_id');
-            $table->integer('tahun_lunas');
-            $table->text('keperluan');
+            $table->text('alamat_tujuan');
+            $table->text('alasan_pindah');
             $table->string('penerbit_id');
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ class CreateSuratKeteranganLunasPbbsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('surat_keterangan_lunas_pbbs');
+        Schema::dropIfExists('surat_pindah_keluars');
     }
 }

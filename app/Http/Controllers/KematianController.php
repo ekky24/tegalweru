@@ -188,7 +188,7 @@ class KematianController extends Controller
 
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('kematian.print', compact('surat', 'penerbit', 'pelapor', 'penduduk'));
-        $pdf->setPaper('legal', 'landscape');
+        $pdf->setPaper('legal', 'portrait');
         return $pdf->stream();
     }
 

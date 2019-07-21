@@ -56,6 +56,7 @@ Route::get('/penduduk/stat_kewarganegaraan_ajax', 'PendudukController@stat_kewar
 Route::get('/penduduk/stat_status_ajax', 'PendudukController@stat_status_ajax');
 
 Route::get('/penduduk/stat', 'PendudukController@stat');
+Route::get('/penduduk/stat/download', 'PendudukController@stat_download');
 Route::get('/penduduk/insert', 'PendudukController@insert');
 Route::post('/penduduk', 'PendudukController@store');
 Route::get('/penduduk', 'PendudukController@show_all');
@@ -148,6 +149,31 @@ Route::get('/skdom/{skdom}/delete', 'SuratDomisiliController@delete');
 Route::get('/skdom/{skdom}/edit', 'SuratDomisiliController@edit');
 Route::get('/stat_skdom_tahun', 'SuratDomisiliController@stat_skdom_tahun');
 Route::get('/stat_skdom_bulan', 'SuratDomisiliController@stat_skdom_bulan');
+
+Route::post('/pindah_masuk/download', 'SuratPindahMasukController@getPdf');
+Route::get('/pindah_masuk/{pindah}/download', 'SuratPindahMasukController@print');
+Route::get('/pindah_masuk/insert', 'SuratPindahMasukController@insert');
+Route::post('/pindah_masuk', 'SuratPindahMasukController@store');
+Route::post('/pindah_masuk/{pindah}', 'SuratPindahMasukController@store_edit');
+Route::post('/insert_penduduk/{pindah}', 'SuratPindahMasukController@insert_penduduk');
+Route::get('/pindah_masuk/{pindah}', 'SuratPindahMasukController@show');
+Route::get('/pindah_masuk', 'SuratPindahMasukController@show_all');
+Route::get('/pindah_masuk/{pindah}/delete', 'SuratPindahMasukController@delete');
+Route::get('/pindah_masuk/{pindah}/edit', 'SuratPindahMasukController@edit');
+Route::get('/stat_pindah_masuk_tahun', 'SuratPindahMasukController@stat_pindah_tahun');
+Route::get('/stat_pindah_masuk_bulan', 'SuratPindahMasukController@stat_pindah_bulan');
+
+Route::post('/pindah_keluar/download', 'SuratPindahKeluarController@getPdf');
+Route::get('/pindah_keluar/{pindah}/download', 'SuratPindahKeluarController@print');
+Route::get('/pindah_keluar/insert', 'SuratPindahKeluarController@insert');
+Route::post('/pindah_keluar', 'SuratPindahKeluarController@store');
+Route::post('/pindah_keluar/{pindah}', 'SuratPindahKeluarController@store_edit');
+Route::get('/pindah_keluar/{pindah}', 'SuratPindahKeluarController@show');
+Route::get('/pindah_keluar', 'SuratPindahKeluarController@show_all');
+Route::get('/pindah_keluar/{pindah}/delete', 'SuratPindahKeluarController@delete');
+Route::get('/pindah_keluar/{pindah}/edit', 'SuratPindahKeluarController@edit');
+Route::get('/stat_pindah_keluar_tahun', 'SuratPindahKeluarController@stat_pindah_tahun');
+Route::get('/stat_pindah_keluar_bulan', 'SuratPindahKeluarController@stat_pindah_bulan');
 
 Route::get('/login', 'SessionController@create');
 Route::get('/ubah_pass', 'SessionController@ubah_pass');

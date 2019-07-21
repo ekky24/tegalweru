@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSuratKeteranganKenalLahirsTable extends Migration
+class CreatePindahMasuksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateSuratKeteranganKenalLahirsTable extends Migration
      */
     public function up()
     {
-        Schema::create('surat_keterangan_kenal_lahirs', function (Blueprint $table) {
+        Schema::create('pindah_masuks', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nomor');
             $table->string('penduduk_id');
-            $table->string('penerbit_id');
+            $table->integer('surat_masuk_id');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateSuratKeteranganKenalLahirsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('surat_keterangan_kenal_lahirs');
+        Schema::dropIfExists('pindah_masuks');
     }
 }

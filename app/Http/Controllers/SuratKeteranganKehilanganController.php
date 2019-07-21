@@ -161,7 +161,7 @@ class SuratKeteranganKehilanganController extends Controller
 
     	$pdf = App::make('dompdf.wrapper'); 
         $pdf->loadView('skk.print', compact('surat', 'penduduk'));
-        $pdf->setPaper('legal', 'landscape');
+        $pdf->setPaper('legal', 'portrait');
         return $pdf->stream();
     }
 

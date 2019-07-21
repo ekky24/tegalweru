@@ -158,6 +158,20 @@ $(function() {
 		i++;
 	});
 
+	// when tambah anggota keluarga and tambah row button is clicked
+	$('#tambah_pindah, #tambah_row_pindah').on('click', function() {
+		$('#div_pindah').show();
+		$('#div_pindah').append('<div class="form-group row">' + 
+		        		'<div class="col-md-6">' + 
+							'<input type="text" id="nik_form' + i + '" class="form-control nik_form_class" name="nik" placeholder="Masukkan NIK">' + 
+						'</div>' + 
+						'<div class="col-md-4 col-md-offset-2">' +
+							'<button type="button" id="hapus_row" class="btn btn-danger">Hapus</button>' +
+						'</div>' +
+		        	'</div>');
+		i++;
+	});
+
 	// when hapus row button is clicked
 	$(document).on('click','#hapus_row', function(){
 		$(this).closest('div.form-group').remove();
@@ -178,6 +192,18 @@ $(function() {
 
 		$('#form_kk').append('<input type="hidden" name="list_nik" value="' + list_nik + '">');
 		$('#form_kk').append('<input type="hidden" name="no_kk" value="' + no_kk + '">');
+	});
+
+	$('#btn_submit_pindah').click(function() {
+		var list_nik = [];
+		
+		$('.nik_form_class').each(function(i, obj) {
+			if ($(this).val() != "") {
+				list_nik.push($(this).val());
+			}
+		});
+
+		$('#form_pindah_keluar').append('<input type="hidden" name="list_nik" value="' + list_nik + '">');
 	});
 
 
@@ -737,8 +763,11 @@ $(function() {
 		if (window.location.href.indexOf("/kematian") > -1) {
 			window.location.href = "/kematian" + link;
 		}
-		else if (window.location.href.indexOf("/pindah") > -1) {
-			window.location.href = "/pindah" + link;
+		else if (window.location.href.indexOf("/pindah_masuk") > -1) {
+			window.location.href = "/pindah_masuk" + link;
+		}
+		else if (window.location.href.indexOf("/pindah_keluar") > -1) {
+			window.location.href = "/pindah_keluar" + link;
 		}
 		else if (window.location.href.indexOf("/sik") > -1) {
 			window.location.href = "/sik" + link;
@@ -796,14 +825,11 @@ $(function() {
 					time: 50,
 				},
 				onSelectItemEvent: function() {
-					$('#nama_pindah').val("");
-					$('#jk_pindah').val("");
+					$('#nama_form').val("");
 
-					var value_nama = $('#nik_pindah').getSelectedItemData().nama;
-					var value_jk = $('#nik_pindah').getSelectedItemData().jk;
+					var value_nama = $('#nik_form').getSelectedItemData().nama;
 
-					$('#nama_pindah').val(value_nama);
-					$('#jk_pindah').val(value_jk);
+					$('#nama_form').val(value_nama);
 				}
 			}
 		};
