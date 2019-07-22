@@ -175,6 +175,12 @@ Route::get('/pindah_keluar/{pindah}/edit', 'SuratPindahKeluarController@edit');
 Route::get('/stat_pindah_keluar_tahun', 'SuratPindahKeluarController@stat_pindah_tahun');
 Route::get('/stat_pindah_keluar_bulan', 'SuratPindahKeluarController@stat_pindah_bulan');
 
+Route::get('/laporan_penduduk', 'LaporanPendudukController@show_all');
+Route::post('/laporan_penduduk', 'LaporanPendudukController@store');
+Route::get('/laporan_penduduk/{laporan}/delete', 'LaporanPendudukController@delete');
+Route::get('/laporan_penduduk/{laporan}/download', 'LaporanPendudukController@download');
+Route::get('/laporan_penduduk/insert', 'LaporanPendudukController@insert');
+
 Route::get('/login', 'SessionController@create');
 Route::get('/ubah_pass', 'SessionController@ubah_pass');
 Route::get('/logout', 'SessionController@logout');

@@ -4,8 +4,8 @@
     $now = Carbon::now();
     $year = $now->year;
 
-    $diff = $year - 2018;
-    $count_year = 2018;
+    $diff = $year - 2019;
+    $count_year = 2019;
 
     $bulan_arr = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
 ?>

@@ -100,6 +100,18 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
+                            <a href="#"><i class="fa fa-home fa-fw"></i> Pelaporan<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/penduduk/stat/download">Statistik Penduduk</a>
+                                </li>
+                                <li>
+                                    <a href="/laporan_penduduk">Laporan Penduduk</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-folder-open fa-fw"></i> Administrasi Desa<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <!--<li>
