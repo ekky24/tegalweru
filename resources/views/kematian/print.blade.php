@@ -73,7 +73,7 @@
                         </tr>
                     </table>
                     <p class="text-justify body">Telah meninggal dunia pada:</p>
-                    <table style="min-width: 50%">
+                    <table style="min-width: 60%">
                         <tr>
                             <td class="header">Hari</td>
                             <td>:</td>

@@ -98,6 +98,16 @@
 			</select>
 		</div>
 	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-3">Pindah Satu Keluarga ?</label>
+		<div class="col-sm-1">
+			<input type="checkbox" class="form-check-input" id="pindah_satu_keluarga">
+	    	<label class="form-check-label" for="pindah_satu_keluarga" style="margin-left: 5px;">Ya</label>
+		</div>
+		<div class="col-sm-5">
+			<input id="nomor_kk" class="form-control" placeholder="Masukkan Nomor KK" type="text" name="nomor_kk" disabled>
+		</div>
+	</div>
 	<br>
 	<input type="hidden" name="penduduk_id" value="{{ $pindah->penduduk_id }}">
 	<div id="div_pindah" style="display: none;">

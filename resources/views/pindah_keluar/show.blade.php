@@ -33,7 +33,11 @@
 		</tr>
 		<tr>
 			<th>Alamat</th>
-			<td>{{ $penduduk->get_kk->alamat }}</td>
+			@if($penduduk->get_kk->alamat != NULL)
+				<td>{{ $penduduk->get_kk->alamat }}</td>
+			@else
+				<td>-</td>
+			@endif
 		</tr>
 		<tr>
 			<th>Pindah Ke</th>

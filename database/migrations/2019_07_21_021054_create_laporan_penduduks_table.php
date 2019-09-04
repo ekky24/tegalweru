@@ -25,6 +25,9 @@ class CreateLaporanPenduduksTable extends Migration
             $table->integer('pindah_keluar_p');
             $table->integer('penduduk_akhir_l');
             $table->integer('penduduk_akhir_p');
+            $table->integer('rt');
+            $table->integer('rw');
+            $table->integer('kk');
             $table->date('laporan_bulan');
             $table->timestamps();
         });

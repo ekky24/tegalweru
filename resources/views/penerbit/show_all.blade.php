@@ -25,7 +25,6 @@
 					<td>{{ $row->nama }}</td>
 					<td>{{ $row->jabatan }}</td>
 					<td class="text-center"><a class="btn btn-primary" style="width: 70px" href="/penerbit/{{$row->id}}/edit">Edit</a>
-					<a class="btn btn-danger" id="delete_penerbit" style="width: 70px" href="/penerbit/{{$row->id}}/delete">Hapus</a></td>
 				</tr>
 			</tbody>
 		@endforeach

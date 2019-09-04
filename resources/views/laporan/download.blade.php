@@ -27,6 +27,7 @@
                         <th colspan="3">Jumlah Pindah Masuk</th>
                         <th colspan="3">Jumlah Pindah Keluar</th>
                         <th colspan="3">Jumlah Penduduk Akhir</th>
+                        <th colspan="3">Jumlah</th>
                     </tr>
                     <tr>
                         <th>L</th>
@@ -47,6 +48,9 @@
                         <th>L</th>
                         <th>P</th>
                         <th>L+P</th>
+                        <th>RT</th>
+                        <th>RW</th>
+                        <th>KK</th>
                     </tr>
                 </thead>
                 <tbody id="list_kk">
@@ -69,6 +73,9 @@
                         <td>{{ $laporan->penduduk_akhir_l }}</td>
                         <td>{{ $laporan->penduduk_akhir_p }}</td>
                         <td>{{ $laporan->penduduk_akhir_l + $laporan->penduduk_akhir_p }}</td>
+                        <td>{{ $laporan->rt }}</td>
+                        <td>{{ $laporan->rw }}</td>
+                        <td>{{ $laporan->kk }}</td>
                     </tr>
                 </tbody>
             </table>

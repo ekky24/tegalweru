@@ -7,13 +7,13 @@
         <body>
   
             <div style="font-family:Arial; font-size:12px;">
-                <center><h2>Data Kartu Keluarga Desa Tegalweru</h2></center>  
+                <center><h2>Data Kartu Keluarga Desa Karangwidoro</h2></center>  
             </div>
             <br>
             <h5>RW: {{ $rw_choose }}</h5>
             <h5>RT: {{ $rt_choose }}</h5>
             <h5>Kata Kunci: {{ $q }}</h5>
-            <table>
+            <table width="100%">
                 <thead>
                     <tr>
                         <th>No. </th>

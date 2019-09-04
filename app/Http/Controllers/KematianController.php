@@ -66,7 +66,7 @@ class KematianController extends Controller
     	$tgl_kematian = request('tgl_kematian');
     	$waktu_kematian = date('Y-m-d H:i:s', strtotime("$tgl_kematian"));
 
-    	Kematian::create([
+    	$kematian = Kematian::create([
     		'penduduk_id' => request('nik'),
             'nomor' => $nomor_fix,
     		'tempat_kematian' => strtoupper(request('tempat_kematian')),

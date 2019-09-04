@@ -1105,4 +1105,14 @@ $(function() {
 			$('#cacat_optional').css('display', 'none');
 		}
 	});
+
+	$('#pindah_satu_keluarga').change(function(){
+    if($(this).is(':checked')) {
+        $('#tambah_pindah').attr('disabled', 'true')
+        $('#nomor_kk').removeAttr('disabled')
+    } else {
+        $('#nomor_kk').attr('disabled', 'true')
+        $('#tambah_pindah').removeAttr('disabled')
+    }
+});
 });

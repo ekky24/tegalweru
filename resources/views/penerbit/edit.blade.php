@@ -29,7 +29,7 @@
 
 				<label class="control-label col-sm-3">Jabatan</label>
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="Masukkan Jabatan" type="text" name="jabatan" value="{{$penerbit->jabatan}}" required>
+					<input class="form-control" placeholder="Masukkan Jabatan" type="text" name="jabatan" value="{{$penerbit->jabatan}}" required disabled>
 				</div>
 			</div>
 			<br>

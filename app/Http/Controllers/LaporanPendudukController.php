@@ -13,6 +13,9 @@ use App\SuratPindahKeluar;
 use App\PindahMasuk;
 use App\PindahKeluar;
 use App\Penerbit;
+use App\RukunTetangga;
+use App\RukunWarga;
+use App\KartuKeluarga;
 use Carbon\Carbon;
 
 class LaporanPendudukController extends Controller
@@ -99,6 +102,10 @@ class LaporanPendudukController extends Controller
         $penduduk_akhir_p = $penduduk_awal_p + $lahir_p - $mati_p + $pindah_masuk_p - $pindah_keluar_p;
         $laporan_bulan = Carbon::createFromFormat('Y-m-d', $tahun . '-' . $bulan . '-01');
 
+        $rt = RukunTetangga::all()->count();
+        $rw = RukunWarga::all()->count();
+        $kk = KartuKeluarga::all()->count();
+
         LaporanPenduduk::create([
             'lahir_l' => $lahir_l,
             'lahir_p' => $lahir_p,
@@ -111,6 +118,9 @@ class LaporanPendudukController extends Controller
             'penduduk_akhir_l' => $penduduk_akhir_l,
             'penduduk_akhir_p' => $penduduk_akhir_p,
             'laporan_bulan' => $laporan_bulan,
+            'rt' => $rt,
+            'rw' => $rw,
+            'kk' => $kk,
         ]);
 
         return redirect('/laporan_penduduk');
@@ -119,6 +129,7 @@ class LaporanPendudukController extends Controller
     public function download(LaporanPenduduk $laporan) {
         $penerbit = Penerbit::where('jabatan', 'KEPALA DESA')->first();
         $laporan_lama = LaporanPenduduk::where('laporan_bulan', '<', $laporan->laporan_bulan)->orderBy('created_at', 'desc')->first();
+
         if ($laporan_lama != null) {
             $penduduk_awal_l = $laporan_lama->penduduk_akhir_l;
             $penduduk_awal_p = $laporan_lama->penduduk_akhir_p;

@@ -25,4 +25,8 @@ class KartuKeluarga extends Model
     public function get_rw() {
         return $this->belongsTo(RukunWarga::class, 'rukun_warga');
     }
+
+    public function scopeGetAktif($query) {
+        return $query->whereNull('status');
+    }
 }

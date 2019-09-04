@@ -10,6 +10,7 @@ use App\PindahKeluar;
 use Carbon\Carbon;
 use DB;
 use App\Penduduk;
+use App\KartuKeluarga;
 
 class SuratPindahKeluarController extends Controller
 {
@@ -23,7 +24,7 @@ class SuratPindahKeluarController extends Controller
     	return view('pindah_keluar.insert', compact('penerbit'));
     }
 
-    public function store() {
+    public function store(Request $request) {
     	$this->validate(request(), [
             'penduduk_id' => 'required',
             'alamat_tujuan' => 'required',
@@ -69,27 +70,23 @@ class SuratPindahKeluarController extends Controller
             'penerbit_id' => request('penerbit_id'),
         ]);
 
-        $penduduk = Penduduk::find(request('penduduk_id'));
-        $penduduk->status = '2';
-        $penduduk->save();
-
-        PindahKeluar::create([
-            'penduduk_id' => $penduduk->id,
-            'surat_keluar_id' => $pindah->id,
-        ]);
-
-        if (request('list_nik') !== null) {
-            $list_nik = request('list_nik');
-            $data = explode("," ,$list_nik);
+        if ($request->has('nomor_kk')) {
+            if (KartuKeluarga::find(request('nomor_kk')) == null) {
+                return back()->withErrors([
+                    'message' => 'Nomor KK yang anda masukkan salah.'
+                ]);
+            }
+            $kk = KartuKeluarga::find(request('nomor_kk'));
+            $data = $kk->get_penduduk;
 
             foreach ($data as $row) {
-                $find = Penduduk::find($row);
+                $find = Penduduk::find($row->id);
                 if ($find) {
                     $find->status = '2';
                     $find->save();
 
                     PindahKeluar::create([
-                        'penduduk_id' => $row,
+                        'penduduk_id' => $row->id,
                         'surat_keluar_id' => $pindah->id,
                     ]);
                 }
@@ -97,6 +94,42 @@ class SuratPindahKeluarController extends Controller
                     return back()->withErrors([
                         'message' => 'NIK yang anda masukkan salah.'
                     ]);
+                }
+            }
+
+            $kk->status = '2';
+            $kk->save();
+        }
+        else {
+            $penduduk = Penduduk::find(request('penduduk_id'));
+            $penduduk->status = '2';
+            $penduduk->save();
+
+            PindahKeluar::create([
+                'penduduk_id' => $penduduk->id,
+                'surat_keluar_id' => $pindah->id,
+            ]);
+
+            if (request('list_nik') !== null) {
+                $list_nik = request('list_nik');
+                $data = explode("," ,$list_nik);
+
+                foreach ($data as $row) {
+                    $find = Penduduk::find($row);
+                    if ($find) {
+                        $find->status = '2';
+                        $find->save();
+
+                        PindahKeluar::create([
+                            'penduduk_id' => $row,
+                            'surat_keluar_id' => $pindah->id,
+                        ]);
+                    }
+                    else {
+                        return back()->withErrors([
+                            'message' => 'NIK yang anda masukkan salah.'
+                        ]);
+                    }
                 }
             }
         }
@@ -174,7 +207,7 @@ class SuratPindahKeluarController extends Controller
     	return view('pindah_keluar.edit', compact('pindah', 'penerbit', 'penduduk'));
     }
 
-    public function store_edit(SuratPindahKeluar $pindah) {
+    public function store_edit(SuratPindahKeluar $pindah, Request $request) {
     	$this->validate(request(), [
             'alamat_tujuan' => 'required',
             'alasan_pindah' => 'required',
@@ -196,18 +229,23 @@ class SuratPindahKeluarController extends Controller
             $row->delete();
         }
 
-        if (request('list_nik') !== null) {
-            $list_nik = request('list_nik');
-            $data = explode("," ,$list_nik);
+        if ($request->has('nomor_kk')) {
+            if (KartuKeluarga::find(request('nomor_kk')) == null) {
+                return back()->withErrors([
+                    'message' => 'Nomor KK yang anda masukkan salah.'
+                ]);
+            }
+            $kk = KartuKeluarga::find(request('nomor_kk'));
+            $data = $kk->get_penduduk;
 
             foreach ($data as $row) {
-                $find = Penduduk::find($row);
+                $find = Penduduk::find($row->id);
                 if ($find) {
                     $find->status = '2';
                     $find->save();
 
                     PindahKeluar::create([
-                        'penduduk_id' => $row,
+                        'penduduk_id' => $row->id,
                         'surat_keluar_id' => $pindah->id,
                     ]);
                 }
@@ -217,16 +255,43 @@ class SuratPindahKeluarController extends Controller
                     ]);
                 }
             }
+
+            $kk->status = '2';
+            $kk->save();
         }
+        else {
+            if (request('list_nik') !== null) {
+                $list_nik = request('list_nik');
+                $data = explode("," ,$list_nik);
 
-        PindahKeluar::create([
-            'penduduk_id' => request('penduduk_id'),
-            'surat_keluar_id' => $pindah->id,
-        ]);
+                foreach ($data as $row) {
+                    $find = Penduduk::find($row);
+                    if ($find) {
+                        $find->status = '2';
+                        $find->save();
 
-        $penduduk = Penduduk::find(request('penduduk_id'));
-        $penduduk->status = '2';
-        $penduduk->save();
+                        PindahKeluar::create([
+                            'penduduk_id' => $row,
+                            'surat_keluar_id' => $pindah->id,
+                        ]);
+                    }
+                    else {
+                        return back()->withErrors([
+                            'message' => 'NIK yang anda masukkan salah.'
+                        ]);
+                    }
+                }
+            }
+
+            PindahKeluar::create([
+                'penduduk_id' => request('penduduk_id'),
+                'surat_keluar_id' => $pindah->id,
+            ]);
+
+            $penduduk = Penduduk::find(request('penduduk_id'));
+            $penduduk->status = '2';
+            $penduduk->save();
+        }
 
     	return redirect("/pindah_keluar/$pindah->id");
     }
@@ -237,6 +302,10 @@ class SuratPindahKeluarController extends Controller
             $penduduk = Penduduk::find($row->penduduk_id);
             $penduduk->status = NULL;
             $penduduk->save();
+
+            $kk = $penduduk->get_kk;
+            $kk->status = NULL;
+            $kk->save();
 
             $row->delete();
         }

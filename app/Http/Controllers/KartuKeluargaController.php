@@ -28,13 +28,13 @@ class KartuKeluargaController extends Controller
         $q = "";
         if ($request->has('rw') && $request->has('rt')) {
             if ($request->has('q')) {
-                $kk = KartuKeluarga::where([['rukun_warga', request('rw')], ['rukun_tetangga', request('rt')], ['id', 'like', '%' . request('q') . '%']])->orWhere('kepala_keluarga', "like", "%" . request('q'). "%")->orWhere('alamat', "like", "%" . request('q'). "%")->paginate(15);
-                $kk_download = KartuKeluarga::with('get_rt', 'get_rw', 'get_penduduk')->where([['rukun_warga', request('rw')], ['rukun_tetangga', request('rt')], ['id', 'like', '%' . request('q') . '%']])->orWhere('kepala_keluarga', "like", "%" . request('q'). "%")->orWhere('alamat', "like", "%" . request('q'). "%")->get();
+                $kk = KartuKeluarga::where([['rukun_warga', request('rw')], ['rukun_tetangga', request('rt')], ['id', 'like', '%' . request('q') . '%']])->orWhere('kepala_keluarga', "like", "%" . request('q'). "%")->orWhere('alamat', "like", "%" . request('q'). "%")->getAktif()->paginate(15);
+                $kk_download = KartuKeluarga::with('get_rt', 'get_rw', 'get_penduduk')->where([['rukun_warga', request('rw')], ['rukun_tetangga', request('rt')], ['id', 'like', '%' . request('q') . '%']])->orWhere('kepala_keluarga', "like", "%" . request('q'). "%")->orWhere('alamat', "like", "%" . request('q'). "%")->getAktif()->get();
                 $q = request('q');
             }
             else {
-                $kk = KartuKeluarga::where([['rukun_warga', request('rw')], ['rukun_tetangga', request('rt')]])->paginate(15);
-                $kk_download = KartuKeluarga::with('get_rt', 'get_rw', 'get_penduduk')->where([['rukun_warga', request('rw')], ['rukun_tetangga', request('rt')]])->get();
+                $kk = KartuKeluarga::where([['rukun_warga', request('rw')], ['rukun_tetangga', request('rt')]])->getAktif()->paginate(15);
+                $kk_download = KartuKeluarga::with('get_rt', 'get_rw', 'get_penduduk')->where([['rukun_warga', request('rw')], ['rukun_tetangga', request('rt')]])->getAktif()->get();
             }
             
             $rt = RukunTetangga::where('rukun_warga_id', request('rw'))->get();
@@ -44,13 +44,13 @@ class KartuKeluargaController extends Controller
         }
         else if($request->has('rw')) {
             if ($request->has('q')) {
-                $kk = KartuKeluarga::where([['rukun_warga', request('rw')], ['id', 'like', '%' . request('q') . '%']])->orWhere('kepala_keluarga', "like", "%" . request('q'). "%")->orWhere('alamat', "like", "%" . request('q'). "%")->paginate(15);
-                $kk_download = KartuKeluarga::with('get_rt', 'get_rw', 'get_penduduk')->where([['rukun_warga', request('rw')], ['id', 'like', '%' . request('q') . '%']])->orWhere('kepala_keluarga', "like", "%" . request('q'). "%")->orWhere('alamat', "like", "%" . request('q'). "%")->get();
+                $kk = KartuKeluarga::where([['rukun_warga', request('rw')], ['id', 'like', '%' . request('q') . '%']])->orWhere('kepala_keluarga', "like", "%" . request('q'). "%")->orWhere('alamat', "like", "%" . request('q'). "%")->getAktif()->paginate(15);
+                $kk_download = KartuKeluarga::with('get_rt', 'get_rw', 'get_penduduk')->where([['rukun_warga', request('rw')], ['id', 'like', '%' . request('q') . '%']])->orWhere('kepala_keluarga', "like", "%" . request('q'). "%")->orWhere('alamat', "like", "%" . request('q'). "%")->getAktif()->get();
                 $q = request('q');
             }
             else {
-                $kk = KartuKeluarga::where('rukun_warga', request('rw'))->paginate(15);
-                $kk_download = KartuKeluarga::with('get_rt', 'get_rw', 'get_penduduk')->where('rukun_warga', request('rw'))->get();
+                $kk = KartuKeluarga::where('rukun_warga', request('rw'))->getAktif()->paginate(15);
+                $kk_download = KartuKeluarga::with('get_rt', 'get_rw', 'get_penduduk')->where('rukun_warga', request('rw'))->getAktif()->get();
             }
             
             $rt = RukunTetangga::where('rukun_warga_id', request('rw'))->get();
@@ -60,13 +60,13 @@ class KartuKeluargaController extends Controller
         }
         else {
             if ($request->has('q')) {
-                $kk = KartuKeluarga::where('id', 'like', '%' . request('q') . '%')->orWhere('kepala_keluarga', "like", "%" . request('q'). "%")->orWhere('alamat', "like", "%" . request('q'). "%")->paginate(15);
-                $kk_download = KartuKeluarga::with('get_rt', 'get_rw', 'get_penduduk')->where('id', 'like', '%' . request('q') . '%')->orWhere('kepala_keluarga', "like", "%" . request('q'). "%")->orWhere('alamat', "like", "%" . request('q'). "%")->get();
+                $kk = KartuKeluarga::where('id', 'like', '%' . request('q') . '%')->orWhere('kepala_keluarga', "like", "%" . request('q'). "%")->orWhere('alamat', "like", "%" . request('q'). "%")->getAktif()->paginate(15);
+                $kk_download = KartuKeluarga::with('get_rt', 'get_rw', 'get_penduduk')->where('id', 'like', '%' . request('q') . '%')->orWhere('kepala_keluarga', "like", "%" . request('q'). "%")->orWhere('alamat', "like", "%" . request('q'). "%")->getAktif()->get();
                 $q = request('q');
             }
             else {
-                $kk = KartuKeluarga::paginate(15);
-                $kk_download = KartuKeluarga::with('get_rt', 'get_rw', 'get_penduduk')->get();
+                $kk = KartuKeluarga::getAktif()->paginate(15);
+                $kk_download = KartuKeluarga::with('get_rt', 'get_rw', 'get_penduduk')->getAktif()->get();
             }
             
             $rw = RukunWarga::all();
@@ -260,12 +260,12 @@ class KartuKeluargaController extends Controller
     }
 
     public function stat_rw_keluarga_ajax() {
-        $count_rw_keluarga = KartuKeluarga::with('get_rw')->selectRaw('count(rukun_warga) as count, rukun_warga')->orderBy('rukun_warga')->groupBy('rukun_warga')->get();
+        $count_rw_keluarga = KartuKeluarga::with('get_rw')->selectRaw('count(rukun_warga) as count, rukun_warga')->orderBy('rukun_warga')->groupBy('rukun_warga')->getAktif()->get();
         return json_encode($count_rw_keluarga);
     }
 
     public function stat_rt_keluarga_ajax() {
-        $count_rt_keluarga = KartuKeluarga::with(['get_rt', 'get_rw'])->selectRaw('count(rukun_tetangga) as count, rukun_tetangga, rukun_warga')->orderBy('rukun_tetangga')->groupBy(['rukun_tetangga', 'rukun_warga'])->get();
+        $count_rt_keluarga = KartuKeluarga::with(['get_rt', 'get_rw'])->selectRaw('count(rukun_tetangga) as count, rukun_tetangga, rukun_warga')->orderBy('rukun_tetangga')->groupBy(['rukun_tetangga', 'rukun_warga'])->getAktif()->get();
         return json_encode($count_rt_keluarga);
     }
 }
