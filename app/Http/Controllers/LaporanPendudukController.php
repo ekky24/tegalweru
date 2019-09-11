@@ -104,7 +104,7 @@ class LaporanPendudukController extends Controller
 
         $rt = RukunTetangga::all()->count();
         $rw = RukunWarga::all()->count();
-        $kk = KartuKeluarga::all()->count();
+        $kk = KartuKeluarga::getAktif()->count();
 
         LaporanPenduduk::create([
             'lahir_l' => $lahir_l,

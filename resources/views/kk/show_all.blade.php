@@ -35,8 +35,17 @@
 						<td>-</td>
 					@endif
 
-					<td>{{ $row->get_rt->nama }}</td>
-					<td>{{ $row->get_rw->nama }}</td>
+					@if($row->get_rt != NULL)
+						<td>{{ $row->get_rt->nama }}</td>
+					@else
+						<td>-</td>
+					@endif
+
+					@if($row->get_rw != NULL)
+						<td>{{ $row->get_rw->nama }}</td>
+					@else
+						<td>-</td>
+					@endif
 					<td>{{ $row->get_penduduk->count() . ' orang' }}</td>
 				</tr>
 		@endforeach

@@ -24,7 +24,7 @@ class RukunWargaController extends Controller
     	]);
 
     	RukunWarga::create([
-    		'nama' => "00" . request('nama'),
+    		'nama' => request('nama'),
     		'ketua' => strtoupper(request('ketua')),
             'kelurahan_id' => '3507300006'
     	]);

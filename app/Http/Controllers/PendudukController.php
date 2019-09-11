@@ -353,27 +353,27 @@ class PendudukController extends Controller
     }
 
     public function stat_agama_ajax() {
-        $count_agama = Penduduk::with('get_agama')->selectRaw('count(agama_id) as count, agama_id')->groupBy('agama_id')->getAktif()->get();
+        $count_agama = Penduduk::with('get_agama')->selectRaw('count(agama_id) as count, agama_id')->whereRaw('agama_id is not null')->groupBy('agama_id')->getAktif()->get();
         return json_encode($count_agama);
     }
 
     public function stat_status_nikah_ajax() {
-        $count_status_nikah = Penduduk::with('get_status_nikah')->selectRaw('count(status_nikah_id) as count, status_nikah_id')->groupBy('status_nikah_id')->getAktif()->get();
+        $count_status_nikah = Penduduk::with('get_status_nikah')->selectRaw('count(status_nikah_id) as count, status_nikah_id')->whereRaw('status_nikah_id is not null')->groupBy('status_nikah_id')->getAktif()->get();
         return json_encode($count_status_nikah);
     }
 
     public function stat_pendidikan_ajax() {
-        $count_pendidikan = Penduduk::with('get_pendidikan')->selectRaw('count(pendidikan_id) as count, pendidikan_id')->groupBy('pendidikan_id')->getAktif()->get();
+        $count_pendidikan = Penduduk::with('get_pendidikan')->selectRaw('count(pendidikan_id) as count, pendidikan_id')->whereRaw('pendidikan_id is not null')->groupBy('pendidikan_id')->getAktif()->get();
         return json_encode($count_pendidikan);
     }
 
     public function stat_jenis_pekerjaan_ajax() {
-        $count_jenis_pekerjaan = Penduduk::with('get_jenis_pekerjaan')->selectRaw('count(jenis_pekerjaan_id) as count, jenis_pekerjaan_id')->groupBy('jenis_pekerjaan_id')->getAktif()->get();
+        $count_jenis_pekerjaan = Penduduk::with('get_jenis_pekerjaan')->selectRaw('count(jenis_pekerjaan_id) as count, jenis_pekerjaan_id')->whereRaw('jenis_pekerjaan_id is not null')->groupBy('jenis_pekerjaan_id')->getAktif()->get();
         return json_encode($count_jenis_pekerjaan);
     }
 
     public function stat_status_hubungan_ajax() {
-        $count_status_hubungan = Penduduk::with('get_status_hubungan')->selectRaw('count(status_hubungan_id) as count, status_hubungan_id')->groupBy('status_hubungan_id')->getAktif()->get();
+        $count_status_hubungan = Penduduk::with('get_status_hubungan')->selectRaw('count(status_hubungan_id) as count, status_hubungan_id')->whereRaw('status_hubungan_id is not null')->groupBy('status_hubungan_id')->getAktif()->get();
         return json_encode($count_status_hubungan);
     }
 

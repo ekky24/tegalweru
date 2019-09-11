@@ -50,12 +50,6 @@
 	</div><br>
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
-			<h3 class="text-center">Jenis Pekerjaan</h3>
-			<canvas id="jenis_pekerjaan_chart"></canvas>
-		</div>
-	</div><br>
-	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
 			<h3 class="text-center">Status Hubungan dalam Keluarga</h3>
 			<canvas id="status_hubungan_chart"></canvas>
 		</div>

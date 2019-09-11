@@ -36,7 +36,7 @@ class RukunTetanggaController extends Controller
 
     	RukunTetangga::create([
     		'rukun_warga_id' => request('rukun_warga_id'),
-    		'nama' => "00" . request('nama'),
+    		'nama' => request('nama'),
     		'ketua' => strtoupper(request('ketua')),
     	]);
 

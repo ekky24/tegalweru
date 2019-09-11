@@ -260,12 +260,12 @@ class KartuKeluargaController extends Controller
     }
 
     public function stat_rw_keluarga_ajax() {
-        $count_rw_keluarga = KartuKeluarga::with('get_rw')->selectRaw('count(rukun_warga) as count, rukun_warga')->orderBy('rukun_warga')->groupBy('rukun_warga')->getAktif()->get();
+        $count_rw_keluarga = KartuKeluarga::with('get_rw')->selectRaw('count(rukun_warga) as count, rukun_warga')->whereRaw('rukun_warga is not null')->orderBy('rukun_warga')->groupBy('rukun_warga')->getAktif()->get();
         return json_encode($count_rw_keluarga);
     }
 
     public function stat_rt_keluarga_ajax() {
-        $count_rt_keluarga = KartuKeluarga::with(['get_rt', 'get_rw'])->selectRaw('count(rukun_tetangga) as count, rukun_tetangga, rukun_warga')->orderBy('rukun_tetangga')->groupBy(['rukun_tetangga', 'rukun_warga'])->getAktif()->get();
+        $count_rt_keluarga = KartuKeluarga::with(['get_rt', 'get_rw'])->selectRaw('count(rukun_tetangga) as count, rukun_tetangga, rukun_warga')->whereRaw('rukun_warga is not null')->whereRaw('rukun_tetangga is not null')->orderBy('rukun_tetangga')->groupBy(['rukun_tetangga', 'rukun_warga'])->getAktif()->get();
         return json_encode($count_rt_keluarga);
     }
 }

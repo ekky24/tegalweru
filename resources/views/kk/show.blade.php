@@ -67,10 +67,6 @@
 			<th>Provinsi</th>
 			<td>JAWA TIMUR</td>
 		</tr>
-		<tr>
-			<th>Tanggal Pengurusan</th>
-			<td>{{ strtoupper($tgl) }}</td>
-		</tr>
 	</table>
 	<br><br><h2>Daftar Anggota Keluarga</h2>
 

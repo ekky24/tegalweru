@@ -17,8 +17,8 @@ class CreateKartuKeluargasTable extends Migration
             $table->string('id')->primary();
             $table->string('kepala_keluarga')->nullable();
             $table->text('alamat');
-            $table->string('rukun_tetangga');
-            $table->string('rukun_warga');
+            $table->string('rukun_tetangga')->nullable();
+            $table->string('rukun_warga')->nullable();
             $table->string('kelurahan');
             $table->string('kode_pos');
             $table->date('tgl_pengurusan');

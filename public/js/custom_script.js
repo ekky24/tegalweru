@@ -583,7 +583,6 @@ $(function() {
 		var ctx_kewarganegaraan = document.getElementById("kewarganegaraan_chart").getContext('2d');
 		var ctx_status = document.getElementById("status_chart").getContext('2d');
 		var ctx_pendidikan = document.getElementById("pendidikan_chart").getContext('2d');
-		var ctx_jenis_pekerjaan = document.getElementById("jenis_pekerjaan_chart").getContext('2d');
 		var ctx_status_hubungan = document.getElementById("status_hubungan_chart").getContext('2d');
 
 		stat_penduduk_ajax('/penduduk/stat_jk_ajax', ctx_jk, "jk", "doughnut");
@@ -593,7 +592,6 @@ $(function() {
 		stat_penduduk_ajax('/penduduk/stat_kewarganegaraan_ajax', ctx_kewarganegaraan, "kewarganegaraan", "doughnut");
 		stat_penduduk_ajax('/penduduk/stat_status_ajax', ctx_status, "status", "doughnut");
 		stat_penduduk_ajax('/penduduk/stat_pendidikan_ajax', ctx_pendidikan, "pendidikan", "bar");
-		stat_penduduk_ajax('/penduduk/stat_jenis_pekerjaan_ajax', ctx_jenis_pekerjaan, "jenis_pekerjaan", "bar");
 		stat_penduduk_ajax('/penduduk/stat_status_hubungan_ajax', ctx_status_hubungan, "status_hubungan", "bar");
 	}
 
@@ -605,8 +603,8 @@ $(function() {
 		var ctx_rw_keluarga = document.getElementById("rw_keluarga_chart").getContext('2d');
 		var ctx_rt_keluarga = document.getElementById("rt_keluarga_chart").getContext('2d');
 
-		stat_penduduk_ajax('/kk/stat_rt_keluarga_ajax', ctx_rt_keluarga, "rt_keluarga", "doughnut");
-		stat_penduduk_ajax('/kk/stat_rw_keluarga_ajax', ctx_rw_keluarga, "rw_keluarga", "doughnut");
+		stat_penduduk_ajax('/kk/stat_rt_keluarga_ajax', ctx_rt_keluarga, "rt_keluarga", "bar");
+		stat_penduduk_ajax('/kk/stat_rw_keluarga_ajax', ctx_rw_keluarga, "rw_keluarga", "bar");
 	}
 
 	/* SCRIPT ON VIEW DASHBOARD 

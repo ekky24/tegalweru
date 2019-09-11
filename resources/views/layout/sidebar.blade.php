@@ -33,6 +33,9 @@
                                 <li>
                                     <a href="/penduduk/stat">Statistik Penduduk</a>
                                 </li>
+                                <li>
+                                    <a href="/import/insert">Form Excel</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

@@ -181,6 +181,9 @@ Route::get('/laporan_penduduk/{laporan}/delete', 'LaporanPendudukController@dele
 Route::get('/laporan_penduduk/{laporan}/download', 'LaporanPendudukController@download');
 Route::get('/laporan_penduduk/insert', 'LaporanPendudukController@insert');
 
+Route::get('/import/insert', 'ImportExcelController@insert');
+Route::post('/import', 'ImportExcelController@store');
+
 Route::get('/login', 'SessionController@create');
 Route::get('/ubah_pass', 'SessionController@ubah_pass');
 Route::get('/logout', 'SessionController@logout');
