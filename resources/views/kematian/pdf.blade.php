@@ -6,13 +6,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Laporan Data Kematian Desa Tegalweru</title>
+        <title>Laporan Data Kematian Desa Karangwidoro</title>
         <link href="{{ public_path() . '/css/pdf.css' }}" rel="stylesheet">
 
         <body>
   
             <div style="font-family:Arial; font-size:12px;">
-                <center><h2>Data Kematian Desa Tegalweru</h2></center>  
+                <center><h2>Data Kematian Desa Karangwidoro</h2></center>  
             </div>
             <br>
             <h5>Tahun: {{ $tahun_choose }}</h5>

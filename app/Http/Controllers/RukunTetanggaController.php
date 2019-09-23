@@ -18,7 +18,7 @@ class RukunTetanggaController extends Controller
     }
 
     public function show_all() {
-        $rt = RukunTetangga::all();
+        $rt = RukunTetangga::paginate(10);
         return view('rt.show_all', compact('rt'));
     }
 

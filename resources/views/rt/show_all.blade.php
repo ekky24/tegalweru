@@ -29,4 +29,5 @@
 			</tbody>
 		@endforeach
 	</table>
+	<center>{{ $rt->links() }}</center>
 @endsection

@@ -6,12 +6,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Laporan Data Kehilangan Desa Tegalweru</title>
+        <title>Laporan Data Kehilangan Desa Karangwidoro</title>
         <link href="{{ public_path() . '/css/pdf.css' }}" rel="stylesheet">
         <body>
   
             <div style="font-family:Arial; font-size:12px;">
-                <center><h2>Data Surat Kehilangan Desa Tegalweru</h2></center>  
+                <center><h2>Data Surat Kehilangan Desa Karangwidoro</h2></center>  
             </div>
             <br>
             <h5>Tahun: {{ $tahun_choose }}</h5>

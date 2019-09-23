@@ -59,23 +59,43 @@
 		</tr>
 		<tr>
 			<th>Agama</th>
-			<td>{{ $penduduk->get_agama->keterangan }}</td>
+			@if($penduduk->get_agama == NULL)
+				<td>{{ "-" }}</td>
+			@else
+				<td>{{ $penduduk->get_agama->keterangan }}</td>
+			@endif
 		</tr>
 		<tr>
 			<th>Pendidikan</th>
-			<td>{{ $penduduk->get_pendidikan->keterangan }}</td>
+			@if($penduduk->get_pendidikan == NULL)
+				<td>{{ "-" }}</td>
+			@else
+				<td>{{ $penduduk->get_pendidikan->keterangan }}</td>
+			@endif
 		</tr>
 		<tr>
 			<th>Jenis Pekerjaan</th>
-			<td>{{ $penduduk->get_jenis_pekerjaan->keterangan }}</td>
+			@if($penduduk->get_jenis_pekerjaan == NULL)
+				<td>{{ "-" }}</td>
+			@else
+				<td>{{ $penduduk->get_jenis_pekerjaan->keterangan }}</td>
+			@endif
 		</tr>
 		<tr>
 			<th>Status Pernikahan</th>
-			<td>{{ $penduduk->get_status_nikah->keterangan }}</td>
+			@if($penduduk->get_status_nikah == NULL)
+				<td>{{ "-" }}</td>
+			@else
+				<td>{{ $penduduk->get_status_nikah->keterangan }}</td>
+			@endif
 		</tr>
 		<tr>
 			<th>Status Hubungan Keluarga</th>
-			<td>{{ $penduduk->get_status_hubungan->keterangan }}</td>
+			@if($penduduk->get_status_hubungan == NULL)
+				<td>{{ "-" }}</td>
+			@else
+				<td>{{ $penduduk->get_status_hubungan->keterangan }}</td>
+			@endif
 		</tr>
 		<tr>
 			<th>Kewarganegaraan</th>
@@ -91,7 +111,11 @@
 		</tr>
 		<tr>
 			<th>Penyandang Cacat</th>
-			<td>{{ $penduduk->get_penyandang_cacat->keterangan }}</td>
+			@if($penduduk->get_penyandang_cacat == NULL)
+				<td>{{ "-" }}</td>
+			@else
+				<td>{{ $penduduk->get_penyandang_cacat->keterangan }}</td>
+			@endif
 		</tr>
 		<tr>
 			<th>Ayah</th>

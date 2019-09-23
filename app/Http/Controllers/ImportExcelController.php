@@ -165,14 +165,20 @@ class ImportExcelController extends Controller
 
     		if(!empty($insert_kk))
     		{
-    			/*foreach (array_chunk($insert_kk,1000) as $row)  
+    			foreach (array_chunk($insert_kk,1000) as $row)  
 				{
-     				DB::table('kartu_keluargas')->insert($row);
-				}*/
+					$exist = DB::table('kartu_keluargas')->find($row[0]);
+					if ($exist == null) {
+						DB::table('kartu_keluargas')->insert($row);
+					}
+				}
 
 				foreach (array_chunk($insert_penduduk,1000) as $row)  
 				{
-     				DB::table('penduduks')->insert($row);
+					$exist = DB::table('penduduks')->find($row[0]);
+					if ($exist == null) {
+						DB::table('penduduks')->insert($row);
+					}
 				}
     		}
     	}

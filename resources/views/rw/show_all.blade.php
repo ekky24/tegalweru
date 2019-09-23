@@ -27,4 +27,5 @@
 			</tbody>
 		@endforeach
 	</table>
+	<center>{{ $rw->links() }}</center>
 @endsection
