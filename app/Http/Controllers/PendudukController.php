@@ -14,6 +14,7 @@ use App\Kota;
 use App\Penduduk;
 use App\Kelahiran;
 use App\PenyandangCacat;
+use App\KartuKeluarga;
 use DB;
 use Carbon\Carbon;
 
@@ -349,7 +350,129 @@ class PendudukController extends Controller
     }
 
     public function stat() {
-        return view('penduduk.stat');
+        $count_penduduk = Penduduk::getAktif()->get()->count();
+        $count_jk = Penduduk::selectRaw('count(jk) as count')->orderBy('jk')->groupBy('jk')->getAktif()->get();
+        $count_status_nikah = Penduduk::with('get_status_nikah')->selectRaw('count(status_nikah_id) as count, status_nikah_id')->whereRaw('status_nikah_id is not null')->groupBy('status_nikah_id')->getAktif()->get();
+        $count_agama = Penduduk::with('get_agama')->selectRaw('count(agama_id) as count, agama_id')->whereRaw('agama_id is not null')->groupBy('agama_id')->getAktif()->get();
+        $count_status_hubungan = Penduduk::with('get_status_hubungan')->selectRaw('count(status_hubungan_id) as count, status_hubungan_id')->whereRaw('status_hubungan_id is not null')->groupBy('status_hubungan_id')->getAktif()->get();
+        $count_pendidikan = Penduduk::with('get_pendidikan')->selectRaw('count(pendidikan_id) as count, pendidikan_id')->whereRaw('pendidikan_id is not null')->groupBy('pendidikan_id')->getAktif()->get();
+
+        $c = [0,0,0,0,0,0,0,0,0,0,0,0,0];
+        $age_count = [];
+
+        $penduduk = Penduduk::selectRaw('YEAR(CURRENT_TIMESTAMP) - YEAR(tgl_lahir) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(tgl_lahir, 5)) as age')->getAktif()->get();
+        
+        foreach ($penduduk as $row) {
+            $age = $row->age;
+
+            if ($age >= 0 && $age <= 5) {
+                $c[0]++;
+            }
+            elseif ($age > 5 && $age <= 10) {
+                $c[1]++;
+            }
+            elseif ($age > 10 && $age <= 15) {
+                $c[2]++;
+            }
+            elseif ($age > 15 && $age <= 20) {
+                $c[3]++;
+            }
+            elseif ($age > 20 && $age <= 25) {
+                $c[4]++;
+            }
+            elseif ($age > 25 && $age <= 30) {
+                $c[5]++;
+            }
+            elseif ($age > 30 && $age <= 35) {
+                $c[6]++;
+            }
+            elseif ($age > 35 && $age <= 40) {
+                $c[7]++;
+            }
+            elseif ($age > 40 && $age <= 45) {
+                $c[8]++;
+            }
+            elseif ($age > 45 && $age <= 50) {
+                $c[9]++;
+            }
+            elseif ($age > 50 && $age <= 55) {
+                $c[10]++;
+            }
+            elseif ($age > 55 && $age <= 60) {
+                $c[11]++;
+            }
+            elseif ($age > 60) {
+                $c[12]++;
+            }
+        }
+
+        if ($c[0] > 0) {
+            $send['count'] = $c[0];
+            $send['nama'] = "0 - 5";
+            array_push($age_count, $send);
+        }
+        if ($c[1] > 0) {
+            $send['count'] = $c[1];
+            $send['nama'] = "6 - 10";
+            array_push($age_count, $send);
+        }
+        if ($c[2] > 0) {
+            $send['count'] = $c[2];
+            $send['nama'] = "11 - 15";
+            array_push($age_count, $send);
+        }
+        if ($c[3] > 0) {
+            $send['count'] = $c[3];
+            $send['nama'] = "16 - 20";
+            array_push($age_count, $send);
+        }
+        if ($c[4] > 0) {
+            $send['count'] = $c[4];
+            $send['nama'] = "21 - 25";
+            array_push($age_count, $send);
+        }
+        if ($c[5] > 0) {
+            $send['count'] = $c[5];
+            $send['nama'] = "26 - 30";
+            array_push($age_count, $send);
+        }
+        if ($c[6] > 0) {
+            $send['count'] = $c[6];
+            $send['nama'] = "31 - 35";
+            array_push($age_count, $send);
+        }
+        if ($c[7] > 0) {
+            $send['count'] = $c[7];
+            $send['nama'] = "36 - 40";
+            array_push($age_count, $send);
+        }
+        if ($c[8] > 0) {
+            $send['count'] = $c[8];
+            $send['nama'] = "41 - 45";
+            array_push($age_count, $send);
+        }
+        if ($c[9] > 0) {
+            $send['count'] = $c[9];
+            $send['nama'] = "46 - 50";
+            array_push($age_count, $send);
+        }
+        if ($c[10] > 0) {
+            $send['count'] = $c[10];
+            $send['nama'] = "51 - 55";
+            array_push($age_count, $send);
+        }
+        if ($c[11] > 0) {
+            $send['count'] = $c[11];
+            $send['nama'] = "56 - 60";
+            array_push($age_count, $send);
+        }
+        if ($c[12] > 0) {
+            $send['count'] = $c[12];
+            $send['nama'] = "> 60";
+            array_push($age_count, $send);
+        }
+
+        return view('penduduk.stat', compact('count_jk', 'age_count', 'count_agama', 'count_pendidikan', 'count_status_hubungan', 'count_status_nikah', 'count_penduduk'));
     }
 
     public function stat_agama_ajax() {
@@ -519,6 +642,7 @@ class PendudukController extends Controller
     }
 
     public function stat_download() {
+        $count_penduduk = Penduduk::getAktif()->get()->count();
         // AGAMA
         $data =  json_decode($this->stat_agama_ajax());
         $counter = 0;
@@ -597,10 +721,44 @@ class PendudukController extends Controller
             array_push($usia_arr, [$row->nama, $row->count, $presentase]);
         } 
 
+        // RW
+        $data =  json_decode($this->stat_rw_keluarga_ajax());
+        $counter = 0;
+        $rw_arr = [];
+        foreach ($data as $row) $counter += $row->count;
+
+        foreach ($data as $row) {
+            $presentase = round($row->count / $counter * 100, 2);
+            array_push($rw_arr, [$row->get_rw->nama, $row->count, $presentase]);
+        }
+
+        // RT
+        $data =  json_decode($this->stat_rt_keluarga_ajax());
+        $counter = 0;
+        $rt_arr = [];
+        foreach ($data as $row) $counter += $row->count;
+
+        foreach ($data as $row) {
+            $presentase = round($row->count / $counter * 100, 2);
+            array_push($rt_arr, [$row->get_rw->nama, $row->get_rt->nama, $row->count, $presentase]);
+        }
+
         $pdf = App::make('dompdf.wrapper'); 
-        $pdf->loadView('penduduk.stat_download', compact('agama_arr', 'status_nikah_arr', 'pendidikan_arr', 'jenis_pekerjaan_arr', 'status_hubungan_arr', 'jk_arr', 'usia_arr'));
+        $pdf->loadView('penduduk.stat_download', compact('agama_arr', 'status_nikah_arr', 'pendidikan_arr', 'jenis_pekerjaan_arr', 'status_hubungan_arr', 'jk_arr', 'usia_arr', 'count_penduduk', 'rw_arr', 'rt_arr'));
         $pdf->setPaper('legal', 'portrait');
         return $pdf->stream();
+    }
+
+    // DARI KK CONTROLLER
+    public function stat_rw_keluarga_ajax() {
+        $count_rw_keluarga = KartuKeluarga::with(['get_rw'])->selectRaw('count(penduduks.id) as count, kartu_keluargas.rukun_warga')->leftJoin('penduduks', 'kartu_keluargas.id', '=', 'penduduks.kk_id')->whereRaw('kartu_keluargas.rukun_warga is not null')->whereNull('penduduks.status')->orderBy('kartu_keluargas.rukun_warga')->groupBy('kartu_keluargas.rukun_warga')->get();
+
+        return json_encode($count_rw_keluarga);
+    }
+
+    public function stat_rt_keluarga_ajax() {
+        $count_rt_keluarga = KartuKeluarga::with(['get_rt', 'get_rw'])->selectRaw('count(penduduks.id) as count, kartu_keluargas.rukun_tetangga, kartu_keluargas.rukun_warga')->leftJoin('penduduks', 'kartu_keluargas.id', '=', 'penduduks.kk_id')->whereRaw('kartu_keluargas.rukun_tetangga is not null')->whereRaw('kartu_keluargas.rukun_warga is not null')->whereNull('penduduks.status')->orderBy('kartu_keluargas.rukun_tetangga')->groupBy('kartu_keluargas.rukun_warga')->groupBy('kartu_keluargas.rukun_tetangga')->get();
+        return json_encode($count_rt_keluarga);
     }
 }
 

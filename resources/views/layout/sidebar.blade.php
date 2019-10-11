@@ -48,9 +48,9 @@
                                 <li>
                                     <a href="/kk/insert">Insert KK</a>
                                 </li>
-                                <!--<li>
+                                <li>
                                     <a href="/kk/stat">Statistik KK</a>
-                                </li>-->
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

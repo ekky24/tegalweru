@@ -5,6 +5,8 @@
         <link href="{{ public_path() . '/css/pdf.css' }}" rel="stylesheet">
 
         <body>
+        <center><h1 style="margin-bottom: 0">STATISTIK PENDUDUK KARANGWIDORO</h1></center>
+        <center><h3 style="margin-top: 0">JUMLAH PENDUDUK AKTIF: {{ $count_penduduk }} ORANG</h3></center>
         <center>
             <div style="font-family:Arial; font-size:12pt;">
                 <h2>Jumlah Penduduk Berdasarkan Agama</h2>
@@ -176,6 +178,58 @@
                             <td>{{ $row[0] }}</td>
                             <td>{{ $row[1] }} orang</td>
                             <td>{{ $row[2] }}%</td>
+                        </tr>
+                @endforeach
+                </tbody>
+            </table>
+
+            <div style="font-family:Arial; font-size:12pt; margin-top: 80px;">
+                <h2>Jumlah Penduduk Berdasarkan RW</h2>
+            </div>
+            <br>
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th>No. </th>
+                        <th>RW</th>
+                        <th>Jumlah</th>
+                        <th>Prosentase</th>
+                    </tr>
+                </thead>
+                <tbody id="list_kk">
+                @foreach($rw_arr as $index => $row)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $row[0] }}</td>
+                            <td>{{ $row[1] }} orang</td>
+                            <td>{{ $row[2] }}%</td>
+                        </tr>
+                @endforeach
+                </tbody>
+            </table>
+
+            <div style="font-family:Arial; font-size:12pt; margin-top: 80px;">
+                <h2>Jumlah Penduduk Berdasarkan RT</h2>
+            </div>
+            <br>
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th>No. </th>
+                        <th>RW</th>
+                        <th>RT</th>
+                        <th>Jumlah</th>
+                        <th>Prosentase</th>
+                    </tr>
+                </thead>
+                <tbody id="list_kk">
+                @foreach($rt_arr as $index => $row)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $row[0] }}</td>
+                            <td>{{ $row[1] }}</td>
+                            <td>{{ $row[2] }} orang</td>
+                            <td>{{ $row[3] }}%</td>
                         </tr>
                 @endforeach
                 </tbody>

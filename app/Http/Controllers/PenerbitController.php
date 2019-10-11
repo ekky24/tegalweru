@@ -17,13 +17,13 @@ class PenerbitController extends Controller
 
     public function store() {
     	$this->validate(request(), [
-    		'nip' => 'required',
+    		'nik' => 'required',
     		'nama' => 'required',
     		'jabatan' => 'required'
     	]);
 
     	Penerbit::create([
-    		'id' =>request('nip'),
+    		'nik' =>request('nik'),
     		'nama' => strtoupper(request('nama')),
     		'jabatan' => strtoupper(request('jabatan'))
     	]);
@@ -33,11 +33,12 @@ class PenerbitController extends Controller
 
     public function store_edit(Penerbit $penerbit) {
     	$this->validate(request(), [
-    		'nip' => 'required',
+    		'nik' => 'required',
     		'nama' => 'required',
     		'jabatan' => 'required'
     	]);
 
+        $penerbit->nik = strtoupper(request('nik'));
     	$penerbit->nama = strtoupper(request('nama'));
     	$penerbit->jabatan = strtoupper(request('jabatan'));
     	$penerbit->save();

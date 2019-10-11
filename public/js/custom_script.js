@@ -563,10 +563,6 @@ $(function() {
 		        		dataLabel.push("Minggu ke-" + item.week);
 		        	else if (stat_type == "jk")
 		        		dataLabel = ["Laki-Laki", "Perempuan"];
-		        	else if (stat_type == "kewarganegaraan")
-		        		dataLabel = ["WNA", "WNI"];
-		        	else if (stat_type == "status")
-		        		dataLabel = ["Sudah Terdaftar", "Belum Terdaftar"];
 		        });
 
 		        show_chart(ctx_name, dataLabel, dataCount, chart_type);
@@ -580,8 +576,6 @@ $(function() {
 		var ctx_status_nikah = document.getElementById("status_nikah_chart").getContext('2d');
 		var ctx_jk = document.getElementById("jk_chart").getContext('2d');
 		var ctx_usia = document.getElementById("usia_chart").getContext('2d');
-		var ctx_kewarganegaraan = document.getElementById("kewarganegaraan_chart").getContext('2d');
-		var ctx_status = document.getElementById("status_chart").getContext('2d');
 		var ctx_pendidikan = document.getElementById("pendidikan_chart").getContext('2d');
 		var ctx_status_hubungan = document.getElementById("status_hubungan_chart").getContext('2d');
 
@@ -589,8 +583,6 @@ $(function() {
 		stat_penduduk_ajax('/penduduk/stat_usia_ajax', ctx_usia, "usia", "doughnut");
 		stat_penduduk_ajax('/penduduk/stat_agama_ajax', ctx_agama, "agama", "doughnut");
 		stat_penduduk_ajax('/penduduk/stat_status_nikah_ajax', ctx_status_nikah, "status_nikah", "doughnut");
-		stat_penduduk_ajax('/penduduk/stat_kewarganegaraan_ajax', ctx_kewarganegaraan, "kewarganegaraan", "doughnut");
-		stat_penduduk_ajax('/penduduk/stat_status_ajax', ctx_status, "status", "doughnut");
 		stat_penduduk_ajax('/penduduk/stat_pendidikan_ajax', ctx_pendidikan, "pendidikan", "bar");
 		stat_penduduk_ajax('/penduduk/stat_status_hubungan_ajax', ctx_status_hubungan, "status_hubungan", "bar");
 	}

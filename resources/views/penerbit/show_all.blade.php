@@ -21,7 +21,7 @@
 			<tbody>
 				<tr>
 					<td>{{ $index + 1 }}</td>
-					<td>{{ $row->id }}</td>
+					<td>{{ $row->nik }}</td>
 					<td>{{ $row->nama }}</td>
 					<td>{{ $row->jabatan }}</td>
 					<td class="text-center"><a class="btn btn-primary" style="width: 70px" href="/penerbit/{{$row->id}}/edit">Edit</a>

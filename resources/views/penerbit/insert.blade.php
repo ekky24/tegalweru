@@ -14,9 +14,9 @@
 			{{ csrf_field() }}
 			<div class="form-group">
 				
-				<label class="control-label col-sm-3">NIP</label>
+				<label class="control-label col-sm-3">NIK</label>
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="Masukkan NIP" type="text" name="nip" required>
+					<input class="form-control" placeholder="Masukkan NIP" type="text" name="nik" required>
 				</div>
 			</div>
 			<div class="form-group">
