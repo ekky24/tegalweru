@@ -2,7 +2,7 @@ $(function() {
 	var value;
 	var options_nik = {
 			url: "/penduduk_ajax_nik",
-			requestDelay: 300,
+			requestDelay: 1000,
 			getValue: "id",
 			template: {
 				type: "description",
@@ -20,7 +20,7 @@ $(function() {
 				},
 				hideAnimation: {
 					type: "slide",
-					time: 50,
+					time: 10,
 				},
 				onSelectItemEvent: function() {$('#nama_surat').val("");
 					$(':focus').closest('div.col-md-4').next().children().val("");
@@ -33,7 +33,7 @@ $(function() {
 
 		var options_nik_kepala = {
 			url: "/penduduk_ajax_nik_kepala",
-			requestDelay: 300,
+			requestDelay: 1000,
 			getValue: "id",
 			template: {
 				type: "description",
@@ -51,7 +51,7 @@ $(function() {
 				},
 				hideAnimation: {
 					type: "slide",
-					time: 50,
+					time: 10,
 				}
 			}
 		};
@@ -77,7 +77,7 @@ $(function() {
 				},
 				hideAnimation: {
 					type: "slide",
-					time: 50,
+					time: 10,
 				},
 				onSelectItemEvent: function() {
 					value = $('#kecamatan_form').getSelectedItemData().id;
@@ -286,7 +286,7 @@ $(function() {
 		// code for autocomplete kota
   		var options = {
 			url: "/penduduk_ajax_kota",
-			requestDelay: 300,
+			requestDelay: 1000,
 			getValue: "nama",
 			list: {
 				match: {
@@ -298,7 +298,7 @@ $(function() {
 				},
 				hideAnimation: {
 					type: "slide",
-					time: 50,
+					time: 10,
 				}
 			}
 		};
@@ -308,39 +308,49 @@ $(function() {
 	/* SCRIPT ON VIEW KK.FILTER 
 	******************************************************************************
 	******************************************************************************/
+	var link = "";
+	var countClick = 0;
+	var temp_link = "?";
 
-	$('#filter_rw').change(function() {
-		if ($(this).val() == "none") {
-			window.location.href = "/kk";
-		}
-		else {
-			window.location.href = "/kk?rw=" + $(this).val();
-		}
-	
-	});
+	function filter_kk(e) {
+		e.preventDefault();
+		countClick = 0;
+		var target = $(e.target)
 
-	$('#filter_rt').change(function() {
-		if ($(this).val() == "none") {
-			window.location.href = "/kk?rw=" + $('#filter_rw').val();
+		if ($('#filter_rw').val() != "none") {
+			if (countClick > 0) {
+				temp_link = "&";
+			}
+			link += temp_link + "rw=" + $('#filter_rw').val();
+			countClick++;
 		}
-		else {
-			window.location.href = "/kk?rw=" + $('#filter_rw').val() + "&rt=" + $(this).val();
-		}
-	
-	});
-
-	$('#filter_search').click(function() {
 		if ($('#filter_rt').val() != "none") {
-			window.location.href = "/kk?rw=" + $('#filter_rw').val() + "&rt=" + $('#filter_rt').val() +
-			"&q=" + $('#search_val').val();
+			if (countClick > 0) {
+				temp_link = "&";
+			}
+			link += temp_link + "rt=" + $('#filter_rt').val();
+			countClick++;
 		}
-		else if ($('#filter_rw').val() != "none") {
-			window.location.href = "/kk?rw=" + $('#filter_rw').val() + "&q=" + $('#search_val').val();
+		if ($('#filter_search').val() != "") {
+			if (countClick > 0) {
+				temp_link = "&";
+			}
+			link += temp_link + "q=" + $('#filter_search').val();
+			countClick++;
 		}
-		else {
-			window.location.href = "/kk?q=" + $('#search_val').val();
+		if (target.is('.page-link')) {
+			if (countClick > 0) {
+				temp_link = "&";
+			}
+			link += temp_link + "page=" + target.text();
+			countClick++;
 		}
-	});
+
+		window.location.href = "/kk" + link;
+	}
+
+	$('#filter_rw, #filter_rt').change(filter_kk)
+	$('#filter_search').click(filter_kk)
 
 
 	/* SCRIPT ON VIEW PENDUDUK.FILTER 
@@ -350,8 +360,10 @@ $(function() {
 	var countClick = 0;
 	var temp_link = "?";
 
-	function filter_penduduk() {
+	function filter_penduduk(e) {
+		e.preventDefault();
 		countClick = 0;
+		var target = $(e.target)
 
 		if ($('#filter_jk').val() != "none") {
 			if (countClick > 0) {
@@ -402,6 +414,13 @@ $(function() {
 			link += temp_link + "q=" + $('#search_val_penduduk').val();
 			countClick++;
 		}
+		if (target.is('.page-link')) {
+			if (countClick > 0) {
+				temp_link = "&";
+			}
+			link += temp_link + "page=" + target.text();
+			countClick++;
+		}
 
 		window.location.href = "/penduduk" + link;
 	}
@@ -410,6 +429,15 @@ $(function() {
 	$('#filter_reset').click(function() {
 		window.location.href = "/penduduk";
 	});
+
+	$('.page-link').click(function(e) {
+		if (window.location.href.indexOf("/penduduk") > -1) {
+			filter_penduduk(e)
+		}
+		else if (window.location.href.indexOf("/kk") > -1) {
+			filter_kk(e)
+		}
+	})
 
 
 	/* SCRIPT ON VIEW PENDUDUK.STAT 
@@ -674,7 +702,7 @@ $(function() {
 	******************************************************************************/
 	var options_nik_kematian = {
 			url: "/penduduk_ajax_kematian",
-			requestDelay: 300,
+			requestDelay: 1000,
 			getValue: "id",
 			template: {
 				type: "description",
@@ -692,7 +720,7 @@ $(function() {
 				},
 				hideAnimation: {
 					type: "slide",
-					time: 50,
+					time: 10,
 				},
 				onSelectItemEvent: function() {
 					$('#nama_kematian').val("");
@@ -794,7 +822,7 @@ $(function() {
 	******************************************************************************/
 	var options_nik_pindah = {
 			url: "/penduduk_ajax_kematian",
-			requestDelay: 300,
+			requestDelay: 1000,
 			getValue: "id",
 			template: {
 				type: "description",
@@ -812,7 +840,7 @@ $(function() {
 				},
 				hideAnimation: {
 					type: "slide",
-					time: 50,
+					time: 10,
 				},
 				onSelectItemEvent: function() {
 					$('#nama_form').val("");
@@ -832,7 +860,7 @@ $(function() {
 	******************************************************************************/
 	var options_nik_surat = {
 			url: "/penduduk_ajax_kematian",
-			requestDelay: 300,
+			requestDelay: 1000,
 			getValue: "id",
 			template: {
 				type: "description",
@@ -850,7 +878,7 @@ $(function() {
 				},
 				hideAnimation: {
 					type: "slide",
-					time: 50,
+					time: 10,
 				},
 				onSelectItemEvent: function() {
 					$('#nama_surat').val("");
@@ -900,7 +928,7 @@ $(function() {
 	******************************************************************************/
 	var options_nik_ayah = {
 			url: "/penduduk_ajax_kematian",
-			requestDelay: 300,
+			requestDelay: 1000,
 			getValue: "id",
 			template: {
 				type: "description",
@@ -918,7 +946,7 @@ $(function() {
 				},
 				hideAnimation: {
 					type: "slide",
-					time: 50,
+					time: 10,
 				},
 				onSelectItemEvent: function() {
 					$('#nama_ayah').val("");
@@ -968,7 +996,7 @@ $(function() {
 	******************************************************************************/
 	var options_nik_pelapor = {
 			url: "/penduduk_ajax_kematian",
-			requestDelay: 300,
+			requestDelay: 1000,
 			getValue: "id",
 			template: {
 				type: "description",
@@ -986,7 +1014,7 @@ $(function() {
 				},
 				hideAnimation: {
 					type: "slide",
-					time: 50,
+					time: 10,
 				},
 				onSelectItemEvent: function() {
 					$('#nama_pelapor').val("");

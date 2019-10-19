@@ -24,7 +24,7 @@
 		<tbody id="list_kk">
 		@foreach($kk as $index => $row)
 				<tr>
-					<td>{{ $index + 1 }}</td>
+					<td>{{ ($kk->currentPage() - 1) * $kk->perPage() + $index + 1 }}</td>
 					<td><a href="/kk/{{ $row->id }}"> {{ $row->id }} </a></td>
 
 					@if($row->kepala_keluarga != NULL)
@@ -52,14 +52,6 @@
 		</tbody>
 	</table>
 	<center> 
-		<form action="/kk/download" method="post" autocomplete="off">
-			{{ csrf_field() }}
-			<input type="hidden" name="kk_download" value="{{ $kk_download }}" required>
-			<input type="hidden" name="rt_choose" value="{{ $rt_choose_report }}" required>
-			<input type="hidden" name="rw_choose" value="{{ $rw_choose_report }}" required>
-			<input type="hidden" name="q" value="{{ $q }}" required>
-			<input type="submit" class="btn btn-primary" value="Download">
-		</form>
 		{{ $kk->links() }} 
 		@include('layout.error')
 	</center>

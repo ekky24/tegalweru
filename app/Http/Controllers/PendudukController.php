@@ -212,9 +212,15 @@ class PendudukController extends Controller
             $penduduk = $penduduk->orWhere('id', "like", "%" . request('q'). "%")->orWhere('nama', "like", "%" . request('q'). "%")->orWhere('kewarganegaraan', "like", "%" . request('q'). "%")->orWhere('no_paspor', "like", "%" . request('q'). "%")->orWhere('nama_ayah', "like", "%" . request('q'). "%")->orWhere('nik_ayah', "like", "%" . request('q'). "%")->orWhere('nama_ibu', "like", "%" . request('q'). "%")->orWhere('kk_id', "like", "%" . request('q'). "%");
             $search_term = request('q');
         }
-        
+        if ($request->has('page')) {
+            $page_choose = (int) request('page');
+        }
+        else {
+            $page_choose = 1;
+        }
+
         $penduduk_download = $penduduk->getAktif()->get();
-        $penduduk = $penduduk->getAktif()->paginate(15);
+        $penduduk = $penduduk->getAktif()->paginate(15, ['*'], 'page', $page_choose);
         $pendidikan = Pendidikan::all();
         $pekerjaan = JenisPekerjaan::all();
         $hubungan = StatusHubungan::all();
@@ -264,7 +270,7 @@ class PendudukController extends Controller
             }
         }
 
-        return view('penduduk.show_all', compact('penduduk', 'pendidikan', 'pekerjaan', 'hubungan', 'jk_choose', 'pendidikan_choose', 'pekerjaan_choose', 'hubungan_choose', 'agama', 'agama_choose', 'search_term', 'penduduk_download', 'jk_choose_report', 'pendidikan_choose_report', 'agama_choose_report', 'pekerjaan_choose_report', 'hubungan_choose_report', 'usia_choose', 'usia'));
+        return view('penduduk.show_all', compact('penduduk', 'pendidikan', 'pekerjaan', 'hubungan', 'jk_choose', 'pendidikan_choose', 'pekerjaan_choose', 'hubungan_choose', 'agama', 'agama_choose', 'search_term', 'penduduk_download', 'jk_choose_report', 'pendidikan_choose_report', 'agama_choose_report', 'pekerjaan_choose_report', 'hubungan_choose_report', 'usia_choose', 'usia', 'page_choose'));
     }
 
     public function getPdf() {

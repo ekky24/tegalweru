@@ -23,7 +23,7 @@
 		<tbody>
 			@foreach($penduduk as $index => $row)
 				<tr>
-					<td>{{ $index + 1 }}</td>
+					<td>{{ ($penduduk->currentPage() - 1) * $penduduk->perPage() + $index + 1 }}</td>
 					<td><a href="/penduduk/{{ $row->id }}"> {{ $row->id }} </a></td>
 					<td>{{ $row->nama }}</td>
 					@if($row->kk_id != NULL)
@@ -38,7 +38,7 @@
 		</tbody>
 	</table>
 	<center> 
-		<form action="/penduduk/download" method="post" autocomplete="off">
+		<!--<form action="/penduduk/download" method="post" autocomplete="off">
 			{{ csrf_field() }}
 			<input type="hidden" name="penduduk_download" value="{{ $penduduk_download }}" required>
 			<input type="hidden" name="jk_choose" value="{{ $jk_choose_report }}" required>
@@ -48,7 +48,7 @@
 			<input type="hidden" name="hubungan_choose" value="{{ $hubungan_choose_report }}" required>
 			<input type="hidden" name="search_term" value="{{ $search_term }}" required>
 			<input type="submit" class="btn btn-primary" value="Download">
-		</form>
+		</form>-->
 		{{ $penduduk->links() }} 
 	</center>
 @endsection

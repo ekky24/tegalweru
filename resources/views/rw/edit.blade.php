@@ -16,7 +16,7 @@
 						<label>Rukun Warga</label>
 					</div>
 					<div class="col-md-6">
-						<input class="form-control" placeholder="Masukkan Nomor RW" type="text" name="nama" value="{{ substr($rw->nama, 2) }}" required>
+						<input class="form-control" placeholder="Masukkan Nomor RW" type="text" name="nama" value="{{ $rw->nama }}" required>
 					</div>
 		        </div>
 		        <div class="form-group row">

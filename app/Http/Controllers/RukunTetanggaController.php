@@ -51,7 +51,7 @@ class RukunTetanggaController extends Controller
         ]);
 
         $rt->rukun_warga_id = request('rukun_warga_id');
-        $rt->nama = "00" . request('nama');
+        $rt->nama = request('nama');
         $rt->ketua = strtoupper(request('ketua'));
         $rt->save();
 

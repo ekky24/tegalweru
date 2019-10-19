@@ -15,7 +15,7 @@
 				
 				<label class="control-label col-sm-3">Rukun Tetangga</label>
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="Masukkan Nomor RT" type="text" value="{{substr($rt->nama, 2)}}" name="nama" required>
+					<input class="form-control" placeholder="Masukkan Nomor RT" type="text" value="{{ $rt->nama }}" name="nama" required>
 				</div>
 			</div>
 			<div class="form-group">

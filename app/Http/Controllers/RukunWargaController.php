@@ -47,7 +47,7 @@ class RukunWargaController extends Controller
             'ketua' => 'required'
         ]);
 
-        $rw->nama = "00" . request('nama');
+        $rw->nama = request('nama');
         $rw->ketua = strtoupper(request('ketua'));
         $rw->save();
 

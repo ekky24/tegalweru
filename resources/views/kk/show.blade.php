@@ -41,11 +41,19 @@
 		
 		<tr>
 			<th>Alamat</th>
-			<td>{{ $kk->alamat }}</td>
+			@if($kk->alamat != NULL)
+				<td>{{ $kk->alamat }}</td>
+			@else
+				<td>-</td>
+			@endif
 		</tr>
 		<tr>
 			<th>RT/RW</th>
-			<td>{{ $kk->get_rt->nama . "/" . $kk->get_rw->nama }}</td>
+			@if($kk->get_rt != NULL)
+				<td>{{ $kk->get_rt->nama . "/" . $kk->get_rw->nama }}</td>
+			@else
+				<td>-</td>
+			@endif
 		</tr>
 		<tr>
 			<th>Desa/Kelurahan</th>

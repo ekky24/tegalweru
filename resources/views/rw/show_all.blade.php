@@ -19,7 +19,7 @@
 		@foreach($rw as $index => $row)
 			<tbody>
 				<tr>
-					<td>{{ $index + 1 }}</td>
+					<td>{{ ($rw->currentPage() - 1) * $rw->perPage() + $index + 1 }}</td>
 					<td>{{ $row->nama }}</td>
 					<td>{{ $row->ketua }}</td>
 					<td class="text-center"><a class="btn btn-primary" href="/rw/{{$row->id}}/edit">Edit</a></td>
