@@ -33,7 +33,7 @@
 				$waktu = Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at);
 			?>
 				<tr>
-					<td>{{ $index + 1 }}</td>
+					<td>{{ ($sku->currentPage() - 1) * $sku->perPage() + $index + 1 }}</td>
 					@if($row->jenis_surat == 'domisili_usaha')
 						<td>{{ $row->penduduk_id }}</td>
 					@else
@@ -60,14 +60,6 @@
 		</tbody>
 	</table>
 	<center>
-		<form action="/sku/download" method="post" autocomplete="off">
-			{{ csrf_field() }}
-			<input type="hidden" name="surat_download" value="{{ $sku_download }}" required>
-			<input type="hidden" name="tahun_choose" value="{{ $tahun_choose }}" required>
-			<input type="hidden" name="bulan_choose" value="{{ $bulan_choose }}" required>
-			<input type="hidden" name="search_term" value="{{ $search_term }}" required>
-			<input type="submit" class="btn btn-primary" value="Download">
-		</form>
 		{{ $sku->links() }}
 	</center>
 @endsection

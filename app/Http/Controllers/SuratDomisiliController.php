@@ -93,9 +93,15 @@ class SuratDomisiliController extends Controller
             $skdom = $skdom->orWhere('penduduk_id', "like", "%" . request('q'). "%")->orWhere('penerbit_id', "like", "%" . request('q'). "%")->orWhere('dari_pengantar', "like", "%" . request('q'). "%")->orWhere('nomor', "like", "%" . request('q'). "%");
             $search_term = request('q');
         }
+        if ($request->has('page')) {
+            $page_choose = (int) request('page');
+        }
+        else {
+            $page_choose = 1;
+        }
 
         $skdom_download = $skdom->get();
-        $skdom = $skdom->paginate(15);
+        $skdom = $skdom->paginate(15, ['*'], 'page', $page_choose);
     	
     	return view('skdom.show_all', compact('skdom', 'search_term', 'tahun_choose', 'bulan_choose', 'skdom_download'));
     }

@@ -119,9 +119,15 @@ class SuratIjinKeramaianController extends Controller
             $sik = $sik->orWhere('penduduk_id', "like", "%" . request('q'). "%")->orWhere('nama_acara', "like", "%" . request('q'). "%")->orWhere('penerbit_id', "like", "%" . request('q'). "%")->orWhere('nomor', "like", "%" . request('q'). "%");
             $search_term = request('q');
         }
+        if ($request->has('page')) {
+            $page_choose = (int) request('page');
+        }
+        else {
+            $page_choose = 1;
+        }
 
         $sik_download = $sik->get();
-        $sik = $sik->paginate(15);
+        $sik = $sik->paginate(15, ['*'], 'page', $page_choose);
     	
     	return view('sik.show_all', compact('sik', 'search_term', 'tahun_choose', 'bulan_choose', 'sik_download'));
     }

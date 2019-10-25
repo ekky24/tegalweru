@@ -437,6 +437,18 @@ $(function() {
 		else if (window.location.href.indexOf("/kk") > -1) {
 			filter_kk(e)
 		}
+		else if (window.location.href.indexOf("/sku") > -1) {
+			filter_kematian(e)
+		}
+		else if (window.location.href.indexOf("/sik") > -1) {
+			filter_kematian(e)
+		}
+		else if (window.location.href.indexOf("/skk") > -1) {
+			filter_kematian(e)
+		}
+		else if (window.location.href.indexOf("/skdom") > -1) {
+			filter_kematian(e)
+		}
 	})
 
 
@@ -753,8 +765,10 @@ $(function() {
 	var countClick = 0;
 	var temp_link = "?";
 
-	function filter_kematian() {
+	function filter_kematian(e) {
+		e.preventDefault();
 		countClick = 0;
+		var target = $(e.target);
 
 		if ($('#filter_tahun').val() != "none") {
 			if (countClick > 0) {
@@ -775,6 +789,13 @@ $(function() {
 				temp_link = "&";
 			}
 			link += temp_link + "q=" + $('#search_val_kematian').val();
+			countClick++;
+		}
+		if (target.is('.page-link')) {
+			if (countClick > 0) {
+				temp_link = "&";
+			}
+			link += temp_link + "page=" + target.text();
 			countClick++;
 		}
 

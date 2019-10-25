@@ -34,7 +34,7 @@
 				$waktu_acara = Carbon::createFromFormat('Y-m-d', $row->tgl_acara);
 			?>
 				<tr>
-					<td>{{ $index + 1 }}</td>
+					<td>{{ ($sik->currentPage() - 1) * $sik->perPage() + $index + 1 }}</td>
 					<td><a href="/penduduk/{{ $row->penduduk_id }}">{{ $row->penduduk_id }}</a></td>
 					
 					@if(strlen($row->nama_acara) > 40)
@@ -53,14 +53,14 @@
 		</tbody>
 	</table>
 	<center>
-		<form action="/sik/download" method="post" autocomplete="off">
+		<!--<form action="/sik/download" method="post" autocomplete="off">
 			{{ csrf_field() }}
 			<input type="hidden" name="surat_download" value="{{ $sik_download }}" required>
 			<input type="hidden" name="tahun_choose" value="{{ $tahun_choose }}" required>
 			<input type="hidden" name="bulan_choose" value="{{ $bulan_choose }}" required>
 			<input type="hidden" name="search_term" value="{{ $search_term }}" required>
 			<input type="submit" class="btn btn-primary" value="Download">
-		</form>
+		</form>-->
 		{{ $sik->links() }}
 	</center>
 @endsection

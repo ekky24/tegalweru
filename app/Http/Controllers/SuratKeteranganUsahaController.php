@@ -176,9 +176,15 @@ class SuratKeteranganUsahaController extends Controller
             $sku = $sku->orWhere('penduduk_id', "like", "%" . request('q'). "%")->orWhere('keperluan', "like", "%" . request('q'). "%")->orWhere('penerbit_id', "like", "%" . request('q'). "%")->orWhere('nomor', "like", "%" . request('q'). "%");
             $search_term = request('q');
         }
+        if ($request->has('page')) {
+            $page_choose = (int) request('page');
+        }
+        else {
+            $page_choose = 1;
+        }
 
         $sku_download = $sku->get();
-        $sku = $sku->paginate(15);
+        $sku = $sku->paginate(15, ['*'], 'page', $page_choose);
     	
     	return view('sku.show_all', compact('sku', 'search_term', 'tahun_choose', 'bulan_choose', 'sku_download'));
     }

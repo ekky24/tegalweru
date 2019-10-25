@@ -33,7 +33,7 @@
 				$waktu = Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at);
 			?>
 				<tr>
-					<td>{{ $index + 1 }}</td>
+					<td>{{ ($skdom->currentPage() - 1) * $skdom->perPage() + $index + 1 }}</td>
 					<td><a href="/penduduk/{{ $row->penduduk_id }}">{{ $row->penduduk_id }}</a></td>
 					
 					@if($row->get_penduduk != NULL)
@@ -60,14 +60,14 @@
 		</tbody>
 	</table>
 	<center>
-		<form action="/skdom/download" method="post" autocomplete="off">
+		<!--<form action="/skdom/download" method="post" autocomplete="off">
 			{{ csrf_field() }}
 			<input type="hidden" name="surat_download" value="{{ $skdom_download }}" required>
 			<input type="hidden" name="tahun_choose" value="{{ $tahun_choose }}" required>
 			<input type="hidden" name="bulan_choose" value="{{ $bulan_choose }}" required>
 			<input type="hidden" name="search_term" value="{{ $search_term }}" required>
 			<input type="submit" class="btn btn-primary" value="Download">
-		</form>
+		</form>-->
 		{{ $skdom->links() }}
 	</center>
 @endsection

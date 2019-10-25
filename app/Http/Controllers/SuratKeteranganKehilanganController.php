@@ -90,9 +90,15 @@ class SuratKeteranganKehilanganController extends Controller
             $skk = $skk->orWhere('penduduk_id', "like", "%" . request('q'). "%")->orWhere('keterangan', "like", "%" . request('q'). "%")->orWhere('penerbit_id', "like", "%" . request('q'). "%")->orWhere('nomor', "like", "%" . request('q'). "%");
             $search_term = request('q');
         }
+        if ($request->has('page')) {
+            $page_choose = (int) request('page');
+        }
+        else {
+            $page_choose = 1;
+        }
 
         $skk_download = $skk->get();
-        $skk = $skk->paginate(15);
+        $skk = $skk->paginate(15, ['*'], 'page', $page_choose);
     	
     	return view('skk.show_all', compact('skk', 'search_term', 'tahun_choose', 'bulan_choose', 'skk_download'));
     }
