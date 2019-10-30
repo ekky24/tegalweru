@@ -86,7 +86,7 @@ class SuratPindahMasukController extends Controller
             'nama_ibu' => 'nullable'
         ]);
 
-        $tempat_lahir = Kota::select('id')->where('nama', request('tempat_lahir'))->get();
+        $tempat_lahir = Kota::select('id')->where('nama', "like", "%" . request('tempat_lahir') . "%")->get();
 
         Penduduk::create([
             'id' => request('nik'),
@@ -152,9 +152,15 @@ class SuratPindahMasukController extends Controller
             $pindah = $pindah->orWhere('nama_pemohon', "like", "%" . request('q'). "%")->orWhere('alamat_asal', "like", "%" . request('q'). "%")->orWhere('alamat_tujuan', "like", "%" . request('q'). "%")->orWhere('nomor', "like", "%" . request('q'). "%");
             $search_term = request('q');
         }
+        if ($request->has('page')) {
+            $page_choose = (int) request('page');
+        }
+        else {
+            $page_choose = 1;
+        }
 
         $pindah_download = $pindah->get();
-        $pindah = $pindah->paginate(15);
+        $pindah = $pindah->paginate(15, ['*'], 'page', $page_choose);
     	
     	return view('pindah_masuk.show_all', compact('pindah', 'search_term', 'tahun_choose', 'bulan_choose', 'pindah_download'));
     }

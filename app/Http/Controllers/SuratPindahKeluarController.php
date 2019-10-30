@@ -158,9 +158,15 @@ class SuratPindahKeluarController extends Controller
             $pindah = $pindah->orWhere('penduduk_id', "like", "%" . request('q'). "%")->orWhere('alasan_pindah', "like", "%" . request('q'). "%")->orWhere('alamat_tujuan', "like", "%" . request('q'). "%")->orWhere('nomor', "like", "%" . request('q'). "%");
             $search_term = request('q');
         }
+        if ($request->has('page')) {
+            $page_choose = (int) request('page');
+        }
+        else {
+            $page_choose = 1;
+        }
 
         $pindah_download = $pindah->get();
-        $pindah = $pindah->paginate(15);
+        $pindah = $pindah->paginate(15, ['*'], 'page', $page_choose);
     	
     	return view('pindah_keluar.show_all', compact('pindah', 'search_term', 'tahun_choose', 'bulan_choose', 'pindah_download'));
     }

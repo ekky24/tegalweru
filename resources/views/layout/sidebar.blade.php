@@ -213,7 +213,7 @@
                                             <a href="/pindah_masuk">Data Pindah Masuk</a>
                                         </li>
                                         <li>
-                                            <a href="/pindah_masuk/insert">Input Data</a>
+                                            <a href="/pindah_masuk/insert">Input Pindah Masuk</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-second-level -->
@@ -225,7 +225,7 @@
                                             <a href="/pindah_keluar">Data Pindah Keluar</a>
                                         </li>
                                         <li>
-                                            <a href="/pindah_keluar/insert">Input Data</a>
+                                            <a href="/pindah_keluar/insert">Input Pindah Keluar</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-second-level -->

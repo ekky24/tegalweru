@@ -35,7 +35,7 @@
 				$waktu = Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at);
 			?>
 				<tr>
-					<td>{{ $index + 1 }}</td>
+					<td>{{ ($skd->currentPage() - 1) * $skd->perPage() + $index + 1 }}</td>
 					
 					@if(strlen($row->nama_anak) > 20)
 						<td>{{ substr($row->nama_anak, 0, 20) . "..."}}</td>
@@ -77,14 +77,14 @@
 		</tbody>
 	</table>
 	<center>
-		<form action="/skd/download" method="post" autocomplete="off">
+		<!--<form action="/skd/download" method="post" autocomplete="off">
 			{{ csrf_field() }}
 			<input type="hidden" name="surat_download" value="{{ $skd_download }}" required>
 			<input type="hidden" name="tahun_choose" value="{{ $tahun_choose }}" required>
 			<input type="hidden" name="bulan_choose" value="{{ $bulan_choose }}" required>
 			<input type="hidden" name="search_term" value="{{ $search_term }}" required>
 			<input type="submit" class="btn btn-primary" value="Download">
-		</form>
+		</form>-->
 		{{ $skd->links() }}
 	</center>
 @endsection

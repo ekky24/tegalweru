@@ -61,7 +61,7 @@ class PendudukController extends Controller
     		'nama_ibu' => 'nullable'
     	]);
 
-    	$tempat_lahir = Kota::select('id')->where('nama', request('tempat_lahir'))->get();
+    	$tempat_lahir = Kota::select('id')->where('nama', "like", "%" . request('tempat_lahir') . "%")->get();
 
     	Penduduk::create([
     		'id' => request('nik'),
@@ -117,7 +117,7 @@ class PendudukController extends Controller
             'nama_ibu' => 'nullable'
         ]);
 
-        $tempat_lahir = Kota::select('id')->where('nama', request('tempat_lahir'))->get();
+        $tempat_lahir = Kota::select('id')->where('nama', "like", "%" . request('tempat_lahir') . "%")->get();
 
         $penduduk->nama = strtoupper(request('nama'));
         $penduduk->alamat_sebelumnya = strtoupper(request('alamat_sebelum'));

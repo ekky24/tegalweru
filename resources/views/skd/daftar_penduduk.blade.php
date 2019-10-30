@@ -152,13 +152,6 @@ $tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->y
 			</div>
 			<div class="form-group">
 				
-				<label class="control-label col-sm-3">No. KITAS/KITAP</label>
-				<div class="col-sm-6">
-					<input type="number" name="kitas" class="form-control" placeholder="Masukkan Nomor KITAS/KITAP">
-				</div>
-			</div>
-			<div class="form-group">
-				
 				<label class="control-label col-sm-3">Nama Ayah</label>
 				<div class="col-sm-6">
 					<input class="form-control" placeholder="Masukkan Nama Ayah" type="text" name="ayah" value="{{ $skd->get_penduduk_ayah->nama }}" required>
@@ -169,6 +162,13 @@ $tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->y
 				<label class="control-label col-sm-3">Nama Ibu</label>
 				<div class="col-sm-6">
 					<input class="form-control" placeholder="Masukkan Nama Ibu" type="text" name="ibu" value="{{ $skd->get_penduduk_ibu->nama }}" required>
+				</div>
+			</div>
+			<div class="form-group">
+				
+				<label class="control-label col-sm-3">Nomor Kartu Keluarga</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Nomor Kartu Keluarga" type="number" name="kk_id" required>
 				</div>
 			</div>
 			<br>

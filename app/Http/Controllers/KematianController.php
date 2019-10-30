@@ -106,9 +106,15 @@ class KematianController extends Controller
             $kematian = $kematian->orWhere('penduduk_id', "like", "%" . request('q'). "%")->orWhere('tempat_kematian', "like", "%" . request('q'). "%")->orWhere('tgl_kematian', "like", "%" . request('q'). "%")->orWhere('penyebab_kematian', "like", "%" . request('q'). "%")->orWhere('created_at', "like", "%" . request('q'). "%")->orWhere('nomor', "like", "%" . request('q'). "%");
             $search_term = request('q');
         }
+        if ($request->has('page')) {
+            $page_choose = (int) request('page');
+        }
+        else {
+            $page_choose = 1;
+        }
 
         $kematian_download = $kematian->get();
-        $kematian = $kematian->paginate(15);
+        $kematian = $kematian->paginate(15, ['*'], 'page', $page_choose);
 
     	return view('kematian.show_all', compact('kematian', 'tahun_choose', 'bulan_choose', 'search_term', 'kematian_download'));
     }

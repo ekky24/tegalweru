@@ -121,12 +121,18 @@ class SuratKeteranganDukunController extends Controller
             $bulan_choose = request('bulan');
         }
         if ($request->has('q')) {
-            $skd = $skd->orWhere('nik_ibu', "like", "%" . request('q'). "%")->orWhere('nama_anak', "like", "%" . request('q'). "%")->orWhere('penerbit_id', "like", "%" . request('q'). "%")->orWhere('nik_ayah', "like", "%" . request('q'). "%")->orWhere('nomor', "like", "%" . request('q'). "%");
+            $skd = $skd->orWhere('nama_ibu', "like", "%" . request('q'). "%")->orWhere('nama_anak', "like", "%" . request('q'). "%")->orWhere('penerbit_id', "like", "%" . request('q'). "%")->orWhere('nama_ayah', "like", "%" . request('q'). "%")->orWhere('nomor', "like", "%" . request('q'). "%");
             $search_term = request('q');
+        }
+        if ($request->has('page')) {
+            $page_choose = (int) request('page');
+        }
+        else {
+            $page_choose = 1;
         }
 
         $skd_download = $skd->get();
-        $skd = $skd->paginate(15);
+        $skd = $skd->paginate(15, ['*'], 'page', $page_choose);
     	
     	return view('skd.show_all', compact('skd', 'search_term', 'tahun_choose', 'bulan_choose', 'skd_download'));
     }
@@ -230,15 +236,17 @@ class SuratKeteranganDukunController extends Controller
             'status_hubungan_id' => 'required|numeric',
             'kewarganegaraan' => 'required',
             'ayah' => 'required',
-            'ibu' => 'required'
+            'ibu' => 'required',
+            'kk_id' => 'required'
         ]);
 
-        $tempat_lahir = Kota::select('id')->where('nama', request('tempat_lahir'))->get();
+        $tempat_lahir = Kota::select('id')->where('nama', "like", "%" . request('tempat_lahir') . "%")->get();
 
         Penduduk::create([
             'id' => request('nik'),
             'nama' => strtoupper(request('nama')),
             'jk' => request('jk'),
+            'alamat_sebelumnya' => '',
             'tempat_lahir' => $tempat_lahir[0]->id,
             'tgl_lahir' => request('tgl_lahir'),
             'agama_id' => request('agama_id'),
@@ -247,9 +255,9 @@ class SuratKeteranganDukunController extends Controller
             'status_nikah_id' => request('status_nikah_id'),
             'status_hubungan_id' => request('status_hubungan_id'),
             'kewarganegaraan' => request('kewarganegaraan'),
-            'ayah' => strtoupper(request('ayah')),
-            'ibu' => strtoupper(request('ibu')),
-            'no_kitas' => request('kitas'),
+            'nama_ayah' => strtoupper(request('ayah')),
+            'nama_ibu' => strtoupper(request('ibu')),
+            'kk_id' => strtoupper(request('kk_id')),
             'no_paspor' => request('paspor')
         ]);
 

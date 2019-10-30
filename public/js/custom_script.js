@@ -331,11 +331,11 @@ $(function() {
 			link += temp_link + "rt=" + $('#filter_rt').val();
 			countClick++;
 		}
-		if ($('#filter_search').val() != "") {
+		if ($('#search_val').val() != "") {
 			if (countClick > 0) {
 				temp_link = "&";
 			}
-			link += temp_link + "q=" + $('#filter_search').val();
+			link += temp_link + "q=" + $('#search_val').val();
 			countClick++;
 		}
 		if (target.is('.page-link')) {
@@ -447,6 +447,18 @@ $(function() {
 			filter_kematian(e)
 		}
 		else if (window.location.href.indexOf("/skdom") > -1) {
+			filter_kematian(e)
+		}
+		else if (window.location.href.indexOf("/skd") > -1) {
+			filter_kematian(e)
+		}
+		else if (window.location.href.indexOf("/kematian") > -1) {
+			filter_kematian(e)
+		}
+		else if (window.location.href.indexOf("/pindah_masuk") > -1) {
+			filter_kematian(e)
+		}
+		else if (window.location.href.indexOf("/pindah_keluar") > -1) {
 			filter_kematian(e)
 		}
 	})
