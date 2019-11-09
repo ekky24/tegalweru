@@ -33,7 +33,7 @@ class RukunWargaController extends Controller
     }
 
     public function show_all() {
-        $rw = RukunWarga::paginate(10);
+        $rw = RukunWarga::paginate(15);
         return view('rw.show_all', compact('rw'));
     }
 

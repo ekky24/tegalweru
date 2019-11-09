@@ -20,7 +20,7 @@
 		@foreach($rt as $index => $row)
 			<tbody>
 				<tr>
-					<td>{{ $index + 1 }}</td>
+					<td>{{ ($rt->currentPage() - 1) * $rt->perPage() + $index + 1 }}</td>
 					<td>{{ $row->nama }}</td>
 					<td>{{ $row->ketua }}</td>
 					<td>{{ $row->get_rw->nama }}</td>

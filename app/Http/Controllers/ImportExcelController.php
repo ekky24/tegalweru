@@ -64,12 +64,31 @@ class ImportExcelController extends Controller
 	    				else {
 	    					if ($next == "KK") {
 	    						$alamat = explode(',', $row[5]);
-	    						if (count($alamat) == 5) {
-	    							$temp_rw = substr($alamat[2], strpos($alamat[2], ':') + 2);
-		    						$rw = RukunWarga::whereRaw("nama like '%" . $temp_rw . "%'")->first()->id;
+	    						if (count($alamat) >= 5) {
+	    							$arr_rw = $alamat[2];
+	    							$arr_rt = $alamat[1];
+
+	    							if (count($alamat) > 5) {
+		    							foreach($alamat as $value) {
+		    								if(strpos($value, 'RW') !== false) {
+		    									$arr_rw = $value;
+		    								}
+		    								else if(strpos($value, 'RT') !== false) {
+		    									$arr_rt = $value;
+		    								}
+		    							}
+	    							}
+
+	    							$temp_rw = substr($arr_rw, strpos($arr_rw, ':') + 2);
+	    							try {
+	    								$rw = RukunWarga::whereRaw("nama like '%" . $temp_rw . "%'")->first()->id;
+	    							}
+	    							catch(\Exception $e) {
+	    								$rw = null;
+	    							}
 		    						
 		    						if ($rw != null) {
-		    							$temp_rt = substr($alamat[1], strpos($alamat[1], ':') + 2);
+		    							$temp_rt = substr($arr_rt, strpos($arr_rt, ':') + 2);
 		    							$rt = RukunTetangga::whereRaw("nama like '%" . $temp_rt . "%'")->first();
 		    							if ($rt != null) {
 		    								$rt = $rt->id;

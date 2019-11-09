@@ -80,25 +80,25 @@
                     <p class="text-justify body">Orang tersebut di atas akan mempunyai Hajat: <span style="text-decoration: underline"><b>{{ $surat->nama_acara }}</b></span></p>
                     <p class="text-justify body">Dengan Hiburan: <span style="text-decoration: underline;"><b>{{ $surat->hiburan }}</b></span></p>
                     <p class="text-justify body">Yang dilaksanakan pada: </p>
-                    <table style="min-width: 50%">
+                    <table style="min-width: 80%">
                         <tr>
-                            <td class="header">Hari</td>
-                            <td>:</td>
+                            <td class="header" style="width: 40%">Hari</td>
+                            <td style="width: 5%">:</td>
                             <td>{{ $hari }}</td>
                         </tr>
                         <tr>
-                            <td class="header">Tanggal</td>
-                            <td>:</td>
+                            <td class="header" style="width: 40%">Tanggal</td>
+                            <td style="width: 5%">:</td>
                             <td>{{ $tgl_acara->day . " " . $bulan_arr[$tgl_acara->month-1] . " " . $tgl_acara->year }}</td>
                         </tr>
                         <tr>
-                            <td class="header">Jam</td>
-                            <td>:</td>
+                            <td class="header" style="width: 40%">Jam</td>
+                            <td style="width: 5%">:</td>
                             <td>{{ $surat->jam_acara }}</td>
                         </tr>
                         <tr>
-                            <td class="header">Bertempat Di</td>
-                            <td>:</td>
+                            <td class="header" style="width: 40%">Bertempat Di</td>
+                            <td style="width: 5%">:</td>
                             <td>{{ $surat->tempat_acara }}</td>
                         </tr>
                     </table>
