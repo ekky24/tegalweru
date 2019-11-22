@@ -28,7 +28,7 @@ class PenerbitController extends Controller
     		'jabatan' => strtoupper(request('jabatan'))
     	]);
 
-    	return redirect('/penerbit');
+    	return redirect('/penerbit')->with(['msg' => 'Data berhasil disimpan']);
     }
 
     public function store_edit(Penerbit $penerbit) {
@@ -43,7 +43,7 @@ class PenerbitController extends Controller
     	$penerbit->jabatan = strtoupper(request('jabatan'));
     	$penerbit->save();
 
-    	return redirect('/penerbit');
+    	return redirect('/penerbit')->with(['msg' => 'Data berhasil diubah']);
     }
 
     public function show_all() {
@@ -57,6 +57,6 @@ class PenerbitController extends Controller
 
     public function delete(Penerbit $penerbit) {
     	$penerbit->delete();
-    	return redirect('/penerbit');
+    	return redirect('/penerbit')->with(['msg' => 'Data berhasil dihapus']);
     }
 }

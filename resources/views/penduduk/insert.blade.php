@@ -60,15 +60,7 @@
 				
 				<label class="control-label col-sm-3">Tanggal Lahir</label>
 				<div class="col-sm-6">
-					<input class="form-control" id="date_custom" placeholder="Masukkan Tanggal Lahir" type="date" name="tgl_lahir" required>
-					<div class="form-group" id="div_dummy" style="display: none;">
-						<div class="col-md-10">
-							<input type="text" class="form-control" id="date_dummy" readonly>
-						</div>
-						<div class="col-md-2">
-							<button id="button_dummy" class="form-control col-md-2 btn btn-primary">Edit</button>
-						</div>
-					</div>
+					<input class="form-control datepicker" placeholder="Masukkan Tanggal Lahir" name="tgl_lahir" required>
 				</div>
 			</div>
 			<div class="form-group">
@@ -210,6 +202,8 @@
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
 		</form>
+		@include('layout.error')
+		@include('layout.success')
 	</div>
 </div>
 

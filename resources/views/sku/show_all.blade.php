@@ -62,4 +62,5 @@
 	<center>
 		{{ $sku->links() }}
 	</center>
+@include('layout.success')
 @endsection

@@ -180,7 +180,7 @@ class KartuKeluargaController extends Controller
             'tgl_pengurusan' => request('tgl_pengurusan'),
         ]);
 
-    	return redirect('/kk');
+    	return redirect('/kk')->with(['msg' => 'Data berhasil disimpan']);
     }
 
     public function store_edit(KartuKeluarga $kk) {
@@ -244,7 +244,7 @@ class KartuKeluargaController extends Controller
         $kk->tgl_pengurusan = request('tgl_pengurusan');
         $kk->save();
 
-        return redirect("/kk/$kk->id");
+        return redirect("/kk/$kk->id")->with(['msg' => 'Data berhasil diubah']);
     }
 
     public function show(KartuKeluarga $kk) {

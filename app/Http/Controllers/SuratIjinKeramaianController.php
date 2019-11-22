@@ -95,7 +95,7 @@ class SuratIjinKeramaianController extends Controller
             $sik->save();
         }
 
-    	return redirect("/sik/$sik->id");
+    	return redirect("/sik/$sik->id")->with(['msg' => 'Data berhasil disimpan']);
     }
 
     public function show_all(Request $request) {
@@ -126,7 +126,7 @@ class SuratIjinKeramaianController extends Controller
             $page_choose = 1;
         }
 
-        $sik_download = $sik->get();
+        $sik_download = $sik->orderBy('created_at', 'desc')->get();
         $sik = $sik->paginate(15, ['*'], 'page', $page_choose);
     	
     	return view('sik.show_all', compact('sik', 'search_term', 'tahun_choose', 'bulan_choose', 'sik_download'));
@@ -199,12 +199,12 @@ class SuratIjinKeramaianController extends Controller
 
     	$sik->save();
 
-    	return redirect("/sik/$sik->id");
+    	return redirect("/sik/$sik->id")->with(['msg' => 'Data berhasil diubah']);
     }
 
     public function delete(SuratIjinKeramaian $sik) {
     	$sik->delete();
-    	return redirect('/sik');
+    	return redirect('/sik')->with(['msg' => 'Data berhasil dihapus']);
     }
 
     public function print($id) {

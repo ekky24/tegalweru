@@ -69,7 +69,7 @@ class SuratDomisiliController extends Controller
             'penerbit_id' => request('penerbit_id'),
     	]);
 
-    	return redirect("/skdom/$skdom->id");
+    	return redirect("/skdom/$skdom->id")->with(['msg' => 'Data berhasil disimpan']);
     }
 
     public function show_all(Request $request) {
@@ -100,7 +100,7 @@ class SuratDomisiliController extends Controller
             $page_choose = 1;
         }
 
-        $skdom_download = $skdom->get();
+        $skdom_download = $skdom->orderBy('created_at', 'desc')->get();
         $skdom = $skdom->paginate(15, ['*'], 'page', $page_choose);
     	
     	return view('skdom.show_all', compact('skdom', 'search_term', 'tahun_choose', 'bulan_choose', 'skdom_download'));
@@ -160,12 +160,12 @@ class SuratDomisiliController extends Controller
     	$skdom->penerbit_id = strtoupper(request('penerbit_id'));
     	$skdom->save();
 
-    	return redirect("/skdom/$skdom->id");
+    	return redirect("/skdom/$skdom->id")->with(['msg' => 'Data berhasil diubah']);
     }
 
     public function delete(SuratDomisili $skdom) {
     	$skdom->delete();
-    	return redirect('/skdom');
+    	return redirect('/skdom')->with(['msg' => 'Data berhasil dihapus']);
     }
 
     public function print($id) {

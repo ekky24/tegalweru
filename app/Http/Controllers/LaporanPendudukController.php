@@ -123,7 +123,7 @@ class LaporanPendudukController extends Controller
             'kk' => $kk,
         ]);
 
-        return redirect('/laporan_penduduk');
+        return redirect('/laporan_penduduk')->with(['msg' => 'Data berhasil disimpan']);
     }
 
     public function download(LaporanPenduduk $laporan) {
@@ -147,6 +147,6 @@ class LaporanPendudukController extends Controller
 
     public function delete(LaporanPenduduk $laporan) {
         $laporan->delete();
-        return redirect('/laporan_penduduk');
+        return redirect('/laporan_penduduk')->with(['msg' => 'Data berhasil dihapus']);
     }
 }

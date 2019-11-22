@@ -114,4 +114,5 @@
 	
 	
 	@include('layout.error')
+	@include('layout.success')
 @endsection

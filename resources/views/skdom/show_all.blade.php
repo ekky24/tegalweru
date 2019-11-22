@@ -70,4 +70,5 @@
 		</form>-->
 		{{ $skdom->links() }}
 	</center>
+@include('layout.success')
 @endsection

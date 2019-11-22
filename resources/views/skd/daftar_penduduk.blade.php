@@ -177,6 +177,7 @@ $tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->y
 			</div>
 		</form>
 		@include('layout.error')
+		@include('layout.success')
 	</div>
 </div>
 

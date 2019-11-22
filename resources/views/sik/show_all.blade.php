@@ -63,4 +63,5 @@
 		</form>-->
 		{{ $sik->links() }}
 	</center>
+@include('layout.success')
 @endsection

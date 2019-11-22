@@ -87,6 +87,7 @@
 			</div>
 		</form>
 		@include('layout.error')
+		@include('layout.success')
 	</div>
 </div>
 

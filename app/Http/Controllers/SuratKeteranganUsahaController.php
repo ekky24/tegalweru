@@ -152,7 +152,7 @@ class SuratKeteranganUsahaController extends Controller
         
         $sku->save();
 
-        return redirect("/sku/$sku->id");
+        return redirect("/sku/$sku->id")->with(['msg' => 'Data berhasil disimpan']);
     }
 
     public function show_all(Request $request) {
@@ -183,7 +183,7 @@ class SuratKeteranganUsahaController extends Controller
             $page_choose = 1;
         }
 
-        $sku_download = $sku->get();
+        $sku_download = $sku->orderBy('created_at', 'desc')->get();
         $sku = $sku->paginate(15, ['*'], 'page', $page_choose);
     	
     	return view('sku.show_all', compact('sku', 'search_term', 'tahun_choose', 'bulan_choose', 'sku_download'));
@@ -304,7 +304,7 @@ class SuratKeteranganUsahaController extends Controller
         }
         
         $sku->save();
-    	return redirect("/sku/$sku->id");
+    	return redirect("/sku/$sku->id")->with(['msg' => 'Data berhasil diubah']);
     }
 
     public function show($id) {
@@ -340,7 +340,7 @@ class SuratKeteranganUsahaController extends Controller
 
     public function delete(SuratKeteranganUsaha $sku) {
     	$sku->delete();
-    	return redirect('/sku');
+    	return redirect('/sku')->with(['msg' => 'Data berhasil dihapus']);
     }
 
     public function stat_sku_tahun(Request $request) {

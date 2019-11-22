@@ -76,4 +76,5 @@
 	<a class="btn btn-primary" href="/kematian/{{ $kematian->penduduk_id }}/edit">Edit Data</a>
 	<a class="btn btn-primary" href="/kematian/{{ $kematian->penduduk_id }}/download">Download</a><br><br>
 	</center>
+@include('layout.success')
 @endsection

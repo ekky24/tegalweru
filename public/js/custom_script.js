@@ -1,4 +1,9 @@
 $(function() {
+	$('.datepicker').datepicker({
+	    format: 'dd-mm-yyyy',
+	    autoclose: 'true'
+	});
+
 	var value;
 	var options_nik = {
 			url: "/penduduk_ajax_nik",
@@ -99,6 +104,18 @@ $(function() {
 		swal({
 			type: 'error',
 			title: 'Gagal...',
+			html: msg
+		})
+	}
+
+	if ($('.layout_success').length>0) {
+		var msg = "";
+
+		msg = $('.msg').text()
+
+		swal({
+			type: 'success',
+			title: 'Sukses',
 			html: msg
 		})
 	}

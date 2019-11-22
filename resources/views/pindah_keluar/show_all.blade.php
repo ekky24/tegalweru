@@ -60,4 +60,5 @@
 		</form>-->
 		{{ $pindah->links() }}
 	</center>
+@include('layout.success')
 @endsection

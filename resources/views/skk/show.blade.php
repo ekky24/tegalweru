@@ -51,4 +51,5 @@
 	<a class="btn btn-primary" href="/skk/{{ $skk->id }}/edit">Edit Data</a>
 	<a class="btn btn-primary" href="/skk/{{ $skk->id }}/download">Download</a><br><br>
 	</center>
+@include('layout.success')
 @endsection

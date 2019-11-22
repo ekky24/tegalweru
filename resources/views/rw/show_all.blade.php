@@ -28,4 +28,5 @@
 		@endforeach
 	</table>
 	<center>{{ $rw->links() }}</center>
+@include('layout.success')
 @endsection

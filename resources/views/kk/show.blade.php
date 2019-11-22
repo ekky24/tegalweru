@@ -101,4 +101,5 @@
 	
 	<a class="btn btn-primary" href="/kk/{{ $kk->id }}/edit">Edit Data</a><br><br>
 	</center>
+@include('layout.success')
 @endsection

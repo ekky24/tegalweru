@@ -132,4 +132,5 @@
 	</table>
 	<a class="btn btn-primary" href="/penduduk/{{ $penduduk->id }}/edit">Edit Data</a><br><br>
 	</center>
+@include('layout.success')
 @endsection

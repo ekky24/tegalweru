@@ -30,4 +30,5 @@
 		@endforeach
 	</table>
 	<center>{{ $rt->links() }}</center>
+@include('layout.success')
 @endsection

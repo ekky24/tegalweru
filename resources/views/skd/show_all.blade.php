@@ -87,4 +87,5 @@
 		</form>-->
 		{{ $skd->links() }}
 	</center>
+@include('layout.success')
 @endsection

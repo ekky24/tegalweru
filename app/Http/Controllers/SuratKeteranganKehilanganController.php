@@ -66,7 +66,7 @@ class SuratKeteranganKehilanganController extends Controller
     		'penerbit_id' => request('penerbit_id')
     	]);
 
-    	return redirect("/skk/$skk->id");
+    	return redirect("/skk/$skk->id")->with(['msg' => 'Data berhasil disimpan']);
     }
 
     public function show_all(Request $request) {
@@ -97,7 +97,7 @@ class SuratKeteranganKehilanganController extends Controller
             $page_choose = 1;
         }
 
-        $skk_download = $skk->get();
+        $skk_download = $skk->orderBy('created_at', 'desc')->get();
         $skk = $skk->paginate(15, ['*'], 'page', $page_choose);
     	
     	return view('skk.show_all', compact('skk', 'search_term', 'tahun_choose', 'bulan_choose', 'skk_download'));
@@ -153,12 +153,12 @@ class SuratKeteranganKehilanganController extends Controller
     	$skk->penerbit_id = strtoupper(request('penerbit_id'));
     	$skk->save();
 
-    	return redirect("/skk/$skk->id");
+    	return redirect("/skk/$skk->id")->with(['msg' => 'Data berhasil diubah']);
     }
 
     public function delete(SuratKeteranganKehilangan $skk) {
     	$skk->delete();
-    	return redirect('/skk');
+    	return redirect('/skk')->with(['msg' => 'Data berhasil dihapus']);
     }
 
     public function print($id) {

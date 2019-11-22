@@ -29,7 +29,7 @@ class RukunWargaController extends Controller
             'kelurahan_id' => '3507300006'
     	]);
 
-    	return redirect('/rw');
+    	return redirect('/rw')->with(['msg' => 'Data berhasil disimpan']);
     }
 
     public function show_all() {
@@ -51,6 +51,6 @@ class RukunWargaController extends Controller
         $rw->ketua = strtoupper(request('ketua'));
         $rw->save();
 
-        return redirect('/rw');
+        return redirect('/rw')->with(['msg' => 'Data berhasil diubah']);
     }
 }

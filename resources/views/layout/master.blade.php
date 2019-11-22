@@ -28,6 +28,9 @@
     <!-- Custom Fonts -->
     <link href="/vendor/font-awesome/css/fontawesome-all.css" rel="stylesheet" type="text/css">
 
+    <!-- Datepicker -->
+    <link href="/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -42,7 +45,6 @@
     <div id="wrapper">
 
         @include('layout.nav')
-
         <div id="page-wrapper">
             @yield('content')
         </div>
@@ -70,7 +72,10 @@
     <script src="/vendor/chart/Chart.min.js"></script>
 
     <!-- Sweet Alert.js -->
-    <script src="/vendor/swal/sweetalert2.min.js"></script>    
+    <script src="/vendor/swal/sweetalert2.min.js"></script>
+
+    <!-- Datepicker -->
+    <script src="/js/bootstrap-datepicker.min.js"></script>    
 
     <!-- Custom Theme JavaScript -->
     <script src="/dist/js/sb-admin-2.js"></script>

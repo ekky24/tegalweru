@@ -56,4 +56,5 @@
 	</table><br>
 	<a class="btn btn-primary" href="/pindah_masuk/{{ $pindah->id }}/edit">Edit Data</a>
 	</center>
+@include('layout.success')
 @endsection

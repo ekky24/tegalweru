@@ -52,4 +52,5 @@
 		</form>-->
 		{{ $kematian->links() }}
 	</center>
+@include('layout.success')
 @endsection

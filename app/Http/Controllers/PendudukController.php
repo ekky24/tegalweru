@@ -70,7 +70,7 @@ class PendudukController extends Controller
             'no_paspor' => request('paspor'),
     		'jk' => request('jk'),
     		'tempat_lahir' => $tempat_lahir[0]->id,
-            'tgl_lahir' => request('tgl_lahir'),
+            'tgl_lahir' => Carbon::createFromFormat('d-m-Y', request('tgl_lahir')),
     		'no_akta_lahir' => request('akta_lahir'),
     		'agama_id' => request('agama_id'),
             'nama_organisasi' => strtoupper(request('nama_organisasi')),
@@ -88,7 +88,7 @@ class PendudukController extends Controller
     		'nama_ibu' => strtoupper(request('nama_ibu')),
     	]);
 
-    	return redirect('/penduduk');
+    	return redirect('/penduduk')->with(['msg' => 'Data berhasil disimpan']);
     }
 
     public function store_edit(Penduduk $penduduk) {
@@ -124,7 +124,7 @@ class PendudukController extends Controller
         $penduduk->no_paspor = strtoupper(request('paspor'));
         $penduduk->jk = request('jk');
         $penduduk->tempat_lahir = $tempat_lahir[0]->id;
-        $penduduk->tgl_lahir = request('tgl_lahir');
+        $penduduk->tgl_lahir = Carbon::createFromFormat('d-m-Y', request('tgl_lahir'));
         $penduduk->no_akta_lahir = strtoupper(request('akta_lahir'));
         $penduduk->agama_id = request('agama_id');
         if (request('agama_id') != 7) {
@@ -147,7 +147,7 @@ class PendudukController extends Controller
         $penduduk->nama_ibu = strtoupper(request('nama_ibu'));
         $penduduk->save();
 
-        return redirect("/penduduk/$penduduk->id");
+        return redirect("/penduduk/$penduduk->id")->with(['msg' => 'Data berhasil diubah']);
     }
 
     public function show_all(Request $request) {

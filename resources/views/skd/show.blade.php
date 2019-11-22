@@ -100,4 +100,5 @@
 	@endif
 	<br><br>
 	</center>
+@include('layout.success')
 @endsection

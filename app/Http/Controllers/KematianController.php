@@ -82,7 +82,7 @@ class KematianController extends Controller
     	$penduduk->status = "1";
     	$penduduk->save();
 
-    	return redirect("kematian/$kematian->penduduk_id");
+    	return redirect("kematian/$kematian->penduduk_id")->with(['msg' => 'Data berhasil disimpan']);
     }
 
     public function show_all(Request $request) {
@@ -113,7 +113,7 @@ class KematianController extends Controller
             $page_choose = 1;
         }
 
-        $kematian_download = $kematian->get();
+        $kematian_download = $kematian->orderBy('created_at', 'desc')->get();
         $kematian = $kematian->paginate(15, ['*'], 'page', $page_choose);
 
     	return view('kematian.show_all', compact('kematian', 'tahun_choose', 'bulan_choose', 'search_term', 'kematian_download'));
@@ -176,7 +176,7 @@ class KematianController extends Controller
         $kematian->penerbit_id = strtoupper(request('penerbit_id'));
     	$kematian->save();
 
-    	return redirect("kematian/$kematian->penduduk_id");
+    	return redirect("kematian/$kematian->penduduk_id")->with(['msg' => 'Data berhasil diubah']);
     }
 
     public function show($id) {
@@ -204,7 +204,7 @@ class KematianController extends Controller
     	$penduduk->save();
 
     	$kematian->delete();
-    	return redirect('/kematian');
+    	return redirect('/kematian')->with(['msg' => 'Data berhasil dihapus']);
     }
 
     public function stat_kematian_tahun(Request $request) {

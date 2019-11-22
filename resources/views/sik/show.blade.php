@@ -86,4 +86,5 @@
 	<a class="btn btn-primary" href="/sik/{{ $sik->id }}/edit">Edit Data</a>
 	<a class="btn btn-primary" href="/sik/{{ $sik->id }}/download">Download</a><br><br>
 	</center>
+@include('layout.success')
 @endsection

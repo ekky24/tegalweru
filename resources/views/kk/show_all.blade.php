@@ -55,4 +55,5 @@
 		{{ $kk->links() }} 
 		@include('layout.error')
 	</center>
+@include('layout.success')
 @endsection

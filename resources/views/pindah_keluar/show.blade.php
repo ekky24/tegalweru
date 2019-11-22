@@ -81,4 +81,5 @@
 	<a class="btn btn-primary" href="/pindah_keluar/{{ $pindah->id }}/edit">Edit Data</a>
 	<a class="btn btn-primary" href="/pindah_keluar/{{ $pindah->id }}/download">Download</a><br><br>
 	</center>
+@include('layout.success')
 @endsection

@@ -40,7 +40,7 @@ class RukunTetanggaController extends Controller
     		'ketua' => strtoupper(request('ketua')),
     	]);
 
-    	return redirect('/rt');
+    	return redirect('/rt')->with(['msg' => 'Data berhasil disimpan']);
     }
 
     public function store_edit(RukunTetangga $rt) {
@@ -55,6 +55,6 @@ class RukunTetanggaController extends Controller
         $rt->ketua = strtoupper(request('ketua'));
         $rt->save();
 
-        return redirect('/rt');
+        return redirect('/rt')->with(['msg' => 'Data berhasil diubah']);
     }
 }

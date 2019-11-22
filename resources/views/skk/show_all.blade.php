@@ -62,4 +62,5 @@
 		</form>-->
 		{{ $skk->links() }}
 	</center>
+@include('layout.success')
 @endsection

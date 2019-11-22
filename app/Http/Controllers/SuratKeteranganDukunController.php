@@ -100,7 +100,7 @@ class SuratKeteranganDukunController extends Controller
             'surat_lahir_id' => $skd->id,
         ]);
 
-    	return redirect("/skd/$skd->id");
+    	return redirect("/skd/$skd->id")->with(['msg' => 'Data berhasil disimpan']);
     }
 
     public function show_all(Request $request) {
@@ -131,7 +131,7 @@ class SuratKeteranganDukunController extends Controller
             $page_choose = 1;
         }
 
-        $skd_download = $skd->get();
+        $skd_download = $skd->orderBy('created_at', 'desc')->get();
         $skd = $skd->paginate(15, ['*'], 'page', $page_choose);
     	
     	return view('skd.show_all', compact('skd', 'search_term', 'tahun_choose', 'bulan_choose', 'skd_download'));
@@ -209,7 +209,7 @@ class SuratKeteranganDukunController extends Controller
     	$skd->penerbit_id = strtoupper(request('penerbit_id'));
     	$skd->save();
 
-    	return redirect("/skd/$skd->id");
+    	return redirect("/skd/$skd->id")->with(['msg' => 'Data berhasil diubah']);
     }
 
     public function daftar_penduduk($id) {
@@ -264,7 +264,7 @@ class SuratKeteranganDukunController extends Controller
         $kelahiran = Kelahiran::where('surat_lahir_id', $id)->first();
         $kelahiran->delete();
 
-        return redirect('/penduduk');
+        return redirect('/penduduk')->with(['msg' => 'Data berhasil disimpan']);
     }
 
     public function delete(SuratKeteranganDukun $skd) {
@@ -275,7 +275,7 @@ class SuratKeteranganDukunController extends Controller
         }
 
     	$skd->delete();
-    	return redirect('/skd');
+    	return redirect('/skd')->with(['msg' => 'Data berhasil dihapus']);
     }
 
     public function print($id) {

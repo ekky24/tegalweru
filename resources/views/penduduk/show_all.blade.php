@@ -51,4 +51,5 @@
 		</form>-->
 		{{ $penduduk->links() }} 
 	</center>
+@include('layout.success')
 @endsection

@@ -205,6 +205,8 @@
 				<button type="submit" class="btn btn-primary" name="submit_button" value="selesai">Selesai</button>
 			</div>
 		</form>
+		@include('layout.error')
+		@include('layout.success')
 	</div>
 </div>
 

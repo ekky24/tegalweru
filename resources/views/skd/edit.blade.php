@@ -218,6 +218,8 @@ $value_tgl_lahir3 = $arr_tgl_lahir3[2] . '-' . $arr_tgl_lahir3[1] . '-' . $arr_t
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
 		</form>	
+		@include('layout.error')
+		@include('layout.success')
 	</div>
 </div>
 

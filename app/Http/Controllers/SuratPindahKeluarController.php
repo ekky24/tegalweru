@@ -134,7 +134,7 @@ class SuratPindahKeluarController extends Controller
             }
         }
 
-        return redirect("/pindah_keluar/$pindah->id");
+        return redirect("/pindah_keluar/$pindah->id")->with(['msg' => 'Data berhasil disimpan']);
     }
 
     public function show_all(Request $request) {
@@ -165,7 +165,7 @@ class SuratPindahKeluarController extends Controller
             $page_choose = 1;
         }
 
-        $pindah_download = $pindah->get();
+        $pindah_download = $pindah->orderBy('created_at', 'desc')->get();
         $pindah = $pindah->paginate(15, ['*'], 'page', $page_choose);
     	
     	return view('pindah_keluar.show_all', compact('pindah', 'search_term', 'tahun_choose', 'bulan_choose', 'pindah_download'));
@@ -299,7 +299,7 @@ class SuratPindahKeluarController extends Controller
             $penduduk->save();
         }
 
-    	return redirect("/pindah_keluar/$pindah->id");
+    	return redirect("/pindah_keluar/$pindah->id")->with(['msg' => 'Data berhasil diubah']);
     }
 
     public function delete(SuratPindahKeluar $pindah) {
@@ -317,7 +317,7 @@ class SuratPindahKeluarController extends Controller
         }
 
     	$pindah->delete();
-    	return redirect('/pindah_keluar');
+    	return redirect('/pindah_keluar')->with(['msg' => 'Data berhasil dihapus']);
     }
 
     public function print($id) {

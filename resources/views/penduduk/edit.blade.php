@@ -3,7 +3,7 @@ use Carbon\Carbon;
 
 $bulan_arr = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
 $waktu = Carbon::createFromFormat('Y-m-d', $penduduk->tgl_lahir);
-$tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->year;
+$tgl_dummy = $waktu->day . "-" . $waktu->month . "-" . $waktu->year;
 ?>
 
 @extends('layout.master')
@@ -72,15 +72,7 @@ $tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->y
 				
 				<label class="control-label col-sm-3">Tanggal Lahir</label>
 				<div class="col-sm-6">
-					<input class="form-control" id="date_custom" placeholder="Masukkan Tanggal Kematian" type="date" name="tgl_lahir" value="{{ $penduduk->tgl_lahir }}" style="display: none;" required>
-					<div class="form-group" id="div_dummy">
-						<div class="col-md-10">
-							<input type="text" class="form-control" id="date_dummy" value="{{ $tgl_dummy }}" readonly>
-						</div>
-						<div class="col-md-2">
-							<button id="button_dummy" class="form-control col-md-2 btn btn-primary">Edit</button>
-						</div>
-					</div>
+					<input class="form-control datepicker" placeholder="Masukkan Tanggal Lahir" name="tgl_lahir" value="{{ $tgl_dummy }}" required>
 				</div>
 			</div>
 			<div class="form-group">
@@ -253,6 +245,8 @@ $tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->y
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
 		</form>	
+		@include('layout.error')
+		@include('layout.success')
 	</div>
 </div>
 

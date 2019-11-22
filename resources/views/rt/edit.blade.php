@@ -45,6 +45,8 @@
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
 		</form>
+		@include('layout.error')
+		@include('layout.success')
 	</div>
 </div>
 

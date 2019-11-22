@@ -160,5 +160,6 @@ $tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->y
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</div>
 </form>
-
+@include('layout.error')
+@include('layout.success')
 @endsection
