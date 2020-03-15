@@ -4,22 +4,22 @@ use Carbon\Carbon;
 $bulan_arr = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
 $waktu = Carbon::createFromFormat('Y-m-d', $skd->tgl_kelahiran);
 $tgl = $waktu->toDateString();
-$tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->year;
+$tgl_dummy = $waktu->day . " " . $waktu->month . " " . $waktu->year;
 
-$temp_tempat_lahir = $skd->get_penduduk_ibu->get_tempat_lahir->nama;
-$value_tempat_lahir = substr($temp_tempat_lahir, strpos($temp_tempat_lahir, " ") + 1);
+$temp_tempat_lahir = $skd->get_penduduk_ibu->tempat_lahir;
 $arr_tgl_lahir = explode('-', $skd->get_penduduk_ibu->tgl_lahir);
 $value_tgl_lahir = $arr_tgl_lahir[2] . '-' . $arr_tgl_lahir[1] . '-' . $arr_tgl_lahir[0];
 
-$temp_tempat_lahir2 = $skd->get_penduduk_ayah->get_tempat_lahir->nama;
-$value_tempat_lahir2 = substr($temp_tempat_lahir2, strpos($temp_tempat_lahir2, " ") + 1);
+$temp_tempat_lahir2 = $skd->get_penduduk_ayah->tempat_lahir;
 $arr_tgl_lahir2 = explode('-', $skd->get_penduduk_ayah->tgl_lahir);
 $value_tgl_lahir2 = $arr_tgl_lahir2[2] . '-' . $arr_tgl_lahir2[1] . '-' . $arr_tgl_lahir2[0];
 
-$temp_tempat_lahir3 = $skd->get_penduduk_pelapor->get_tempat_lahir->nama;
-$value_tempat_lahir3 = substr($temp_tempat_lahir3, strpos($temp_tempat_lahir3, " ") + 1);
+$temp_tempat_lahir3 = $skd->get_penduduk_pelapor->tempat_lahir;
 $arr_tgl_lahir3 = explode('-', $skd->get_penduduk_ibu->tgl_lahir);
 $value_tgl_lahir3 = $arr_tgl_lahir3[2] . '-' . $arr_tgl_lahir3[1] . '-' . $arr_tgl_lahir3[0];
+
+$waktu_surat = Carbon::createFromFormat('Y-m-d H:i:s', $skd->created_at);
+$tgl_dummy = $waktu_surat->day . "-" . $waktu_surat->month . "-" . $waktu_surat->year;
 ?>
 
 @extends('layout.master')
@@ -36,10 +36,15 @@ $value_tgl_lahir3 = $arr_tgl_lahir3[2] . '-' . $arr_tgl_lahir3[1] . '-' . $arr_t
 		<form method="post" action="/skd/{{ $skd->id }}" autocomplete="off" class="form-horizontal">
 			{{ csrf_field() }}
 			<div class="form-group">
-				
+				<label class="control-label col-sm-3">Judul Surat</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Judul Surat" type="text" name="judul_surat" value="{{ $skd->judul }}" required>
+				</div>
+			</div>
+			<div class="form-group">
 				<label class="control-label col-sm-3">Nomor Surat</label>
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="Nomor Surat" type="text" value="{{ $skd->nomor }}" readonly>
+					<input class="form-control" placeholder="Masukkan Nomor Surat" type="text" name="nomor_surat" value="{{ $skd->nomor }}" required>
 				</div>
 			</div>
 			<h4>Data Ibu:</h4>
@@ -58,7 +63,7 @@ $value_tgl_lahir3 = $arr_tgl_lahir3[2] . '-' . $arr_tgl_lahir3[1] . '-' . $arr_t
 			<div class="form-group">
 				<label class="control-label col-sm-3">Tempat, Tgl Lahir</label>
 				<div class="col-sm-6">
-					<input id="ttl_surat" class="form-control" placeholder="Nama" value="{{ $value_tempat_lahir . ', ' . $value_tgl_lahir }}" type="text" readonly>
+					<input id="ttl_surat" class="form-control" placeholder="Nama" value="{{ $temp_tempat_lahir . ', ' . $value_tgl_lahir }}" type="text" readonly>
 				</div>
 			</div>
 			<div class="form-group">
@@ -88,7 +93,7 @@ $value_tgl_lahir3 = $arr_tgl_lahir3[2] . '-' . $arr_tgl_lahir3[1] . '-' . $arr_t
 			<div class="form-group">
 				<label class="control-label col-sm-3">Tempat, Tgl Lahir</label>
 				<div class="col-sm-6">
-					<input id="ttl_ayah" class="form-control" placeholder="Tempat Tgl Lahir" type="text" value="{{ $value_tempat_lahir2 . ', ' . $value_tgl_lahir2 }}" readonly>
+					<input id="ttl_ayah" class="form-control" placeholder="Tempat Tgl Lahir" type="text" value="{{ $temp_tempat_lahir2 . ', ' . $value_tgl_lahir2 }}" readonly>
 				</div>
 			</div>
 			<div class="form-group">
@@ -118,7 +123,7 @@ $value_tgl_lahir3 = $arr_tgl_lahir3[2] . '-' . $arr_tgl_lahir3[1] . '-' . $arr_t
 			<div class="form-group">
 				<label class="control-label col-sm-3">Tempat, Tgl Lahir</label>
 				<div class="col-sm-6">
-					<input id="ttl_pelapor" class="form-control" placeholder="Tempat Tgl Lahir" type="text" value="{{ $value_tempat_lahir3 . ', ' . $value_tgl_lahir3 }}" readonly>
+					<input id="ttl_pelapor" class="form-control" placeholder="Tempat Tgl Lahir" type="text" value="{{ $temp_tempat_lahir3 . ', ' . $value_tgl_lahir3 }}" readonly>
 				</div>
 			</div>
 			<div class="form-group">
@@ -143,15 +148,7 @@ $value_tgl_lahir3 = $arr_tgl_lahir3[2] . '-' . $arr_tgl_lahir3[1] . '-' . $arr_t
 				
 				<label class="control-label col-sm-3">Tanggal Kelahiran</label>
 				<div class="col-sm-6">
-					<input id="date_custom" class="form-control" placeholder="Masukkan Tanggal Kelahiran" type="date" name="tgl_kelahiran" value="{{ $tgl }}" style="display: none;" required>
-					<div class="form-group" id="div_dummy">
-						<div class="col-md-10">
-							<input type="text" class="form-control" id="date_dummy" value="{{ $tgl_dummy }}" readonly>
-						</div>
-						<div class="col-md-2">
-							<button id="button_dummy" class="form-control col-md-2 btn btn-primary">Edit</button>
-						</div>
-					</div>
+					<input class="form-control datepicker" placeholder="Masukkan Tanggal Kelahiran" name="tgl_kelahiran" value="{{ $tgl_dummy }}" required>
 				</div>
 			</div>
 			<div class="form-group">
@@ -211,6 +208,12 @@ $value_tgl_lahir3 = $arr_tgl_lahir3[2] . '-' . $arr_tgl_lahir3[1] . '-' . $arr_t
 						@endif
 						@endforeach
 					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Tanggal Surat</label>
+				<div class="col-sm-6">
+					<input class="form-control datepicker" placeholder="Masukkan Tanggal Surat" name="created_at" value="{{ $tgl_dummy }}" required>
 				</div>
 			</div>
 			<br>

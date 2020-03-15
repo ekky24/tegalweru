@@ -51,7 +51,7 @@
 		</tr>
 		<tr>
 			<th>Tempat Lahir</th>
-			<td>{{ $penduduk->get_tempat_lahir->nama }}</td>
+			<td>{{ $penduduk->tempat_lahir }}</td>
 		</tr>
 		<tr>
 			<th>Tanggal Lahir</th>

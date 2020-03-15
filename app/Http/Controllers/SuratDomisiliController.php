@@ -25,10 +25,13 @@ class SuratDomisiliController extends Controller
 
     public function store() {
     	$this->validate(request(), [
+            'judul_surat' => 'required',
+            'nomor_surat' => 'required',
     		'nik' => 'required',
             'dari_pengantar' => 'required',
             'tgl_pengantar' => 'required',
             'penerbit_id' => 'required',
+            'created_at' => 'required',
     	]);
 
         if (Penduduk::find(request('nik')) == null) {
@@ -41,32 +44,34 @@ class SuratDomisiliController extends Controller
         $now = Carbon::now();
         $tahun = $now->year;
     
-        if ($cek == null) {
-            $nomor_sebelum = 0;
-        }
-        else {
-            $nomor_temp = $cek->nomor;
-            $tahun_temp = substr($nomor_temp, -4);
+        // if ($cek == null) {
+        //     $nomor_sebelum = 0;
+        // }
+        // else {
+        //     $nomor_temp = $cek->nomor;
+        //     $tahun_temp = substr($nomor_temp, -4);
 
-            if ($tahun_temp < $tahun) {
-                $nomor_sebelum = 0;
-            }
-            else {
-                $get_last = substr($nomor_temp, 4);
-                $pos = strpos($get_last, '/');
-                $nomor_sebelum = substr($get_last, 0, $pos);
-            }
-        }
+        //     if ($tahun_temp < $tahun) {
+        //         $nomor_sebelum = 0;
+        //     }
+        //     else {
+        //         $get_last = substr($nomor_temp, 4);
+        //         $pos = strpos($get_last, '/');
+        //         $nomor_sebelum = substr($get_last, 0, $pos);
+        //     }
+        // }
 
-        $nomor_sesudah = $nomor_sebelum + 1;
-        $nomor_fix = "471/" . $nomor_sesudah . "/35.07.22.2003/" . $tahun;
+        // $nomor_sesudah = $nomor_sebelum + 1;
+        // $nomor_fix = "471/" . $nomor_sesudah . "/35.07.22.2003/" . $tahun;
 
     	$skdom = SuratDomisili::create([
-    		'nomor' => $nomor_fix,
+    		'judul' => strtoupper(request('judul_surat')),
+            'nomor' => strtoupper(request('nomor_surat')),
             'penduduk_id' => request('nik'),
             'dari_pengantar' => strtoupper(request('dari_pengantar')),
             'tgl_pengantar' => strtoupper(request('tgl_pengantar')),
             'penerbit_id' => request('penerbit_id'),
+            'created_at' => Carbon::createFromFormat('d-m-Y', request('created_at')),
     	]);
 
     	return redirect("/skdom/$skdom->id")->with(['msg' => 'Data berhasil disimpan']);
@@ -149,15 +154,21 @@ class SuratDomisiliController extends Controller
 
     public function store_edit(SuratDomisili $skdom) {
     	$this->validate(request(), [
+            'judul_surat' => 'required',
+            'nomor_surat' => 'required',
     		'nik' => 'required',
             'dari_pengantar' => 'required',
             'tgl_pengantar' => 'required',
             'penerbit_id' => 'required',
+            'created_at' => 'required',
     	]);
 
+        $skdom->judul = strtoupper(request('judul_surat'));
+        $skdom->nomor = strtoupper(request('nomor_surat'));
         $skdom->dari_pengantar = strtoupper(request('dari_pengantar'));
         $skdom->tgl_pengantar = strtoupper(request('tgl_pengantar'));
     	$skdom->penerbit_id = strtoupper(request('penerbit_id'));
+        $skdom->created_at = Carbon::createFromFormat('d-m-Y', request('created_at'));
     	$skdom->save();
 
     	return redirect("/skdom/$skdom->id")->with(['msg' => 'Data berhasil diubah']);

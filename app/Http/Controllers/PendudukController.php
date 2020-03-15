@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+ini_set('max_execution_time', '0'); // for infinite time of execution
 
 use App;
 use PDF;
@@ -61,7 +62,7 @@ class PendudukController extends Controller
     		'nama_ibu' => 'nullable'
     	]);
 
-    	$tempat_lahir = Kota::select('id')->where('nama', "like", "%" . request('tempat_lahir') . "%")->get();
+    	$tempat_lahir = request('tempat_lahir');
 
     	Penduduk::create([
     		'id' => request('nik'),
@@ -69,7 +70,7 @@ class PendudukController extends Controller
     		'alamat_sebelumnya' => strtoupper(request('alamat_sebelum')),
             'no_paspor' => request('paspor'),
     		'jk' => request('jk'),
-    		'tempat_lahir' => $tempat_lahir[0]->id,
+    		'tempat_lahir' => strtoupper($tempat_lahir),
             'tgl_lahir' => Carbon::createFromFormat('d-m-Y', request('tgl_lahir')),
     		'no_akta_lahir' => request('akta_lahir'),
     		'agama_id' => request('agama_id'),
@@ -117,13 +118,13 @@ class PendudukController extends Controller
             'nama_ibu' => 'nullable'
         ]);
 
-        $tempat_lahir = Kota::select('id')->where('nama', "like", "%" . request('tempat_lahir') . "%")->get();
+        $tempat_lahir = request('tempat_lahir');
 
         $penduduk->nama = strtoupper(request('nama'));
         $penduduk->alamat_sebelumnya = strtoupper(request('alamat_sebelum'));
         $penduduk->no_paspor = strtoupper(request('paspor'));
         $penduduk->jk = request('jk');
-        $penduduk->tempat_lahir = $tempat_lahir[0]->id;
+        $penduduk->tempat_lahir = strtoupper($tempat_lahir);
         $penduduk->tgl_lahir = Carbon::createFromFormat('d-m-Y', request('tgl_lahir'));
         $penduduk->no_akta_lahir = strtoupper(request('akta_lahir'));
         $penduduk->agama_id = request('agama_id');

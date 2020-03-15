@@ -1,3 +1,10 @@
+<?php
+	use Carbon\Carbon;
+
+	$waktu_surat = Carbon::createFromFormat('Y-m-d H:i:s', $skk->created_at);
+	$tgl_dummy = $waktu_surat->day . "-" . $waktu_surat->month . "-" . $waktu_surat->year;
+?>
+
 @extends('layout.master')
 
 @section('content')
@@ -12,10 +19,15 @@
 		<form method="post" action="/skk/{{ $skk->id }}" autocomplete="off" class="form-horizontal">
 			{{ csrf_field() }}
 			<div class="form-group">
-				
+				<label class="control-label col-sm-3">Judul Surat</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Judul Surat" type="text" name="judul_surat" value="{{ $skk->judul }}" required>
+				</div>
+			</div>
+			<div class="form-group">
 				<label class="control-label col-sm-3">Nomor Surat</label>
 				<div class="col-sm-6">
-					<input class="form-control" placeholder="Nomor Surat" type="text" value="{{ $skk->nomor }}" readonly>
+					<input class="form-control" placeholder="Masukkan Nomor Surat" type="text" name="nomor_surat" value="{{ $skk->nomor }}" required>
 				</div>
 			</div>
 			<div class="form-group">
@@ -82,6 +94,12 @@
 						@endif
 						@endforeach
 					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Tanggal Surat</label>
+				<div class="col-sm-6">
+					<input class="form-control datepicker" placeholder="Masukkan Tanggal Surat" name="created_at" value="{{ $tgl_dummy }}" required>
 				</div>
 			</div>
 			<br>

@@ -7,7 +7,10 @@ use Carbon\Carbon;
 $bulan_arr = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
 $waktu = Carbon::createFromFormat('Y-m-d', $kematian->tgl_kematian);
 $tgl = $waktu->toDateString();
-$tgl_dummy = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->year;
+$tgl_dummy = $waktu->day . "-" . $waktu->month . "-" . $waktu->year;
+
+$waktu_surat = Carbon::createFromFormat('Y-m-d H:i:s', $kematian->created_at);
+$tgl_dummy_surat = $waktu_surat->day . "-" . $waktu_surat->month . "-" . $waktu_surat->year;
 
 if ($kematian->get_penduduk->jk == "L") {
 	$jk = "LAKI-LAKI";
@@ -33,6 +36,20 @@ else {
 	<div class="col-lg-12">
 		<form method="post" action="/kematian/{{ $kematian->penduduk_id }}" autocomplete="off" class="form-horizontal">
 			{{ csrf_field() }}
+			<h4>Data Surat:</h4>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Judul Surat</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Judul Surat" type="text" name="judul_surat" value="{{ $kematian->judul }}" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Nomor Surat</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Nomor Surat" type="text" name="nomor_surat" value="{{ $kematian->nomor }}" required>
+				</div>
+			</div>
+
 			<h4>Data Orang Meninggal:</h4>
 			<div class="form-group">
 				
@@ -72,15 +89,7 @@ else {
 				
 				<label class="control-label col-sm-3">Tanggal Kematian</label>
 				<div class="col-sm-6">
-					<input class="form-control" id="date_custom" placeholder="Masukkan Tanggal Kematian" type="date" name="tgl_kematian" value="{{ $tgl }}" style="display: none;" required>
-					<div class="form-group" id="div_dummy">
-						<div class="col-md-10">
-							<input type="text" class="form-control" id="date_dummy" value="{{ $tgl_dummy }}" readonly>
-						</div>
-						<div class="col-md-2">
-							<button id="button_dummy" class="form-control col-md-2 btn btn-primary">Edit</button>
-						</div>
-					</div>
+					<input class="form-control datepicker" placeholder="Masukkan Tanggal Kematian" name="tgl_kematian" value="{{ $tgl_dummy }}" required>
 				</div>
 			</div>
 			<div class="form-group">
@@ -149,6 +158,12 @@ else {
 					</select>
 				</div>
 			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Tanggal Surat</label>
+				<div class="col-sm-6">
+					<input class="form-control datepicker" placeholder="Masukkan Tanggal Surat" name="created_at" value="{{ $tgl_dummy_surat }}" required>
+				</div>
+			</div><br>
 			<div class="form-group text-center">
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>

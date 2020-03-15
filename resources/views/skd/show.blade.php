@@ -1,6 +1,10 @@
 <?php
 	use Carbon\Carbon;
 	$waktu = Carbon::createFromFormat('Y-m-d', $skd->tgl_kelahiran);
+
+	$bulan_arr = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+	$waktu_surat = Carbon::createFromFormat('Y-m-d H:i:s', $skd->created_at);
+	$tgl = $waktu_surat->day . " " . $bulan_arr[$waktu_surat->month - 1] . " " . $waktu_surat->year;
 ?>
 
 @extends('layout.master')
@@ -12,6 +16,10 @@
         </div>
     </div>
 	<center><table class="table table-bordered table-hover tabel_detail_penduduk">
+		<tr>
+			<th>Judul Surat</th>
+			<td>{{ $skd->judul }}</td>
+		</tr>
 		<tr>
 			<th>Nomor Surat</th>
 			<td>{{ $skd->nomor }}</td>
@@ -91,6 +99,10 @@
 		<tr>
 			<th>Jabatan Pejabat Penerbit</th>
 			<td>{{ $skd->get_penerbit->jabatan }}</td>
+		</tr>
+		<tr>
+			<th>Tanggal Surat</th>
+			<td>{{ strtoupper($tgl) }}</td>
 		</tr>
 	</table>
 	<a class="btn btn-primary" href="/skd/{{ $skd->id }}/edit">Edit Data</a>

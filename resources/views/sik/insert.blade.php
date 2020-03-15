@@ -12,6 +12,19 @@
 		<form method="post" action="/sik" autocomplete="off" class="form-horizontal">
 			{{ csrf_field() }}
 			<div class="form-group">
+				<label class="control-label col-sm-3">Judul Surat</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Judul Surat" type="text" name="judul_surat" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Nomor Surat</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Nomor Surat" type="text" name="nomor_surat" required>
+				</div>
+			</div>
+			
+			<div class="form-group">
 				<label class="control-label col-sm-3">NIK</label>
 				<div class="col-sm-6">
 					<input id="nik_surat" class="form-control" placeholder="Masukkan NIK" type="number" name="nik" required>
@@ -51,15 +64,7 @@
 				
 				<label class="control-label col-sm-3">Tanggal Acara</label>
 				<div class="col-sm-6">
-					<input class="form-control" id="date_custom" placeholder="Masukkan Tanggal Acara" type="date" name="tgl_acara" required>
-					<div class="form-group" id="div_dummy" style="display: none;">
-						<div class="col-md-10">
-							<input type="text" class="form-control" id="date_dummy" readonly>
-						</div>
-						<div class="col-md-2">
-							<button id="button_dummy" class="form-control col-md-2 btn btn-primary">Edit</button>
-						</div>
-					</div>
+					<input class="form-control datepicker" placeholder="Masukkan Tanggal Acara" name="tgl_acara" required>
 				</div>
 			</div>
 			<div class="form-group">
@@ -106,7 +111,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-3">Tanggal</label>
+				<label class="control-label col-sm-3">Tanggal Surat Pengantar</label>
 				<div class="col-sm-6">
 					<input class="form-control" placeholder="Masukkan Tanggal Surat Pengantar" type="text" name="tgl_pengantar">
 				</div>
@@ -120,6 +125,12 @@
 						<option value="{{ $row->id }}">{{ $row->nama }}</option>
 						@endforeach
 					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Tanggal Surat</label>
+				<div class="col-sm-6">
+					<input class="form-control datepicker" placeholder="Masukkan Tanggal Surat" name="created_at" required>
 				</div>
 			</div>
 			<br>

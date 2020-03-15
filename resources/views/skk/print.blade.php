@@ -20,7 +20,7 @@
             <div class="size">
                 <center><img src="{{ public_path() . $image_path }}"></center>
                 <div class="isi">
-                    <center><p class="header">SURAT KETERANGAN KEHILANGAN</p></center>
+                    <center><p class="header">{{ $surat->judul }}</p></center>
                     <center><p class="nomor">Nomor : {{ $surat->nomor }}</p></center>
                     <p class="text-justify body">Yang bertanda tangan dibawah ini Kepala Desa Karangwidoro  Kecamatan Dau Kabupaten Malang menerangkan bahwa :</p>
                     
@@ -38,7 +38,7 @@
                         <tr>
                             <td class="header">Tempat, Tgl Lahir</td>
                             <td>:</td>
-                            <td>{{ $penduduk->get_tempat_lahir->nama . ", " . $penduduk_lahir_dummy }}</td>
+                            <td>{{ $penduduk->tempat_lahir . ", " . $penduduk_lahir_dummy }}</td>
                         </tr>
                         <tr>
                             <td class="header">Kewarganegaraan</td>
@@ -112,9 +112,6 @@
                                 <td>{{ $surat->get_penerbit->jabatan }}</td>
                             </tr>
                         @else
-                            <tr>
-                                <td>&nbsp;</td>
-                            </tr>
                             <tr>
                                 <td>Kepala Desa Karangwidoro</td>
                             </tr>

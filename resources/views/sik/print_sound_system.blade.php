@@ -26,7 +26,7 @@
             <div class="size">
                 <center><img src="{{ public_path() . $image_path }}"></center>
                 <div class="isi" style="padding-left: 0.5cm; padding-right: 0.5cm">
-                    <center><p class="header" style="margin-top: 20px; font-size: 12pt">SURAT IJIN</p></center>
+                    <center><p class="header" style="margin-top: 20px; font-size: 12pt">{{ $surat->judul }}</p></center>
                     <center><p class="nomor" style="margin-bottom: 20px; font-size: 12pt">Nomor : {{ $surat->nomor }}</p></center>
                     <table style="margin-left: 0" width="100%" border="0">
                         <tr>

@@ -65,7 +65,7 @@ $tgl_dummy = $waktu->day . "-" . $waktu->month . "-" . $waktu->year;
 				
 				<label class="control-label col-sm-3">Tempat Lahir</label>
 				<div class="col-sm-6">
-					<input class="form-control" id="kota" placeholder="Masukkan Tempat Lahir" type="text" name="tempat_lahir" value="{{$penduduk->get_tempat_lahir->nama}}" required>
+					<input class="form-control" placeholder="Masukkan Tempat Lahir" type="text" name="tempat_lahir" value="{{$penduduk->tempat_lahir}}" required>
 				</div>
 			</div>
 			<div class="form-group">

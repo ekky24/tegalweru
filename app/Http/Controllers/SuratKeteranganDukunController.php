@@ -31,6 +31,8 @@ class SuratKeteranganDukunController extends Controller
 
     public function store() {
     	$this->validate(request(), [
+            'judul_surat' => 'required',
+            'nomor_surat' => 'required',
     		'nik_ibu' => 'required',
             'nik_ayah' => 'required',
             'nik_pelapor' => 'required',
@@ -41,7 +43,8 @@ class SuratKeteranganDukunController extends Controller
     		'jk_anak' => 'required',
             'nama_anak' => 'required',
             'anak_ke' => 'required',
-    		'penerbit_id' => 'required'
+            'penerbit_id' => 'required',
+    		'created_at' => 'required',
     	]);
 
         if (Penduduk::find(request('nik_ibu')) == null or Penduduk::find(request('nik_ayah')) == null or Penduduk::find(request('nik_pelapor')) == null) {
@@ -54,49 +57,51 @@ class SuratKeteranganDukunController extends Controller
     	$now = Carbon::now();
     	$tahun = $now->year;
     
-    	if ($cek == null) {
-    		$nomor_sebelum = 0;
-    	}
-    	else {
-    		$nomor_temp = $cek->nomor;
-    		$tahun_temp = substr($nomor_temp, -4);
+    	// if ($cek == null) {
+    	// 	$nomor_sebelum = 0;
+    	// }
+    	// else {
+    	// 	$nomor_temp = $cek->nomor;
+    	// 	$tahun_temp = substr($nomor_temp, -4);
 
-    		if ($tahun_temp < $tahun) {
-    			$nomor_sebelum = 0;
-    		}
-    		else {
-    			$get_last = substr($nomor_temp, 7);
-    			$pos = strpos($get_last, '/');
-    			$nomor_sebelum = substr($get_last, 0, $pos);
-    		}
-    	}
+    	// 	if ($tahun_temp < $tahun) {
+    	// 		$nomor_sebelum = 0;
+    	// 	}
+    	// 	else {
+    	// 		$get_last = substr($nomor_temp, 7);
+    	// 		$pos = strpos($get_last, '/');
+    	// 		$nomor_sebelum = substr($get_last, 0, $pos);
+    	// 	}
+    	// }
 
-    	$nomor_sesudah = $nomor_sebelum + 1;
-    	$nomor_fix = "472.11/" . $nomor_sesudah . "/35.07.22.2003/" . $tahun;
+    	// $nomor_sesudah = $nomor_sebelum + 1;
+    	// $nomor_fix = "472.11/" . $nomor_sesudah . "/35.07.22.2003/" . $tahun;
 
     	$tgl_kelahiran = request('tgl_kelahiran');
     	$waktu_kelahiran = date('Y-m-d', strtotime("$tgl_kelahiran"));
 
     	$skd = SuratKeteranganDukun::create([
-    		'nomor' => $nomor_fix,
+    		'judul' => strtoupper(request('judul_surat')),
+            'nomor' => strtoupper(request('nomor_surat')),
     		'nik_ibu' => request('nik_ibu'),
             'nik_ayah' => request('nik_ayah'),
             'nik_pelapor' => request('nik_pelapor'),
             'hubungan_pelapor' => strtoupper(request('hubungan_pelapor')),
-            'tgl_kelahiran' => request('tgl_kelahiran'),
+            'tgl_kelahiran' => Carbon::createFromFormat('d-m-Y', request('tgl_kelahiran')),
             'jam_kelahiran' => request('jam_kelahiran'),
             'tempat_kelahiran' => strtoupper(request('tempat_kelahiran')),
             'jk_anak' => strtoupper(request('jk_anak')),
             'nama_anak' => strtoupper(request('nama_anak')),
             'anak_ke' => strtoupper(request('anak_ke')),
-    		'penerbit_id' => request('penerbit_id')
+    		'penerbit_id' => request('penerbit_id'),
+            'created_at' => Carbon::createFromFormat('d-m-Y', request('created_at')),
     	]);
 
         Kelahiran::create([
             'nama' => strtoupper(request('nama_anak')),
             'jk' => request('jk_anak'),
             'tempat_lahir' => strtoupper('3573'),
-            'tgl_lahir' => request('tgl_kelahiran'),
+            'tgl_lahir' => Carbon::createFromFormat('d-m-Y', request('tgl_kelahiran')),
             'surat_lahir_id' => $skd->id,
         ]);
 
@@ -180,6 +185,8 @@ class SuratKeteranganDukunController extends Controller
 
     public function store_edit(SuratKeteranganDukun $skd) {
     	$this->validate(request(), [
+            'judul_surat' => 'required',
+            'nomor_surat' => 'required',
     		'nik_ibu' => 'required',
             'nik_ayah' => 'required',
             'nik_pelapor' => 'required',
@@ -190,12 +197,15 @@ class SuratKeteranganDukunController extends Controller
             'jk_anak' => 'required',
             'nama_anak' => 'required',
             'anak_ke' => 'required',
-            'penerbit_id' => 'required'
+            'penerbit_id' => 'required',
+            'created_at' => 'required',
     	]);
 
     	$tgl_kelahiran = request('tgl_kelahiran');
     	$waktu_kelahiran = date('Y-m-d', strtotime("$tgl_kelahiran"));
 
+        $skd->judul = strtoupper(request('judul_surat'));
+        $skd->nomor = strtoupper(request('nomor_surat'));
     	$skd->nik_ibu = strtoupper(request('nik_ibu'));
     	$skd->nik_ayah = strtoupper(request('nik_ayah'));
     	$skd->nik_pelapor = strtoupper(request('nik_pelapor'));
@@ -207,6 +217,7 @@ class SuratKeteranganDukunController extends Controller
         $skd->nama_anak = strtoupper(request('nama_anak'));
         $skd->anak_ke = strtoupper(request('anak_ke'));
     	$skd->penerbit_id = strtoupper(request('penerbit_id'));
+        $skd->created_at = Carbon::createFromFormat('d-m-Y', request('created_at'));
     	$skd->save();
 
     	return redirect("/skd/$skd->id")->with(['msg' => 'Data berhasil diubah']);

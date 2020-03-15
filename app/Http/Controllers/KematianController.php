@@ -23,6 +23,8 @@ class KematianController extends Controller
 
     public function store() {
     	$this->validate(request(), [
+            'judul_surat' => 'required',
+            'nomor_surat' => 'required',
             'nik' => 'required',
     		'tempat_kematian' => 'required',
     		'tgl_kematian' => 'required',
@@ -31,6 +33,7 @@ class KematianController extends Controller
             'nik_pelapor' => 'required',
             'hubungan_pelapor' => 'required',
             'penerbit_id' => 'required',
+            'created_at' => 'required',
     	]);
 
         if (Penduduk::find(request('nik')) == null) {
@@ -43,32 +46,33 @@ class KematianController extends Controller
         $now = Carbon::now();
         $tahun = $now->year;
     
-        if ($cek == null) {
-            $nomor_sebelum = 0;
-        }
-        else {
-            $nomor_temp = $cek->nomor;
-            $tahun_temp = substr($nomor_temp, -4);
+        // if ($cek == null) {
+        //     $nomor_sebelum = 0;
+        // }
+        // else {
+        //     $nomor_temp = $cek->nomor;
+        //     $tahun_temp = substr($nomor_temp, -4);
 
-            if ($tahun_temp < $tahun) {
-                $nomor_sebelum = 0;
-            }
-            else {
-                $get_last = substr($nomor_temp, 7);
-                $pos = strpos($get_last, '/');
-                $nomor_sebelum = substr($get_last, 0, $pos);
-            }
-        }
+        //     if ($tahun_temp < $tahun) {
+        //         $nomor_sebelum = 0;
+        //     }
+        //     else {
+        //         $get_last = substr($nomor_temp, 7);
+        //         $pos = strpos($get_last, '/');
+        //         $nomor_sebelum = substr($get_last, 0, $pos);
+        //     }
+        // }
 
-        $nomor_sesudah = $nomor_sebelum + 1;
-        $nomor_fix = "472.12/" . $nomor_sesudah . "/35.07.22.2003/" . $tahun;
+        // $nomor_sesudah = $nomor_sebelum + 1;
+        // $nomor_fix = "472.12/" . $nomor_sesudah . "/35.07.22.2003/" . $tahun;
 
     	$tgl_kematian = request('tgl_kematian');
     	$waktu_kematian = date('Y-m-d H:i:s', strtotime("$tgl_kematian"));
 
     	$kematian = Kematian::create([
     		'penduduk_id' => request('nik'),
-            'nomor' => $nomor_fix,
+            'judul' => strtoupper(request('judul_surat')),
+            'nomor' => strtoupper(request('nomor_surat')),
     		'tempat_kematian' => strtoupper(request('tempat_kematian')),
     		'tgl_kematian' => $waktu_kematian,
             'jam_kematian' => strtoupper(request('jam_kematian')),
@@ -76,6 +80,7 @@ class KematianController extends Controller
             'nik_pelapor' => request('nik_pelapor'),
             'hubungan_pelapor' => strtoupper(request('hubungan_pelapor')),
             'penerbit_id' => request('penerbit_id'),
+            'created_at' => Carbon::createFromFormat('d-m-Y', request('created_at')),
     	]);
 
     	$penduduk = Penduduk::find(request('nik'));
@@ -155,6 +160,8 @@ class KematianController extends Controller
 
     public function store_edit(Kematian $kematian) {
     	$this->validate(request(), [
+            'judul_surat' => 'required',
+            'nomor_surat' => 'required',
             'tempat_kematian' => 'required',
             'tgl_kematian' => 'required',
             'jam_kematian' => 'required',
@@ -162,18 +169,22 @@ class KematianController extends Controller
             'nik_pelapor' => 'required',
             'hubungan_pelapor' => 'required',
             'penerbit_id' => 'required',
+            'created_at' => 'required',
     	]);
 
     	$tgl_kematian = request('tgl_kematian');
     	$waktu_kematian = date('Y-m-d', strtotime("$tgl_kematian"));
 
+        $kematian->judul = strtoupper(request('judul_surat'));
+        $kematian->nomor = strtoupper(request('nomor_surat'));
     	$kematian->tempat_kematian = strtoupper(request('tempat_kematian'));
-    	$kematian->tgl_kematian = $tgl_kematian;
+    	$kematian->tgl_kematian = Carbon::createFromFormat('d-m-Y', request('tgl_kematian'));
         $kematian->jam_kematian = strtoupper(request('jam_kematian'));
         $kematian->penyebab_kematian = strtoupper(request('penyebab_kematian'));
         $kematian->nik_pelapor = strtoupper(request('nik_pelapor'));
     	$kematian->hubungan_pelapor = strtoupper(request('hubungan_pelapor'));
         $kematian->penerbit_id = strtoupper(request('penerbit_id'));
+        $kematian->created_at = Carbon::createFromFormat('d-m-Y', request('created_at'));
     	$kematian->save();
 
     	return redirect("kematian/$kematian->penduduk_id")->with(['msg' => 'Data berhasil diubah']);

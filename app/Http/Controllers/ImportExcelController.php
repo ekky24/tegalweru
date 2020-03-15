@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+ini_set('max_execution_time', '0'); // for infinite time of execution
 
 use Illuminate\Http\Request;
 use Excel;
@@ -47,22 +48,24 @@ class ImportExcelController extends Controller
     	})->get();
 
     	$c_kk = 0;
+    	$next = '';
 
     	if($data->count() > 0)
     	{
-    		foreach($data->toArray() as $key => $value)
+    		foreach($data->toArray() as $i => $row)
     		{
-    				foreach($value as $i => $row)
-	    			{
-	    				//return $value[2];
-	    				if ($row[0] == 'NO. KK') {
-	    					$next = 'KK';
-	    				}
-	    				elseif ($row[0] == 'NO') {
-	    					$next = "PEN";
-	    				}
-	    				else {
-	    					if ($next == "KK") {
+	   //  		if($i == 3) {
+	   //  			return $row;
+				// }
+	   
+	    		if ($row[0] == 'NO. KK') {
+	    			$next = 'KK';
+				}
+	    		elseif ($row[0] == 'NO') {
+	    			$next = "PEN";
+				}
+	    		else {
+	    			if ($next == "KK") {
 	    						$alamat = explode(',', $row[5]);
 	    						if (count($alamat) >= 5) {
 	    							$arr_rw = $alamat[2];
@@ -117,21 +120,19 @@ class ImportExcelController extends Controller
 						        );
 						        $temp_kk = $row[0];
 						        $c_kk += 1;
-	    					}
-	    					elseif ($next == 'PEN') {
-	    						$tempat_lahir = Kota::where('nama', 'like', '%' . $row[4] . '%')->first();
-	    						if ($tempat_lahir != NULL) $tempat_lahir = $tempat_lahir->id;
-	    						else $tempat_lahir = 3573;
+					}
+	    			elseif ($next == 'PEN') {
+	    						$tempat_lahir = $row[4];
 
-	    						$agama = Agama::where('keterangan', 'like', '%' . $row[6] . '%')->first();
+	    						$agama = Agama::where('keterangan', 'like', '%' . $row[7] . '%')->first();
 	    						if ($agama != NULL) $agama = $agama->id;
 	    						else $agama = NULL;
 
-	    						$nikah = StatusNikah::where('keterangan', $row[8])->first();
+	    						$nikah = StatusNikah::where('keterangan', $row[9])->first();
 	    						if ($nikah != NULL) $nikah = $nikah->id;
 	    						else $nikah = NULL;
 
-	    						$hubungan = StatusHubungan::where('keterangan', 'like', '%' . $row[9] . '%')->first();
+	    						$hubungan = StatusHubungan::where('keterangan', 'like', '%' . $row[10] . '%')->first();
 	    						if ($hubungan != NULL) {
 	    							$hubungan = $hubungan->id;
 	    							if ($hubungan == 1) {
@@ -140,11 +141,11 @@ class ImportExcelController extends Controller
 	    						}
 	    						else $hubungan = NULL;
 
-	    						$pendidikan = Pendidikan::where('keterangan', 'like', '%' . $row[10] . '%')->first();
+	    						$pendidikan = Pendidikan::where('keterangan', 'like', '%' . $row[11] . '%')->first();
 	    						if ($pendidikan != NULL) $pendidikan = $pendidikan->id;
 	    						else $pendidikan = NULL;
 
-	    						$pekerjaan = JenisPekerjaan::where('keterangan', 'like', '%' . $row[11] . '%')->first();
+	    						$pekerjaan = JenisPekerjaan::where('keterangan', 'like', '%' . $row[12] . '%')->first();
 	    						if ($pekerjaan != NULL) $pekerjaan = $pekerjaan->id;
 	    						else $pekerjaan = NULL;
 
@@ -163,22 +164,21 @@ class ImportExcelController extends Controller
 						    		'alamat_sebelumnya' => '-',
 						    		'jk' => $row[3],
 						    		'tempat_lahir' => $tempat_lahir,
-						            'tgl_lahir' => $tgl_lahir[2] . '-' . $tgl_lahir[1] . '-' . $tgl_lahir[0],
+						            'tgl_lahir' => $tgl_lahir[2] . '-' . $tgl_lahir[0] . '-' . $tgl_lahir[1],
 						    		'agama_id' => $agama,
 						            'status_nikah_id' => $nikah,
 						            'status_hubungan_id' => $hubungan,
 						    		'pendidikan_id' => $pendidikan,
 						    		'jenis_pekerjaan_id' => $pekerjaan,
 						    		'kewarganegaraan' => 'WNI',
-						    		'nama_ayah' => strtoupper($row[13]),
-						    		'nama_ibu' => strtoupper($row[12]),
+						    		'nama_ayah' => strtoupper($row[14]),
+						    		'nama_ibu' => strtoupper($row[13]),
 						    		'kk_id' => $temp_kk,
 						    		'created_at' => Carbon::now(),
 						            'updated_at' => Carbon::now(),
 						    	);
-	    					}
-	    				}
-    				}
+	    			}
+	   			}
     		}
     		//return $insert_penduduk;
 

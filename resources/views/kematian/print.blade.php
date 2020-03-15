@@ -26,7 +26,7 @@
             <div class="size">
                 <center><img src="{{ public_path() . $image_path }}"></center>
                 <div class="isi">
-                    <center><p class="header">SURAT KETERANGAN KEMATIAN</p></center>
+                    <center><p class="header">{{ $surat->judul }}</p></center>
                     <center><p class="nomor">Nomor : {{ $surat->nomor }}</p></center>
                     <p class="text-justify body">Yang bertanda tangan di bawah ini: </p>
                     <table>

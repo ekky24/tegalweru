@@ -38,6 +38,8 @@ class SuratKeteranganUsahaController extends Controller
 
     public function store(Request $request) {
         $this->validate(request(), [
+            'judul_surat' => 'required',
+            'nomor_surat' => 'required',
             'nik' => 'required',
             'nama_usaha' => 'required',
             'tahun_pendirian_usaha' => 'nullable',
@@ -52,6 +54,7 @@ class SuratKeteranganUsahaController extends Controller
             'sendiri_tegal' => 'nullable',
             'sewa_sawah' => 'nullable',
             'sewa_tegal' => 'nullable',
+            'created_at' => 'required',
         ]);
 
         if (Penduduk::find(request('nik')) == null) {
@@ -66,29 +69,30 @@ class SuratKeteranganUsahaController extends Controller
         $now = Carbon::now();
         $tahun = $now->year;
     
-        if ($cek == null) {
-            $nomor_sebelum = 0;
-        }
-        else {
-            $nomor_temp = $cek->nomor;
-            $tahun_temp = substr($nomor_temp, -4);
+        // if ($cek == null) {
+        //     $nomor_sebelum = 0;
+        // }
+        // else {
+        //     $nomor_temp = $cek->nomor;
+        //     $tahun_temp = substr($nomor_temp, -4);
 
-            if ($tahun_temp < $tahun) {
-                $nomor_sebelum = 0;
-            }
-            else {
-                $get_last = substr($nomor_temp, 4);
-                $pos = strpos($get_last, '/');
-                $nomor_sebelum = substr($get_last, 0, $pos);
-            }
-        }
+        //     if ($tahun_temp < $tahun) {
+        //         $nomor_sebelum = 0;
+        //     }
+        //     else {
+        //         $get_last = substr($nomor_temp, 4);
+        //         $pos = strpos($get_last, '/');
+        //         $nomor_sebelum = substr($get_last, 0, $pos);
+        //     }
+        // }
 
-        $nomor_sesudah = $nomor_sebelum + 1;
-        $nomor_fix = "517/" . $nomor_sesudah . "/35.07.22.2003/" . $tahun;
+        // $nomor_sesudah = $nomor_sebelum + 1;
+        // $nomor_fix = "517/" . $nomor_sesudah . "/35.07.22.2003/" . $tahun;
 
         if(request('jenis_surat') == 'biasa') {
             $sku = SuratKeteranganUsaha::create([
-                'nomor' => $nomor_fix,
+                'judul' => strtoupper(request('judul_surat')),
+                'nomor' => strtoupper(request('nomor_surat')),
                 'penduduk_id' => request('nik'),
                 'nama_usaha' => strtoupper(request('nama_usaha')),
                 'alamat_usaha' => strtoupper(request('alamat_usaha')),
@@ -97,15 +101,18 @@ class SuratKeteranganUsahaController extends Controller
                 'tgl_pengantar' => strtoupper(request('tgl_pengantar')),
                 'penerbit_id' => request('penerbit_id'),
                 'jenis_surat' => request('jenis_surat'),
+                'created_at' => Carbon::createFromFormat('d-m-Y', request('created_at')),
             ]);
         }
         elseif(request('jenis_surat') == 'bri') {
             $sku = SuratKeteranganUsaha::create([
-                'nomor' => $nomor_fix,
+                'judul' => strtoupper(request('judul_surat')),
+                'nomor' => strtoupper(request('nomor_surat')),
                 'penduduk_id' => request('nik'),
                 'nama_usaha' => strtoupper(request('nama_usaha')),
                 'penerbit_id' => request('penerbit_id'),
                 'jenis_surat' => request('jenis_surat'),
+                'created_at' => Carbon::createFromFormat('d-m-Y', request('created_at')),
             ]);
 
             if ($request->has('sendiri_sawah')) {
@@ -123,19 +130,22 @@ class SuratKeteranganUsahaController extends Controller
         }
         elseif(request('jenis_surat') == 'jatim_mandiri') {
             $sku = SuratKeteranganUsaha::create([
-                'nomor' => $nomor_fix,
+                'judul' => strtoupper(request('judul_surat')),
+                'nomor' => strtoupper(request('nomor_surat')),
                 'penduduk_id' => request('nik'),
                 'nama_usaha' => strtoupper(request('nama_usaha')),
                 'alamat_usaha' => strtoupper(request('alamat_usaha')),
                 'keperluan' => strtoupper(request('keperluan')),
                 'penerbit_id' => request('penerbit_id'),
                 'jenis_surat' => request('jenis_surat'),
+                'created_at' => Carbon::createFromFormat('d-m-Y', request('created_at')),
             ]);
         }
 
         elseif(request('jenis_surat') == 'domisili_usaha') {
             $sku = SuratKeteranganUsaha::create([
-                'nomor' => $nomor_fix,
+                'judul' => strtoupper(request('judul_surat')),
+                'nomor' => strtoupper(request('nomor_surat')),
                 'penduduk_id' => request('nik'),
                 'nama_pimpinan' => strtoupper(request('nama_pimpinan')),
                 'alamat_pimpinan' => strtoupper(request('alamat_pimpinan')),
@@ -147,6 +157,7 @@ class SuratKeteranganUsahaController extends Controller
                 'tgl_pengantar' => strtoupper(request('tgl_pengantar')),
                 'penerbit_id' => request('penerbit_id'),
                 'jenis_surat' => request('jenis_surat'),
+                'created_at' => Carbon::createFromFormat('d-m-Y', request('created_at')),
             ]);
         }
         
@@ -243,6 +254,8 @@ class SuratKeteranganUsahaController extends Controller
 
     public function store_edit(SuratKeteranganUsaha $sku, Request $request) {
     	$this->validate(request(), [
+            'judul_surat' => 'required',
+            'nomor_surat' => 'required',
     		'penduduk_id' => 'nullable',
             'nama_usaha' => 'required',
             'tahun_pendirian_usaha' => 'nullable',
@@ -252,6 +265,7 @@ class SuratKeteranganUsahaController extends Controller
             'dari_pengantar' => 'nullable',
             'tgl_pengantar' => 'nullable',
             'penerbit_id' => 'required',
+            'created_at' => 'required',
             'jenis_surat' => 'required',
             'sendiri_sawah' => 'nullable',
             'sendiri_tegal' => 'nullable',
@@ -260,6 +274,8 @@ class SuratKeteranganUsahaController extends Controller
     	]);
 
     	if(request('jenis_surat') == 'biasa') {
+            $sku->judul = strtoupper(request('judul_surat'));
+            $sku->nomor = strtoupper(request('nomor_surat'));
             $sku->nama_usaha = strtoupper(request('nama_usaha'));
             $sku->alamat_usaha = strtoupper(request('alamat_usaha'));
             $sku->keperluan = strtoupper(request('keperluan'));
@@ -268,6 +284,8 @@ class SuratKeteranganUsahaController extends Controller
             $sku->penerbit_id = strtoupper(request('penerbit_id'));
         }
         elseif(request('jenis_surat') == 'bri') {
+            $sku->judul = strtoupper(request('judul_surat'));
+            $sku->nomor = strtoupper(request('nomor_surat'));
             $sku->nama_usaha = strtoupper(request('nama_usaha'));
             $sku->penerbit_id = strtoupper(request('penerbit_id'));
 
@@ -285,12 +303,16 @@ class SuratKeteranganUsahaController extends Controller
             }
         }
         elseif(request('jenis_surat') == 'jatim_mandiri') {
+            $sku->judul = strtoupper(request('judul_surat'));
+            $sku->nomor = strtoupper(request('nomor_surat'));
             $sku->nama_usaha = strtoupper(request('nama_usaha'));
             $sku->alamat_usaha = strtoupper(request('alamat_usaha'));
             $sku->keperluan = strtoupper(request('keperluan'));
             $sku->penerbit_id = strtoupper(request('penerbit_id'));
         }
         elseif(request('jenis_surat') == 'domisili_usaha') {
+            $sku->judul = strtoupper(request('judul_surat'));
+            $sku->nomor = strtoupper(request('nomor_surat'));
             $sku->penduduk_id = strtoupper(request('penduduk_id'));
             $sku->nama_pimpinan = strtoupper(request('nama_pimpinan'));
             $sku->alamat_pimpinan = strtoupper(request('alamat_pimpinan'));
@@ -302,7 +324,8 @@ class SuratKeteranganUsahaController extends Controller
             $sku->tgl_pengantar = strtoupper(request('tgl_pengantar'));
             $sku->penerbit_id = strtoupper(request('penerbit_id'));
         }
-        
+
+        $sku->created_at = Carbon::createFromFormat('d-m-Y', request('created_at'));
         $sku->save();
     	return redirect("/sku/$sku->id")->with(['msg' => 'Data berhasil diubah']);
     }

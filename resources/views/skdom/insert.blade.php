@@ -13,6 +13,19 @@
 		<form method="post" action="/skdom" autocomplete="off" class="form-horizontal">
 			{{ csrf_field() }}
 			<div class="form-group">
+				<label class="control-label col-sm-3">Judul Surat</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Judul Surat" type="text" name="judul_surat" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Nomor Surat</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Nomor Surat" type="text" name="nomor_surat" required>
+				</div>
+			</div>
+			
+			<div class="form-group">
 				<label class="control-label col-sm-3">NIK</label>
 				<div class="col-sm-6">
 					<input id="nik_surat" class="form-control" placeholder="Masukkan NIK" type="number" name="nik" required>
@@ -56,7 +69,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-3">Tanggal</label>
+				<label class="control-label col-sm-3">Tanggal Surat Pengantar</label>
 				<div class="col-sm-6">
 					<input class="form-control" placeholder="Masukkan Tanggal Surat Pengantar" type="text" name="tgl_pengantar">
 				</div>
@@ -70,6 +83,12 @@
 						<option value="{{ $row->id }}">{{ $row->nama }}</option>
 						@endforeach
 					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Tanggal Surat</label>
+				<div class="col-sm-6">
+					<input class="form-control datepicker" placeholder="Masukkan Tanggal Surat" name="created_at" required>
 				</div>
 			</div><br>
 			<input type="hidden" name="jenis_surat" value="biasa">

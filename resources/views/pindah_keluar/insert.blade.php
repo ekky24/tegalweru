@@ -13,6 +13,19 @@
 		<form method="post" action="/pindah_keluar" autocomplete="off" class="form-horizontal" id="form_pindah_keluar">
 			{{ csrf_field() }}
 			<div class="form-group">
+				<label class="control-label col-sm-3">Judul Surat</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Judul Surat" type="text" name="judul_surat" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Nomor Surat</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Nomor Surat" type="text" name="nomor_surat" required>
+				</div>
+			</div>
+			
+			<div class="form-group">
 				<label class="control-label col-sm-3">NIK</label>
 				<div class="col-sm-6">
 					<input id="nik_surat" class="form-control" placeholder="Masukkan NIK" type="number" name="penduduk_id" required>
@@ -69,6 +82,12 @@
 						<option value="{{ $row->id }}">{{ $row->nama }}</option>
 						@endforeach
 					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Tanggal Surat</label>
+				<div class="col-sm-6">
+					<input class="form-control datepicker" placeholder="Masukkan Tanggal Surat" name="created_at" required>
 				</div>
 			</div>
 			<div class="form-group">

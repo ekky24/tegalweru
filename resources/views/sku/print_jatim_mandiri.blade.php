@@ -17,7 +17,7 @@
             <div class="size">
                 <center><img src="{{ public_path() . $image_path }}"></center>
                 <div class="isi">
-                    <center><p class="header">SURAT KETERANGAN USAHA</p></center>
+                    <center><p class="header">{{ $surat->judul }}</p></center>
                     <center><p class="nomor">Nomor : {{ $surat->nomor }}</p></center>
                     <p class="text-justify body">Yang bertanda tangan di bawah ini: </p>
                     <table>
@@ -56,7 +56,9 @@
 
                     <table class="bawah-ybs">
                         <tr><td><br></td></tr>
-                        <tr><td><br></td></tr>
+                        @if($surat->get_penerbit->jabatan != 'KEPALA DESA')
+                            <tr><td><br></td></tr>
+                        @endif
                         <tr>
                             <td>Yang bersangkutan</td>
                         </tr>
@@ -79,9 +81,6 @@
                                 <td>{{ $surat->get_penerbit->jabatan }}</td>
                             </tr>
                         @else
-                            <tr>
-                                <td>&nbsp;</td>
-                            </tr>
                             <tr>
                                 <td>Kepala Desa Karangwidoro</td>
                             </tr>

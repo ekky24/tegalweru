@@ -54,7 +54,7 @@
 
                 <div class="isi">
                     <center><p style="margin-top: 20px; margin-bottom: 0">UNTUK YANG BERSANGKUTAN</p></center>
-                    <center><p class="header" style="margin-top: 0">SURAT KELAHIRAN</p></center>
+                    <center><p class="header" style="margin-top: 0">{{ $surat->judul }}</p></center>
                     <center><p class="nomor" style="margin-bottom: 20px;">No: {{ $surat->nomor }}</p></center>
                     <p class="text-justify body">Yang bertandatangan dibawah ini Kepala Desa Karangwidoro Kecamatan Dau Kabupaten Malang menerangkan bahwa pada :</p>
                     <table>

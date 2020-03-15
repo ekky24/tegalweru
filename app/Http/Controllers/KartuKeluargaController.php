@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+ini_set('max_execution_time', '0'); // for infinite time of execution
 
 use App;
 use PDF;

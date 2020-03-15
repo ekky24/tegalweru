@@ -946,7 +946,7 @@ $(function() {
 						$('#alamat_surat').val("-");
 					}
 
-					var temp_tempat_lahir = $('#nik_surat').getSelectedItemData().get_tempat_lahir.nama;
+					var temp_tempat_lahir = $('#nik_surat').getSelectedItemData().tempat_lahir;
 					var value_tempat_lahir = temp_tempat_lahir.substr(temp_tempat_lahir.indexOf(" ") + 1);
 					var arr_tgl_lahir = $('#nik_surat').getSelectedItemData().tgl_lahir.split('-');
 					var value_tgl_lahir = arr_tgl_lahir[2] + '-' + arr_tgl_lahir[1] + '-' + arr_tgl_lahir[0];
@@ -1014,7 +1014,7 @@ $(function() {
 						$('#alamat_ayah').val("-");
 					}
 
-					var temp_tempat_lahir = $('#nik_ayah').getSelectedItemData().get_tempat_lahir.nama;
+					var temp_tempat_lahir = $('#nik_ayah').getSelectedItemData().tempat_lahir;
 					var value_tempat_lahir = temp_tempat_lahir.substr(temp_tempat_lahir.indexOf(" ") + 1);
 					var arr_tgl_lahir = $('#nik_ayah').getSelectedItemData().tgl_lahir.split('-');
 					var value_tgl_lahir = arr_tgl_lahir[2] + '-' + arr_tgl_lahir[1] + '-' + arr_tgl_lahir[0];
@@ -1082,7 +1082,7 @@ $(function() {
 						$('#alamat_pelapor').val("-");
 					}
 
-					var temp_tempat_lahir = $('#nik_pelapor').getSelectedItemData().get_tempat_lahir.nama;
+					var temp_tempat_lahir = $('#nik_pelapor').getSelectedItemData().tempat_lahir;
 					var value_tempat_lahir = temp_tempat_lahir.substr(temp_tempat_lahir.indexOf(" ") + 1);
 					var arr_tgl_lahir = $('#nik_pelapor').getSelectedItemData().tgl_lahir.split('-');
 					var value_tgl_lahir = arr_tgl_lahir[2] + '-' + arr_tgl_lahir[1] + '-' + arr_tgl_lahir[0];

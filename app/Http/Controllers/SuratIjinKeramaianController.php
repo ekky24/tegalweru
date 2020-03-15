@@ -24,6 +24,8 @@ class SuratIjinKeramaianController extends Controller
 
     public function store() {
     	$this->validate(request(), [
+            'judul_surat' => 'required',
+            'nomor_surat' => 'required',
     		'nik' => 'required',
             'nama_acara' => 'required',
             'tgl_acara' => 'required',
@@ -35,6 +37,7 @@ class SuratIjinKeramaianController extends Controller
             'dari_pengantar' => 'nullable',
             'tgl_pengantar' => 'nullable',
     		'penerbit_id' => 'required',
+            'created_at' => 'required',
     	]);
 
         if (Penduduk::find(request('nik')) == null) {
@@ -47,31 +50,32 @@ class SuratIjinKeramaianController extends Controller
     	$now = Carbon::now();
     	$tahun = $now->year;
     
-    	if ($cek == null) {
-    		$nomor_sebelum = 0;
-    	}
-    	else {
-    		$nomor_temp = $cek->nomor;
-    		$tahun_temp = substr($nomor_temp, -4);
+    	// if ($cek == null) {
+    	// 	$nomor_sebelum = 0;
+    	// }
+    	// else {
+    	// 	$nomor_temp = $cek->nomor;
+    	// 	$tahun_temp = substr($nomor_temp, -4);
 
-    		if ($tahun_temp < $tahun) {
-    			$nomor_sebelum = 0;
-    		}
-    		else {
-    			$get_last = substr($nomor_temp, 4);
-    			$pos = strpos($get_last, '/');
-    			$nomor_sebelum = substr($get_last, 0, $pos);
-    		}
-    	}
+    	// 	if ($tahun_temp < $tahun) {
+    	// 		$nomor_sebelum = 0;
+    	// 	}
+    	// 	else {
+    	// 		$get_last = substr($nomor_temp, 4);
+    	// 		$pos = strpos($get_last, '/');
+    	// 		$nomor_sebelum = substr($get_last, 0, $pos);
+    	// 	}
+    	// }
 
-    	$nomor_sesudah = $nomor_sebelum + 1;
-    	$nomor_fix = "301/" . $nomor_sesudah . "/35.07.22.2003/" . $tahun;
+    	// $nomor_sesudah = $nomor_sebelum + 1;
+    	// $nomor_fix = "301/" . $nomor_sesudah . "/35.07.22.2003/" . $tahun;
 
     	$tgl_acara = request('tgl_acara');
     	$waktu_acara = date('Y-m-d', strtotime("$tgl_acara"));
 
     	$sik = SuratIjinKeramaian::create([
-    		'nomor' => $nomor_fix,
+            'judul' => strtoupper(request('judul_surat')),
+            'nomor' => strtoupper(request('nomor_surat')),
     		'penduduk_id' => request('nik'),
             'nama_acara' => strtoupper(request('nama_acara')),
             'tgl_acara' => $waktu_acara,
@@ -79,7 +83,8 @@ class SuratIjinKeramaianController extends Controller
             'tempat_acara' => strtoupper(request('tempat_acara')),
             'hiburan' => strtoupper(request('hiburan')),
             'jenis_surat' => request('jenis_surat'),
-    		'penerbit_id' => request('penerbit_id')
+    		'penerbit_id' => request('penerbit_id'),
+            'created_at' => Carbon::createFromFormat('d-m-Y', request('created_at')),
     	]);
 
     	if(request('jumlah_undangan') != null) {
@@ -172,6 +177,8 @@ class SuratIjinKeramaianController extends Controller
 
     public function store_edit(SuratIjinKeramaian $sik) {
     	$this->validate(request(), [
+            'judul_surat' => 'required',
+            'nomor_surat' => 'required',
     		'nik' => 'required',
             'nama_acara' => 'required',
             'tgl_acara' => 'required',
@@ -180,12 +187,15 @@ class SuratIjinKeramaianController extends Controller
             'hiburan' => 'required',
             'jumlah_undangan' => 'nullable',
             'jenis_surat' => 'required',
-            'penerbit_id' => 'required'
+            'penerbit_id' => 'required',
+            'created_at' => 'required',
     	]);
 
     	$tgl_acara = request('tgl_acara');
     	$waktu_acara = date('Y-m-d', strtotime("$tgl_acara"));
 
+        $sik->judul = strtoupper(request('judul_surat'));
+        $sik->nomor = strtoupper(request('nomor_surat'));
         $sik->nama_acara = strtoupper(request('nama_acara'));
         $sik->tgl_acara = $waktu_acara;
         $sik->jam_acara = strtoupper(request('jam_acara'));
@@ -193,6 +203,7 @@ class SuratIjinKeramaianController extends Controller
         $sik->hiburan = strtoupper(request('hiburan'));
         $sik->jenis_surat = request('jenis_surat');
         $sik->penerbit_id = request('penerbit_id');
+        $sik->created_at = Carbon::createFromFormat('d-m-Y', request('created_at'));
         $sik->jumlah_undangan = strtoupper(request('jumlah_undangan'));
         $sik->dari_pengantar = strtoupper(request('dari_pengantar'));
         $sik->tgl_pengantar = strtoupper(request('tgl_pengantar'));

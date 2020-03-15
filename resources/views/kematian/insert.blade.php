@@ -11,6 +11,20 @@
 	<div class="col-lg-12">
 		<form method="post" action="/kematian" autocomplete="off" class="form-horizontal">
 			{{ csrf_field() }}
+			<h4>Data Surat:</h4>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Judul Surat</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Judul Surat" type="text" name="judul_surat" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Nomor Surat</label>
+				<div class="col-sm-6">
+					<input class="form-control" placeholder="Masukkan Nomor Surat" type="text" name="nomor_surat" required>
+				</div>
+			</div>
+
 			<h4>Data Orang Meninggal:</h4>
 			<div class="form-group">
 				
@@ -43,15 +57,7 @@
 				
 				<label class="control-label col-sm-3">Tanggal Kematian</label>
 				<div class="col-sm-6">
-					<input class="form-control" id="date_custom" placeholder="Masukkan Tanggal Kematian" type="date" name="tgl_kematian" required>
-					<div class="form-group" id="div_dummy" style="display: none;">
-						<div class="col-md-10">
-							<input type="text" class="form-control" id="date_dummy" readonly>
-						</div>
-						<div class="col-md-2">
-							<button id="button_dummy" class="form-control col-md-2 btn btn-primary">Edit</button>
-						</div>
-					</div>
+					<input class="form-control datepicker" placeholder="Masukkan Tanggal Kematian" name="tgl_kematian" required>
 				</div>
 			</div>
 			<div class="form-group">
@@ -120,6 +126,12 @@
 						<option value="{{ $row->id }}">{{ $row->nama }}</option>
 						@endforeach
 					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3">Tanggal Surat</label>
+				<div class="col-sm-6">
+					<input class="form-control datepicker" placeholder="Masukkan Tanggal Surat" name="created_at" required>
 				</div>
 			</div><br>
 			<div class="form-group text-center">

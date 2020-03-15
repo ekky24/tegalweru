@@ -19,7 +19,7 @@
             <div class="size">
                 <center><img src="{{ public_path() . $image_path }}"></center>
                 <div class="isi">
-                    <center><p class="header" style="margin-top: 30px;">SURAT KETERANGAN USAHA</p></center>
+                    <center><p class="header" style="margin-top: 30px;">{{ $surat->judul }}</p></center>
                     <center><p class="nomor" style="margin-bottom: 30px;">Nomor: {{ $surat->nomor }}</p></center>
                     <p class="text-justify body">Yang bertanda tangan di bawah ini: </p>
                     <table>
@@ -50,7 +50,7 @@
                         <tr>
                             <td class="header">Tempat, Tgl Lahir</td>
                             <td>:</td>
-                            <td>{{ $penduduk->get_tempat_lahir->nama . ", " . $penduduk_lahir_dummy }}</td>
+                            <td>{{ $penduduk->tempat_lahir . ", " . $penduduk_lahir_dummy }}</td>
                         </tr>
                         <tr>
                             <td class="header">Alamat</td>

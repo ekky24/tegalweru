@@ -13,7 +13,7 @@
                         <tr>
                             <td class="header">Tempat, Tgl Lahir</td>
                             <td>:</td>
-                            <td>{{ $penduduk->get_tempat_lahir->nama . ", " . $penduduk_lahir_dummy }}</td>
+                            <td>{{ $penduduk->tempat_lahir . ", " . $penduduk_lahir_dummy }}</td>
                         </tr>
                         <tr>
                             <td class="header">NIK</td>

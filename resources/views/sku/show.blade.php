@@ -1,3 +1,11 @@
+<?php
+	use Carbon\Carbon;
+
+	$bulan_arr = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+	$waktu = Carbon::createFromFormat('Y-m-d H:i:s', $sku->created_at);
+	$tgl = $waktu->day . " " . $bulan_arr[$waktu->month - 1] . " " . $waktu->year;
+?>
+
 @extends('layout.master')
 
 @section('content')
@@ -7,6 +15,10 @@
         </div>
     </div>
 	<center><table class="table table-bordered table-hover tabel_detail_penduduk">
+		<tr>
+			<th>Judul Surat</th>
+			<td>{{ $sku->judul }}</td>
+		</tr>
 		<tr>
 			<th>Nomor Surat</th>
 			<td>{{ $sku->nomor }}</td>
@@ -82,6 +94,10 @@
 		<tr>
 			<th>Jabatan Pejabat Penerbit</th>
 			<td>{{ $sku->get_penerbit->jabatan }}</td>
+		</tr>
+		<tr>
+			<th>Tanggal Surat</th>
+			<td>{{ strtoupper($tgl) }}</td>
 		</tr>
 	</table>
 	<a class="btn btn-primary" href="/sku/{{ $sku->id }}/edit/{{ $sku->jenis_surat }}">Edit Data</a>

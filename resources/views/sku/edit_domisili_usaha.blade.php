@@ -10,10 +10,15 @@
 <form method="post" action="/sku/{{ $sku->id }}" autocomplete="off" class="form-horizontal">
 	{{ csrf_field() }}
 	<div class="form-group">
-
+		<label class="control-label col-sm-3">Judul Surat</label>
+		<div class="col-sm-6">
+			<input class="form-control" placeholder="Masukkan Judul Surat" type="text" name="judul_surat" value="{{ $sku->judul }}" required>
+		</div>
+	</div>
+	<div class="form-group">
 		<label class="control-label col-sm-3">Nomor Surat</label>
 		<div class="col-sm-6">
-			<input class="form-control" placeholder="Nomor Surat" type="text" value="{{ $sku->nomor }}" readonly>
+			<input class="form-control" placeholder="Masukkan Nomor Surat" type="text" name="nomor_surat" value="{{ $sku->nomor }}" required>
 		</div>
 	</div>
 	<div class="form-group">
