@@ -5,7 +5,6 @@
 	use Carbon\Carbon;
 	
 	$temp_tempat_lahir = $penduduk->tempat_lahir;
-	$value_tempat_lahir = substr($temp_tempat_lahir, strpos($temp_tempat_lahir, " ") + 1);
 	$arr_tgl_lahir = explode('-', $penduduk->tgl_lahir);
 	$value_tgl_lahir = $arr_tgl_lahir[2] . '-' . $arr_tgl_lahir[1] . '-' . $arr_tgl_lahir[0];
 
@@ -50,7 +49,7 @@
 
 		<label class="control-label col-sm-3">Tempat, Tgl Lahir</label>
 		<div class="col-sm-6">
-			<input id="ttl_surat" class="form-control" placeholder="Nama" value="{{ $value_tempat_lahir . ', ' . $value_tgl_lahir }}" type="text" readonly>
+			<input id="ttl_surat" class="form-control" placeholder="Nama" value="{{ $temp_tempat_lahir . ', ' . $value_tgl_lahir }}" type="text" readonly>
 		</div>
 	</div>
 	<div class="form-group">

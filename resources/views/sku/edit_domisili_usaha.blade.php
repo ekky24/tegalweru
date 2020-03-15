@@ -1,3 +1,10 @@
+<?php
+	use Carbon\Carbon;
+
+	$waktu = Carbon::createFromFormat('Y-m-d H:i:s', $sku->created_at);
+	$tgl_dummy = $waktu->day . "-" . $waktu->month . "-" . $waktu->year;
+?>
+
 @extends('layout.master')
 
 @section('content')
@@ -101,6 +108,12 @@
 				@endif
 				@endforeach
 			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-3">Tanggal Surat</label>
+		<div class="col-sm-6">
+			<input class="form-control datepicker" placeholder="Masukkan Tanggal Surat" name="created_at" value="{{ $tgl_dummy }}" required>
 		</div>
 	</div>
 	<br>
