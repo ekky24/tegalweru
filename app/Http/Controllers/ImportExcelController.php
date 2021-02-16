@@ -52,133 +52,138 @@ class ImportExcelController extends Controller
 
     	if($data->count() > 0)
     	{
-    		foreach($data->toArray() as $i => $row)
+    		foreach($data->toArray() as $i => $row_temp)
     		{
-	   //  		if($i == 3) {
-	   //  			return $row;
-				// }
-	   
-	    		if ($row[0] == 'NO. KK') {
-	    			$next = 'KK';
-				}
-	    		elseif ($row[0] == 'NO') {
-	    			$next = "PEN";
-				}
-	    		else {
-	    			if ($next == "KK") {
-	    						$alamat = explode(',', $row[5]);
-	    						if (count($alamat) >= 5) {
-	    							$arr_rw = $alamat[2];
-	    							$arr_rt = $alamat[1];
-
-	    							if (count($alamat) > 5) {
-		    							foreach($alamat as $value) {
-		    								if(strpos($value, 'RW') !== false) {
-		    									$arr_rw = $value;
-		    								}
-		    								else if(strpos($value, 'RT') !== false) {
-		    									$arr_rt = $value;
-		    								}
-		    							}
-	    							}
-
-	    							$temp_rw = substr($arr_rw, strpos($arr_rw, ':') + 2);
-	    							try {
-	    								$rw = RukunWarga::whereRaw("nama like '%" . $temp_rw . "%'")->first()->id;
-	    							}
-	    							catch(\Exception $e) {
-	    								$rw = null;
-	    							}
-		    						
-		    						if ($rw != null) {
-		    							$temp_rt = substr($arr_rt, strpos($arr_rt, ':') + 2);
-		    							$rt = RukunTetangga::whereRaw("nama like '%" . $temp_rt . "%'")->first();
-		    							if ($rt != null) {
-		    								$rt = $rt->id;
-		    							}
-		    							else {
-		    								$rt = NULL;
-		    							}
-		    						}
-	    						}
-	    						else {
-	    							$rw = NULL;
-	    							$rt = NULL;
-	    						}
-
-	    						$insert_kk[] = array(
-						            'id' => $row[0],
-						            'kepala_keluarga' => NULL,
-						            'alamat' => strtoupper($alamat[0]),
-						            'rukun_tetangga' => $rt,
-						            'rukun_warga' => $rw,
-						            'kelurahan' => '3507300003',
-						            'kode_pos' => '65151',
-						            'tgl_pengurusan' => '1900-01-01',
-						            'created_at' => Carbon::now(),
-						            'updated_at' => Carbon::now(),
-						        );
-						        $temp_kk = $row[0];
-						        $c_kk += 1;
+				foreach($row_temp as $i => $row)
+				{
+		//  		if($i == 3) {
+		//  			return $row;
+					// }
+		
+					if ($row[0] == 'NO. KK') {
+						$next = 'KK';
 					}
-	    			elseif ($next == 'PEN') {
-	    						$tempat_lahir = $row[4];
+					elseif ($row[0] == 'NO') {
+						$next = "PEN";
+					}
+					else {
+						if ($next == "KK") {
 
-	    						$agama = Agama::where('keterangan', 'like', '%' . $row[7] . '%')->first();
-	    						if ($agama != NULL) $agama = $agama->id;
-	    						else $agama = NULL;
+									$alamat = explode(',', $row[5]);
+									if (count($alamat) >= 5) {
+										$arr_rw = $alamat[2];
+										$arr_rt = $alamat[1];
 
-	    						$nikah = StatusNikah::where('keterangan', $row[9])->first();
-	    						if ($nikah != NULL) $nikah = $nikah->id;
-	    						else $nikah = NULL;
+										if (count($alamat) > 5) {
+											foreach($alamat as $value) {
+												if(strpos($value, 'RW') !== false) {
+													$arr_rw = $value;
+												}
+												else if(strpos($value, 'RT') !== false) {
+													$arr_rt = $value;
+												}
+											}
+										}
 
-	    						$hubungan = StatusHubungan::where('keterangan', 'like', '%' . $row[10] . '%')->first();
-	    						if ($hubungan != NULL) {
-	    							$hubungan = $hubungan->id;
-	    							if ($hubungan == 1) {
-	    								$insert_kk[$c_kk - 1]['kepala_keluarga'] = $row[1];
-	    							}
-	    						}
-	    						else $hubungan = NULL;
+										$temp_rw = substr($arr_rw, strpos($arr_rw, ':') + 2);
+										try {
+											$rw = RukunWarga::whereRaw("nama like '%" . $temp_rw . "%'")->first()->id;
+										}
+										catch(\Exception $e) {
+											$rw = null;
+										}
+										
+										if ($rw != null) {
+											$temp_rt = substr($arr_rt, strpos($arr_rt, ':') + 2);
+											$rt = RukunTetangga::whereRaw("nama like '%" . $temp_rt . "%'")->first();
+											if ($rt != null) {
+												$rt = $rt->id;
+											}
+											else {
+												$rt = NULL;
+											}
+										}
+									}
+									else {
+										$rw = NULL;
+										$rt = NULL;
+									}
 
-	    						$pendidikan = Pendidikan::where('keterangan', 'like', '%' . $row[11] . '%')->first();
-	    						if ($pendidikan != NULL) $pendidikan = $pendidikan->id;
-	    						else $pendidikan = NULL;
+									$insert_kk[] = array(
+										'id' => $row[0],
+										'kepala_keluarga' => NULL,
+										'alamat' => strtoupper($alamat[0]),
+										'rukun_tetangga' => $rt,
+										'rukun_warga' => $rw,
+										'kelurahan' => '3507300003',
+										'kode_pos' => '65151',
+										'tgl_pengurusan' => '1900-01-01',
+										'created_at' => Carbon::now(),
+										'updated_at' => Carbon::now(),
+									);
+									$temp_kk = $row[0];
+									$c_kk += 1;
+						}
+						elseif ($next == 'PEN') {
 
-	    						$pekerjaan = JenisPekerjaan::where('keterangan', 'like', '%' . $row[12] . '%')->first();
-	    						if ($pekerjaan != NULL) $pekerjaan = $pekerjaan->id;
-	    						else $pekerjaan = NULL;
+									$tempat_lahir = $row[4];
 
-	    						$tgl_lahir = explode('/', $row[5]);
-	    						if (count($tgl_lahir) != 3) {
-	    							$tgl_lahir = array('01', '01', '1900');
-	    						}
+									$agama = Agama::where('keterangan', 'like', '%' . $row[6] . '%')->first();
+									if ($agama != NULL) $agama = $agama->id;
+									else $agama = NULL;
 
-	    						if ($row[1] == NULL) {
-	    							continue;
-	    						}
+									$nikah = StatusNikah::where('keterangan', $row[8])->first();
+									if ($nikah != NULL) $nikah = $nikah->id;
+									else $nikah = NULL;
 
-	    						$insert_penduduk[] = array(
-						    		'id' => $row[1],
-						            'nama' => $row[2],
-						    		'alamat_sebelumnya' => '-',
-						    		'jk' => $row[3],
-						    		'tempat_lahir' => $tempat_lahir,
-						            'tgl_lahir' => $tgl_lahir[2] . '-' . $tgl_lahir[0] . '-' . $tgl_lahir[1],
-						    		'agama_id' => $agama,
-						            'status_nikah_id' => $nikah,
-						            'status_hubungan_id' => $hubungan,
-						    		'pendidikan_id' => $pendidikan,
-						    		'jenis_pekerjaan_id' => $pekerjaan,
-						    		'kewarganegaraan' => 'WNI',
-						    		'nama_ayah' => strtoupper($row[14]),
-						    		'nama_ibu' => strtoupper($row[13]),
-						    		'kk_id' => $temp_kk,
-						    		'created_at' => Carbon::now(),
-						            'updated_at' => Carbon::now(),
-						    	);
-	    			}
-	   			}
+									$hubungan = StatusHubungan::where('keterangan', 'like', '%' . $row[9] . '%')->first();
+									if ($hubungan != NULL) {
+										$hubungan = $hubungan->id;
+										if ($hubungan == 1) {
+											$insert_kk[$c_kk - 1]['kepala_keluarga'] = $row[1];
+										}
+									}
+									else $hubungan = NULL;
+
+									$pendidikan = Pendidikan::where('keterangan', 'like', '%' . $row[10] . '%')->first();
+									if ($pendidikan != NULL) $pendidikan = $pendidikan->id;
+									else $pendidikan = NULL;
+
+									$pekerjaan = JenisPekerjaan::where('keterangan', 'like', '%' . $row[11] . '%')->first();
+									if ($pekerjaan != NULL) $pekerjaan = $pekerjaan->id;
+									else $pekerjaan = NULL;
+
+									$tgl_lahir = explode('/', $row[5]);
+									if (count($tgl_lahir) != 3) {
+										$tgl_lahir = array('01', '01', '1900');
+									}
+
+									if ($row[1] == NULL) {
+										continue;
+									}
+
+									$insert_penduduk[] = array(
+										'id' => $row[1],
+										'nama' => $row[2],
+										'alamat_sebelumnya' => '-',
+										'jk' => $row[3],
+										'tempat_lahir' => $tempat_lahir,
+										'tgl_lahir' => $tgl_lahir[2] . '-' . $tgl_lahir[1] . '-' . $tgl_lahir[0],
+										'agama_id' => $agama,
+										'status_nikah_id' => $nikah,
+										'status_hubungan_id' => $hubungan,
+										'pendidikan_id' => $pendidikan,
+										'jenis_pekerjaan_id' => $pekerjaan,
+										'kewarganegaraan' => 'WNI',
+										'nama_ayah' => strtoupper($row[13]),
+										'nama_ibu' => strtoupper($row[12]),
+										'kk_id' => $temp_kk,
+										'created_at' => Carbon::now(),
+										'updated_at' => Carbon::now(),
+									);
+						}
+					}
+				}
     		}
     		//return $insert_penduduk;
 

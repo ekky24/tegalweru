@@ -251,14 +251,14 @@ class SuratKeteranganDukunController extends Controller
             'kk_id' => 'required'
         ]);
 
-        $tempat_lahir = Kota::select('id')->where('nama', "like", "%" . request('tempat_lahir') . "%")->get();
+        $tempat_lahir = request('tempat_lahir');
 
         Penduduk::create([
             'id' => request('nik'),
             'nama' => strtoupper(request('nama')),
             'jk' => request('jk'),
             'alamat_sebelumnya' => '',
-            'tempat_lahir' => $tempat_lahir[0]->id,
+            'tempat_lahir' => $tempat_lahir,
             'tgl_lahir' => request('tgl_lahir'),
             'agama_id' => request('agama_id'),
             'pendidikan_id' => request('pendidikan_id'),
